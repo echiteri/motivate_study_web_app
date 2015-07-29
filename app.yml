@@ -1,0 +1,268 @@
+application: motivatestudy-967
+version: 1
+runtime: php55
+api_version: 1
+threadsafe: true
+ 
+handlers:
+- url: /
+  script: login.php
+
+- url: /admin.php
+  script: admin.php
+
+- url: /logout.php
+  script: logout.php
+
+- url: /class_role.php
+  script: class_role.php
+
+- url: /config.php
+  script: config.php
+
+- url: /c_transacions.php
+  script: c_transacions.php
+
+- url: /dashboard.php
+  script: dashboard.php
+
+- url: /women_adherence.php
+  script: women_adherence.php
+  
+- url: /adherence.php
+  script: adherence.php
+  
+- url: /adherence_response.php
+  script: adherence_response.php
+
+- url: /women_retention.php
+  script: women_retention.php
+  
+- url: /retention.php
+  script: retention.php
+
+- url: /retention_response.php
+  script: retention_response.php
+
+- url: /women_variables.php
+  script: women_variables.php
+  
+- url: /variable_response.php
+  script: variable_response.php
+  
+- url: /variables.php
+  script: variables.php
+
+- url: /demographics.php
+  script: demographics.php
+  
+- url: /demographic_response.php
+  script: demographic_response.php
+  
+- url: /demographics_identifier.php
+  script: demographics_identifier.php
+
+- url: /c_role.php
+  script: c_role.php
+
+- url: /c_sources.php
+  script: c_sources.php
+
+- url: /infant_diagnosis.php
+  script: infant_diagnosis.php
+  
+- url: /diagnosis.php
+  script: diagnosis.php
+  
+- url: /diagnosis_response.php
+  script: diagnosis_response.php
+  
+- url: /infant_registration.php
+  script: infant_registration.php
+  
+- url: /registration.php
+  script: registration.php
+  
+- url: /registration_response.php
+  script: registration_response.php
+
+- url: /class_db_transactions.php
+  script: class_db_transactions.php
+  
+- url: /version.php
+  script: version.php
+
+- url: /demographic-grid-data.php
+  script: demographic-grid-data.php
+
+- url: /logout.php
+  script: logout.php
+
+- url: /(.*\.(appcache|manifest))
+  mime_type: text/cache-manifest
+  static_files: 1
+  upload: (.*\.(appcache|manifest))
+  expiration: "0m"
+ 
+- url: /(.*\.atom)
+  mime_type: application/atom+xml
+  static_files: \1
+  upload: (.*\.atom)
+  expiration: "1h"
+ 
+- url: /(.*\.crx)
+  mime_type: application/x-chrome-extension
+  static_files: \1
+  upload: (.*\.crx)
+ 
+- url: /(.*\.css)
+  mime_type: text/css
+  static_files: \1
+  upload: (.*\.css)
+ 
+- url: /(.*\.eot)
+  mime_type: application/vnd.ms-fontobject
+  static_files: 1
+  upload: (.*\.eot)
+ 
+- url: /(.*\.htc)
+  mime_type: text/x-component
+  static_files: \1
+  upload: (.*\.htc)
+ 
+- url: /(.*\.html)
+  mime_type: text/html
+  static_files: \1
+  upload: (.*\.html)
+  expiration: "1h"
+ 
+- url: /(.*\.ico)
+  mime_type: image/x-icon
+  static_files: \1
+  upload: (.*\.ico)
+  expiration: "7d"
+ 
+- url: /(.*\.js)
+  mime_type: text/javascript
+  static_files: \1
+  upload: (.*\.js)
+ 
+- url: /(.*\.json)
+  mime_type: application/json
+  static_files: \1
+  upload: (.*\.json)
+  expiration: "1h"
+ 
+- url: /(.*\.m4v)
+  mime_type: video/m4v
+  static_files: 1
+  upload: (.*\.m4v)
+ 
+- url: /(.*\.mp4)
+  mime_type: video/mp4
+  static_files: \1
+  upload: (.*\.mp4)
+ 
+- url: /(.*\.(ogg|oga))
+  mime_type: audio/ogg
+  static_files: \1
+  upload: (.*\.(ogg|oga))
+ 
+- url: /(.*\.ogv)
+  mime_type: video/ogg
+  static_files: \1
+  upload: (.*\.ogv)
+ 
+- url: /(.*\.otf)
+  mime_type: font/opentype
+  static_files: \1
+  upload: (.*\.otf)
+ 
+- url: /(.*\.rss)
+  mime_type: application/rss+xml
+  static_files: \1
+  upload: (.*\.rss)
+  expiration: "1h"
+ 
+- url: /(.*\.safariextz)
+  mime_type: application/octet-stream
+  static_files: \1
+  upload: (.*\.safariextz)
+ 
+- url: /(.*\.(svg|svgz))
+  mime_type: images/svg+xml
+  static_files: \1
+  upload: (.*\.(svg|svgz))
+ 
+- url: /(.*\.swf)
+  mime_type: application/x-shockwave-flash
+  static_files: \1
+  upload: (.*\.swf)
+ 
+- url: /(.*\.ttf)
+  mime_type: font/truetype
+  static_files: \1
+  upload: (.*\.ttf)
+ 
+- url: /(.*\.txt)
+  mime_type: text/plain
+  static_files: \1
+  upload: (.*\.txt)
+ 
+- url: /(.*\.unity3d)
+  mime_type: application/vnd.unity
+  static_files: \1
+  upload: (.*\.unity3d)
+ 
+- url: /(.*\.webm)
+  mime_type: video/webm
+  static_files: \1
+  upload: (.*\.webm)
+ 
+- url: /(.*\.webp)
+  mime_type: image/webp
+  static_files: \1
+  upload: (.*\.webp)
+ 
+- url: /(.*\.woff)
+  mime_type: application/x-font-woff
+  static_files: \1
+  upload: (.*\.woff)
+ 
+- url: /(.*\.xml)
+  mime_type: application/xml
+  static_files: \1
+  upload: (.*\.xml)
+  expiration: "1h"
+ 
+# image files
+- url: /(.*\.(bmp|gif|ico|jpeg|jpg|png))
+  static_files: \1
+  upload: (.*\.(bmp|gif|ico|jpeg|jpg|png))
+ 
+# audio files
+- url: /(.*\.(mid|midi|mp3|wav))
+  static_files: \1
+  upload: (.*\.(mid|midi|mp3|wav))  
+ 
+# windows files
+- url: /(.*\.(doc|exe|ppt|rtf|xls))
+  static_files: \1
+  upload: (.*\.(doc|exe|ppt|rtf|xls))
+ 
+
+# compressed files
+- url: /(.*\.(bz2|gz|rar|tar|tgz|zip))
+  static_files: /\1
+  upload: /(.*\.(bz2|gz|rar|tar|tgz|zip))
+ 
+# index files
+- url: /(.+)/
+  static_files: /\1/index.html
+  upload: /(.+)/index.html
+  expiration: "15m"
+ 
+- url: /(.+)
+  static_files: /\1/index.html
+  upload: /(.+)/index.html
+  expiration: "15m"
