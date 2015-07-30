@@ -65,17 +65,7 @@ $_SESSION['timeout'] = time();
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="dashboard.php"><?php include('version.php'); ?></a>
-            </div>
-            <!-- /.navbar-header -->
-
+            
             <ul class="nav navbar-top-links navbar-right"><?php echo $_SESSION["name"]." is logged in."; ?>
                
                 <li class="dropdown">
@@ -101,13 +91,8 @@ $_SESSION['timeout'] = time();
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
+                            <div class="alert alert-success">
+                                <a class="alert-link" href="dashboard.php"><?php include('version.php'); ?></a>
                             </div>
                             <!-- /input-group -->
                         </li>
@@ -368,8 +353,8 @@ $_SESSION['timeout'] = time();
                                         <input type="hidden" name="mode" value="diagnosis" />
                                          <div class="form-group">
                                             <label>HEI Study ID</label>
-                                            <input class="form-control" value="<?php if($_REQUEST["action"] == "edit"){echo $select_record["i_hei_id"];} ?>" 
-                                                   placeholder="Enter identification number of the infant" name="hei_id" required="TRUE" >
+                                            <input class="form-control" value="<?php if($_REQUEST["action"] == "edit"){echo $select_record["i_hei_id"];} else if($_REQUEST["action"] == "add"){ echo trim($_REQUEST["hei_id"]);}?>" 
+                                                   placeholder="Enter identification number of the infant" name="hei_id"  required="TRUE" >
                                         </div>
                                         <div class="form-group">
                                             <label>Date of infant visit</label>
@@ -427,7 +412,12 @@ $_SESSION['timeout'] = time();
                                            </div>
                                             <div class="checkbox">
                                                 <label class="checkbox-inline">
-                                                    <input type="checkbox" value="OPV at birth OPV1" name="opv_1" <?php if(in_array("OPV at birth OPV1", $arr)) {echo 'checked="true"';} ?>>OPV at birth OPV1
+                                                    <input type="checkbox" value="OPV at birth" name="opv_1" <?php if(in_array("OPV at birth", $arr)) {echo 'checked="true"';} ?>>OPV at birth
+                                                </label>
+                                                </div>
+                                            <div class="checkbox">
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" value="OPV1" name="opv_2" <?php if(in_array("OPV1", $arr)) {echo 'checked="true"';} ?>>OPV1
                                                 </label>
                                                 </div>
                                             <div class="checkbox">
@@ -808,6 +798,8 @@ function getImmunizations()
     {  $immunization .= trim($_POST["bcg"]).";";  }
     if (isset($_POST["opv_1"]))
     {  $immunization .= trim($_POST["opv_1"]).";";  }
+    if (isset($_POST["opv_2"]))
+    {  $immunization .= trim($_POST["opv_2"]).";";  }
     if (isset($_POST["pent1"]))
     {  $immunization .= trim($_POST["pent1"]).";";  }
     if (isset($_POST["pcv_1"]))

@@ -64,17 +64,7 @@ $_SESSION['timeout'] = time();
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="dashboard.php"><?php include('version.php'); ?></a>
-            </div>
-            <!-- /.navbar-header -->
-
+            
             <ul class="nav navbar-top-links navbar-right"><?php echo $_SESSION["name"]." is logged in."; ?>
                 
                 <li class="dropdown">
@@ -100,15 +90,9 @@ $_SESSION['timeout'] = time();
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
+                            <div class="alert alert-success">
+                                <a class="alert-link" href="dashboard.php"><?php include('version.php'); ?></a>
                             </div>
-                            <!-- /input-group -->
                         </li>
                         <li>
                             <a href="dashboard.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
@@ -220,7 +204,7 @@ $_SESSION['timeout'] = time();
                                         <input type="hidden" name="mode" value="adherence" />
                                         <div class="form-group">
                                             <label>Participant Study ID</label>
-                                            <input class="form-control" value="<?php if($action == "edit"){echo $select_record["a_study_id"];} ?>" placeholder="Enter participant study identification number" name="a_study_id" required="TRUE" >
+                                            <input class="form-control" value="<?php if($action == "edit"){echo $select_record["a_study_id"];} else if($_REQUEST["action"] == "add"){ echo trim($_REQUEST["study_id"]);} ?>" placeholder="Enter participant study identification number" name="a_study_id" required="TRUE" >
                                         </div>
                                         <div class="form-group">
                                             <label>Date of starting HAART</label>
@@ -234,6 +218,7 @@ $_SESSION['timeout'] = time();
                                                 <option value="AF1B" <?php if($select_record["haart_regimen"]=="AF1B") { echo 'selected="selected"';} ?> >AZT + 3TC + EFV</option>
                                                 <option value="AF2A" <?php if($select_record["haart_regimen"]=="AF2A") { echo 'selected="selected"';} ?> >TDF + 3TC + NVP</option>
                                                 <option value="AF2B" <?php if($select_record["haart_regimen"]=="AF2B") { echo 'selected="selected"';} ?> >TDF + 3TC + EFV</option>
+                                                <option value="AF2C" <?php if($select_record["haart_regimen"]=="AF2C") { echo 'selected="selected"';} ?> >TDF+3TC+ATV/r</option>
                                                 <option value="AS1A" <?php if($select_record["haart_regimen"]=="AS1A") { echo 'selected="selected"';} ?> >AZT + 3TC + LPV/r</option>
                                                 <option value="AS1C" <?php if($select_record["haart_regimen"]=="AS1C") { echo 'selected="selected"';} ?> >AZT + 3TC + ABC</option>
                                                 <option value="AS2A" <?php if($select_record["haart_regimen"]=="AS2A") { echo 'selected="selected"';} ?> >TDF + 3TC + LPV/r</option>
@@ -316,6 +301,7 @@ $_SESSION['timeout'] = time();
                                                 <option value="G" <?php if($select_record["self_ctx_adherence"]=="G") { echo 'selected="selected"';} ?> >Good (>95%)</option>
                                                 <option value="F" <?php if($select_record["self_ctx_adherence"]=="F") { echo 'selected="selected"';} ?> >Fair (85% - 94%)</option>
                                                 <option value="P" <?php if($select_record["self_ctx_adherence"]=="P") { echo 'selected="selected"';} ?> >Poor (<85%)</option> 
+                                                <option value="NI" <?php if($select_record["self_ctx_adherence"]=="NI") { echo 'selected="selected"';} ?> >Newly Initiated</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -325,6 +311,7 @@ $_SESSION['timeout'] = time();
                                                 <option value="G" <?php if($select_record["self_ctx_adherence"]=="G") { echo 'selected="selected"';} ?> >Good (>95%)</option>
                                                 <option value="F" <?php if($select_record["self_ctx_adherence"]=="F") { echo 'selected="selected"';} ?> >Fair (85% - 94%)</option>
                                                 <option value="P" <?php if($select_record["self_ctx_adherence"]=="P") { echo 'selected="selected"';} ?> >Poor (<85%)</option> 
+                                                <option value="NI" <?php if($select_record["self_ctx_adherence"]=="NI") { echo 'selected="selected"';} ?> >Newly Initiated</option>
                                             </select>
                                         </div>
                                         <div class="form-group">

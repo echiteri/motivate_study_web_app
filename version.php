@@ -5,4 +5,4 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-echo "Motivate Study Version 15.07";
+echo "Motivate Study V. 15.08";

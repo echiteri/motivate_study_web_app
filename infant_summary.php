@@ -5,7 +5,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 require_once("c_transactions.php");
 $inactive = 600;
 if(!isset($_SESSION['timeout']) ) {
@@ -19,55 +18,26 @@ else{
 }
 
 $_SESSION['timeout'] = time();
-?>
+//infant registration variables
+$infant_registation_hei_id = $_REQUEST["id"];
+$infant_registration_table = "infant_registration";
+$infant_registration_table_id = "hei_id";
+//women variable variables
+$infant_diagnosis_table = "infant_diagnosis";
+$infant_diagnosis_table_id = "i_hei_id";
 
+
+$db = new db_transactions();
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>Early Infant Diagnosis</title>
-        <!-- DataTables CSS -->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.7/css/jquery.dataTables.css">
-        <!-- jQuery -->
-        <script type="text/javascript" charset="utf8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <!-- DataTables -->
-        <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.7/js/jquery.dataTables.min.js"></script>
-        <script>
-            $( document ).ready(function() {
-                $('#diagnosis').dataTable({
-                    "bProcessing": true,
-                    "sAjaxSource": "diagnosis_response.php",
-                     aoColumns: [
-                           { mData: 'DiagID' } ,
-                           { mData: 'HEI_ID' },
-                           { mData: 'VisitDate'},
-                           { mData: 'WeightDate' },
-                           { mData: 'Height' },
-                           { mData: 'TB_Contact' } ,
-                           { mData: 'TB_Status' },
-                           { mData: 'Milestone' },
-                           { mData: 'ImmHistory' },
-                           { mData: 'NextAppmnt' } ,
-                           {
-                           "aTargets": [10],    
-                           "mData": "DiagID",  
-                           "mRender": function (data, type, full) {
-                             return '<a href=diagnosis.php?action=edit&id=' + data +'>Edit</a> | <a href=diagnosis.php?action=delete&id=' + data +'>Delete</a>';
-                               }
-                           }
-                       ]
-                                
-                });   
-            });
-
-        </script> 
+    <title>Summary of participant's visit</title>
     <!-- Bootstrap Core CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -86,19 +56,17 @@ $_SESSION['timeout'] = time();
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-      <script type="text/javascript">
-       setTimeout(function() { window.location.href = "logout.php"; }, 6000000);
+    <script type="text/javascript">
+        setTimeout(function() { window.location.href = "logout.php"; }, 6000000);
     </script>
-
 </head>
-
 <body>
 
     <div id="wrapper">
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            
+
             <ul class="nav navbar-top-links navbar-right"><?php echo $_SESSION["name"]." is logged in."; ?>
                
                 <li class="dropdown">
@@ -124,7 +92,7 @@ $_SESSION['timeout'] = time();
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
-                           <div class="alert alert-success">
+                            <div class="alert alert-success">
                                 <a class="alert-link" href="dashboard.php"><?php include('version.php'); ?></a>
                             </div>
                         </li>
@@ -166,41 +134,89 @@ $_SESSION['timeout'] = time();
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Infant Diagnosis form</h1>
-                    <div class="panel panel-default">
-                       
-                            <div class="table-responsive">
-                                <a href="diagnosis.php?action=add"  class="fa fa-pencil"> Add new</a>
-                                        <table id="diagnosis" class="table table-striped table-bordered table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>DiagID</th>
-                                                    <th>HEI_ID</th>
-                                                    <th>VisitDate</th>
-                                                    <th>WeightDate</th>
-                                                    <th>Height</th>
-                                                    <th>TB_Contact</th>
-                                                    <th>TB_Status</th>
-                                                    <th>Milestone</th>
-                                                    <th>ImmHistory</th>
-                                                    <th>NextAppmnt</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
-                        <!-- /.panel-body -->
-                    </div><!-- chedk here -->
+                    <h1 class="page-header">HEI ID: <?php echo $infant_registation_hei_id; ?></h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="text-danger"><strong>Infant identifier summary</strong></h3>
+                            <?php $select_record = $db->selectRecord($infant_registration_table, $infant_registration_table_id, $infant_registation_hei_id);?>
+                        </div>
+                        <div class="panel-body">
+                            <h3>Date of birth: <small><?php echo $select_record["birth_date"]; ?></small></h3>
+                            <h3>Mother Study ID: <small><?php echo $select_record["d_study_id"]; ?></small></h3>
+                            <h3>Birth Weight: <small><?php echo $select_record["birth_weight"]; ?> Kg</small></h3>
+                            <h3>Sex: <small><?php echo $select_record["sex"]; ?></small></h3>
+                            <h3>Delivery Place: <small><?php echo $select_record["delivery_place"]; ?></small></h3>
+                            <h3>Abstraction Date: <small><?php echo $select_record["created_date"]; ?></small></h3>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                
+                <div class="col-lg-5">
+                   <!-- infant diagnosis panel begins -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="text-danger">Women Variables <span class="pull-right"> <a href="diagnosis.php?action=add&hei_id=<?php echo $infant_registation_hei_id ; ?>" class="fa fa-pencil"> Add new</a></span></h4>
+                            <?php 
+                            $number = 1;
+                            $select_variables = "diagnosis_id, visit_date, weight, height, next_appointment";
+                            $select_record = $db->selectDefinedRecords($select_variables, $infant_diagnosis_table, $infant_diagnosis_table_id, $infant_registation_hei_id);
+                            ?>
+                        </div>
+                        <div class="panel-body">
+                        
+                        <?php
+                            if (count($select_record) < 1)
+                            {
+                                echo "<p class='text-warning'>No visits for the participant</p>";
+                            }
+                            else
+                            {
+                             foreach ($select_record as $key => $rec)
+                                {
+                                    echo '<p class="text-success">';
+                                    echo $number;
+                                    echo " Visit Date: <strong>".$rec["visit_date"]."</strong> "
+                                            . "Weight: <strong>".$rec["weight"]."</strong> "
+                                            . "Height: <strong>".$rec["height"]."</strong> "
+                                            . "Next Appointment: <strong>".$rec["next_appointment"]."</strong> ";
+                                    echo "<span class='pull-right'>";
+                                    echo "<a href='diagnosis.php?action=edit&id=".$rec["diagnosis_id"]."' class='fa fa-edit' alt='Edit current record'></a> |  "
+                                                        . "<a href='diagnosis.php?action=delete&id=".$rec["diagnosis_id"]."' class='fa fa-times-circle' alt='Delete current record'></a>";
+                                    echo "</span>";
+                                    echo '</p>';
+                                    
+                                    $number++;
+                                }
+                            }
+                        ?>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- infant diagnosis panel ends -->
+               
+                </div>
+                <!-- /.col-lg-6 -->
+                
+            </div>
+                       
         </div>
         <!-- /#page-wrapper -->
 
     </div>
-   <!-- /#wrapper -->
- <!-- Bootstrap Core JavaScript -->
+        <!-- /#wrapper -->
+
+   <!-- jQuery -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
@@ -210,5 +226,4 @@ $_SESSION['timeout'] = time();
     <script src="dist/js/sb-admin-2.js"></script>
 
 </body>
-
 </html>

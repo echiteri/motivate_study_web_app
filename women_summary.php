@@ -23,17 +23,17 @@ $demographic_study_id = $_REQUEST["id"];
 $demographics_table = "demographics";
 $demographics_table_id = "study_id";
 //women variable variables
-$women_variables_study_id = $_REQUEST["id"];
 $women_variables_table = "variables";
 $women_variables_table_id = "v_study_id";
 //women retention variables
-$women_retention_study_id = $_REQUEST["id"];
 $women_retention_table = "retention";
 $women_retention_table_id = "r_study_id";
 //women adherence variables
-$women_adherence_study_id = $_REQUEST["id"];
 $women_adherence_table = "adherence";
 $women_adherence_table_id = "a_study_id";
+//infant registration variables
+$infant_registration_table = "infant_registration";
+$infant_registration_table_id = "d_study_id";
 
 $db = new db_transactions();
 ?>
@@ -74,26 +74,7 @@ $db = new db_transactions();
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="dashboard.php"><?php include('version.php'); ?></a>
-            </div>
-            <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="dashboard.php"><?php include('version.php'); ?></a>
-            </div>
+            
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right"><?php echo $_SESSION["name"]." is logged in."; ?>
@@ -121,15 +102,9 @@ $db = new db_transactions();
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
+                            <div class="alert alert-success">
+                                <a class="alert-link" href="dashboard.php"><?php include('version.php'); ?></a>
                             </div>
-                            <!-- /input-group -->
                         </li>
                         <li>
                             <a href="dashboard.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
@@ -198,11 +173,11 @@ $db = new db_transactions();
                    <!-- women variable panel begins -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4 class="text-danger">Women Variables <span class="pull-right"> <a href="variables.php?action=add"  class="fa fa-pencil"> Add new</a></span></h4>
+                            <h4 class="text-danger">Women Variables <span class="pull-right"> <a href="variables.php?action=add&study_id=<?php echo $demographic_study_id ; ?>"  class="fa fa-pencil"> Add new</a></span></h4>
                             <?php 
                             $number = 1;
                             $select_variables = "variables_id, weight, height, edd";
-                            $select_record = $db->selectDefinedRecords($select_variables, $women_variables_table, $women_variables_table_id, $women_variables_study_id);
+                            $select_record = $db->selectDefinedRecords($select_variables, $women_variables_table, $women_variables_table_id, $demographic_study_id);
                             ?>
                         </div>
                         <div class="panel-body">
@@ -240,11 +215,11 @@ $db = new db_transactions();
                     <!-- women adherence panel begins -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4 class="text-danger">Women Adherence<span class="pull-right"> <a href="adherence.php?action=add"  class="fa fa-pencil"> Add new</a></span></h4>
+                            <h4 class="text-danger">Women Adherence<span class="pull-right"> <a href="adherence.php?action=add&study_id=<?php echo $demographic_study_id ; ?>"  class="fa fa-pencil"> Add new</a></span></h4>
                             <?php 
                             $number = 1;
                             $select_variables = "adherence_id, haart_regimen, cd4_count, viral_load";
-                            $select_record = $db->selectDefinedRecords($select_variables, $women_adherence_table, $women_adherence_table_id, $women_adherence_study_id);
+                            $select_record = $db->selectDefinedRecords($select_variables, $women_adherence_table, $women_adherence_table_id, $demographic_study_id);
                             ?>
                         </div>
                         <div class="panel-body">
@@ -280,11 +255,11 @@ $db = new db_transactions();
                     <!-- women retention panel begins -->
                     <div class="panel panel-default">
                         <div class="panel-heading"> <span style="text-align: left"></span>
-                            <h4 class="text-danger">Women Retention <span class="pull-right"> <a href="retention.php?action=add"  class="fa fa-pencil"> Add new</a></span></h4>
+                            <h4 class="text-danger">Women Retention <span class="pull-right"> <a href="retention.php?action=add&study_id=<?php echo $demographic_study_id ; ?>"  class="fa fa-pencil"> Add new</a></span></h4>
                             <?php 
                             $number = 1;
                             $select_variables = "retention_id, hiv_visit, next_visit";
-                            $select_record = $db->selectDefinedRecords($select_variables, $women_retention_table, $women_retention_table_id, $women_retention_study_id);
+                            $select_record = $db->selectDefinedRecords($select_variables, $women_retention_table, $women_retention_table_id, $demographic_study_id);
                             ?>
                         </div>
                         <div class="panel-body">
@@ -315,6 +290,47 @@ $db = new db_transactions();
                         <!-- /.panel-body -->
                     </div>
                     <!-- women retention panel ends -->
+                    <!-- infant registration panel begins -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading"> <span style="text-align: left"></span>
+                            <h4 class="text-danger">Participants infants on HEI <span class="pull-right"> <a href="registration.php?action=add&study_id=<?php echo $demographic_study_id ; ?>"  class="fa fa-pencil"> Add new</a></span></h4>
+                            <?php 
+                            $number = 1;
+                            $select_variables = "hei_id, birth_date, birth_weight, sex, delivery_place";
+                            $select_record = $db->selectDefinedRecords($select_variables, $infant_registration_table, $infant_registration_table_id, $demographic_study_id);
+                            ?>
+                        </div>
+                        <div class="panel-body">
+                        <?php
+                             if (count($select_record) < 1)
+                            {
+                                echo "<p class='text-warning'>No visits for the participant</p>";
+                            }
+                            else
+                            {
+                                foreach ($select_record as $key => $rec)
+                                    {
+                                        echo '<p class="text-success">';
+                                        echo $number;
+                                        echo " HEI ID: <strong>".$rec["hei_id"]."</strong> "
+                                                . "Date of birthh: <strong>".$rec["birth_date"]."</strong>  "
+                                                . "Birth Weight: <strong>".$rec["birth_weight"]."</strong>  "
+                                                . "Sex: <strong>".$rec["sex"]."</strong> "
+                                                . "Delivery Place: <strong>".$rec["delivery_place"]."</strong> "
+                                                . "Abstraction Date: <strong>".$rec["created_date"]."</strong> ";
+                                        echo "<span class='pull-right'>";
+                                        echo "<a href='registration.php?action=edit&id=".$rec["hei_id"]."' class='fa fa-edit' alt='Edit current record'></a> |  "
+                                                        . "<a href='registration.php?action=delete&id=".$rec["hei_id"]."' class='fa fa-times-circle' alt='Delete current record'></a>";
+                                        echo "</span>";
+                                        echo '</p>';
+                                        $number++;
+                                    }
+                            }
+                             ?>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- infant diagnosis panel ends -->
                 </div>
                 <!-- /.col-lg-6 -->
                 
