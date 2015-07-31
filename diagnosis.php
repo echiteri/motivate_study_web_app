@@ -481,6 +481,83 @@ $_SESSION['timeout'] = time();
                                                 </label>
                                             </div>
                                         </div>
+                                        <!-- infant feeding methods based of an infant age -->
+                                        <div class="form-group">
+                                        <?php
+                                            $dob = date();
+                                            $today = date("Y-m-d");
+                                            $infant_registration_record = $db->selectDefinedRecords("birth_date", "infant_registration", "hei_id", $_REQUEST["hei_id"]);
+                                            foreach ($infant_registration_record as $rec)
+                                            {
+                                                $dob = $rec["birth_date"];
+                                            }
+                                            $diff = abs(strtotime($today) - strtotime($dob));
+                                            $weeks = $diff/(60*60*24*7);
+                                            $months = $diff/(60*60*24*30);
+                                                                                        
+                                         if ($weeks >= 6 && $weeks < 10)   { ?>  
+                                        <label>Infant feeding method at 6 weeks</label>
+                                            <select class="form-control" name="feeding_6wks">
+                                                <option value="" selected="selected" >Select infant feeding method at 6 weeks</option>
+                                                <option value="EBF" <?php if($select_record["feeding_6wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
+                                                <option value="ERF" <?php if($select_record["feeding_6wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
+                                                <option value="MF" <?php if($select_record["feeding_6wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
+                                            </select> 
+                                        <?php } 
+                                        
+                                        if ($weeks >= 10 && $weeks < 14)   { ?> 
+                                        <label>Infant feeding method at 10 weeks</label>
+                                            <select class="form-control" name="feeding_10wks">
+                                                <option value="" selected="selected">Select infant feeding method at 10 weeks</option>
+                                               <option value="EBF" <?php if($select_record["feeding_10wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
+                                                <option value="ERF" <?php if($select_record["feeding_10wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
+                                                <option value="MF" <?php if($select_record["feeding_10wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
+                                            </select> 
+                                        <?php } 
+                                        if ($weeks >= 14 && $weeks < 16)   { ?> 
+                                        <label>Infant feeding method at 14 weeks</label>
+                                            <select class="form-control" name="feeding_14wks">
+                                                <option value="" selected="selected">Select infant feeding method at 14 weeks</option>
+                                                <option value="EBF" <?php if($select_record["feeding_14wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
+                                                <option value="ERF" <?php if($select_record["feeding_14wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
+                                                <option value="MF" <?php if($select_record["feeding_14wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
+                                            </select> 
+                                        <?php } 
+                                        if ($weeks >= 16 && $months < 9)   { ?> 
+                                          <label>Infant feeding method at 9 months</label>
+                                            <select class="form-control" name="feeding_9mths">
+                                                <option value="" selected="selected">Select infant feeding method at 9 months</option>
+                                                <option value="BF" <?php if($select_record["feeding_9mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
+                                                <option value="No BF" <?php if($select_record["feeding_9mths"]=="No BF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
+                                            </select>                                    
+                                        <?php } 
+                                        if ($months >= 9 && $months < 12)   { ?> 
+                                        <label>Infant feeding method at 12 months</label>
+                                            <select class="form-control" name="feeding_12mths">
+                                                <option value="" selected="selected">Select infant feeding method at 12 months</option>
+                                                <option value="BF" <?php if($select_record["feeding_12mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
+                                                <option value="No BF" <?php if($select_record["feeding_12mths"]=="No BF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
+                                            </select>                                     
+                                        <?php } 
+                                        if ($months >= 12 && $months < 15)   { ?> 
+                                        <label>Infant feeding method at 15 months</label>
+                                            <select class="form-control" name="feeding_15mths">
+                                                <option value="" selected="selected">Select infant feeding method at 15 months</option>
+                                                <option value="BF" <?php if($select_record["feeding_15mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
+                                                <option value="No BF" <?php if($select_record["feeding_15mths"]=="No BF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
+                                            </select>
+                                        <?php } 
+                                        if ($months >= 15 && $months < 18)   { ?> 
+                                        <label>Infant feeding method at 18 months</label>
+                                            <select class="form-control" name="feeding_18mths">
+                                                <option value="" selected="selected">Select infant feeding method at 18 months</option>
+                                                <option value="BF" <?php if($select_record["feeding_18mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
+                                                <option value="No BF" <?php if($select_record["feeding_18mths"]=="No BF") echo 'selected="selected"'; ?>>Not Breastfed</option>
+                                            </select> 
+                                        <?php } ?>
+                                    </div>
+                                        
+                                        <!-- infant feeding methods ends -->
                                          <div class="form-group">
                                             <label>Date of next appointment</label>
                                             <input min="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_appointment"];} ?>" name="next_appointment"  >
@@ -663,21 +740,7 @@ $_SESSION['timeout'] = time();
                                         <label class="radio-inline">
                                             <input type="radio" name="sixth_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["sixth_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
                                         </label>
-                                        <div class="form-group">
-                                            <label>Infant feeding methods</label>
-                                            <select class="form-control" name="hei_outcome">
-                                                <option value="" selected="selected">Select Methods of feeding infant</option>
-                                                <option value="1" <?php if($select_record["hei_outcome"]=="1") { echo 'selected="selected"';} ?>>Discharged  at 18 months </option>
-                                                <option value="2" <?php if($select_record["hei_outcome"]=="2") { echo 'selected="selected"';} ?>>Referred to CCC </option>
-                                                <option value="3" <?php if($select_record["hei_outcome"]=="3") { echo 'selected="selected"';} ?>>Transfer out</option>
-                                                <option value="4" <?php if($select_record["hei_outcome"]=="4") { echo 'selected="selected"';} ?>>Lost to follow up</option>
-                                                <option value="5" <?php if($select_record["hei_outcome"]=="5") { echo 'selected="selected"';} ?>>Dead</option>
-                                            </select>
-                                        </div>
-                                    <div class="form-group">
-                                        <label>Date at exit</label>
-                                        <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["exit_date"];} ?>" name="exit_date"  >
-                                    </div>
+                                        
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
                                         <button type="reset" class="btn btn-warning">Clear</button>
@@ -685,68 +748,25 @@ $_SESSION['timeout'] = time();
                                 </div>
                                       <!-- Date at exit -->
                                 <div class="tab-pane fade" id="exit">
-                                    <h4>Infant feeding methods</h4>
+                                    <h4>HEI outcome at exit</h4>
                                     <form role="form" action="diagnosis.php?id=<?php echo $Diag_id;?>" method="post" id="EXIT">
                                         <input type="hidden" name="mode" value="EXIT" />
-                                    <div class="form-group">
-                                        <label>Infant feeding method at 6 weeks</label>
-                                            <select class="form-control" name="feeding_6wks">
-                                                <option value="" selected="selected" >Select infant feeding method at 6 weeks</option>
-                                                <option value="EBF" <?php if($select_record["feeding_6wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
-                                                <option value="ERF" <?php if($select_record["feeding_6wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
-                                                <option value="MF" <?php if($select_record["feeding_6wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
-                                            </select>                                    
-                                    </div>
                                         <div class="form-group">
-                                        <label>Infant feeding method at 10 weeks</label>
-                                            <select class="form-control" name="feeding_10wks">
-                                                <option value="" selected="selected">Select infant feeding method at 10 weeks</option>
-                                               <option value="EBF" <?php if($select_record["feeding_10wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
-                                                <option value="ERF" <?php if($select_record["feeding_10wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
-                                                <option value="MF" <?php if($select_record["feeding_10wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
-                                            </select>                                    
-                                    </div>
+                                            <label>Date at exit</label>
+                                            <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["exit_date"];} ?>" name="exit_date"  >
+                                        </div>
                                         <div class="form-group">
-                                        <label>Infant feeding method at 14 weeks</label>
-                                            <select class="form-control" name="feeding_14wks">
-                                                <option value="" selected="selected">Select infant feeding method at 14 weeks</option>
-                                                <option value="EBF" <?php if($select_record["feeding_14wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
-                                                <option value="ERF" <?php if($select_record["feeding_14wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
-                                                <option value="MF" <?php if($select_record["feeding_14wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
-                                            </select>                                    
-                                    </div>
-                                        <div class="form-group">
-                                        <label>Infant feeding method at 9 months</label>
-                                            <select class="form-control" name="feeding_9mths">
-                                                <option value="" selected="selected">Select infant feeding method at 9 months</option>
-                                                <option value="BF" <?php if($select_record["feeding_9mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
-                                                <option value="No BF" <?php if($select_record["feeding_9mths"]=="No BF") { echo 'selected="selected"';} ?>>Baby Weaned</option>
-                                            </select>                                    
-                                    </div>
-                                        <div class="form-group">
-                                        <label>Infant feeding method at 12 months</label>
-                                            <select class="form-control" name="feeding_12mths">
-                                                <option value="" selected="selected">Select infant feeding method at 12 months</option>
-                                                <option value="BF" <?php if($select_record["feeding_12mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
-                                                <option value="No BF" <?php if($select_record["feeding_12mths"]=="No BF") { echo 'selected="selected"';} ?>>Baby Weaned</option>
-                                            </select>                                     
-                                    </div>
-                                        <div class="form-group">
-                                        <label>Infant feeding method at 15 months</label>
-                                            <select class="form-control" name="feeding_15mths">
-                                                <option value="" selected="selected">Select infant feeding method at 15 months</option>
-                                                <option value="BF" <?php if($select_record["feeding_15mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
-                                                <option value="No BF" <?php if($select_record["feeding_15mths"]=="No BF") { echo 'selected="selected"';} ?>>Baby Weaned</option>
-                                            </select>                                     
-                                    </div>
-                                        <div class="form-group">
-                                        <label>Infant feeding method at 18 months</label>
-                                            <select class="form-control" name="feeding_18mths">
-                                                <option value="" selected="selected">Select infant feeding method at 18 months</option>
-                                                <option value="BF" <?php if($select_record["feeding_18mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
-                                                <option value="No BF" <?php if($select_record["feeding_18mths"]=="No BF") echo 'selected="selected"'; ?>>Baby Weaned</option>
-                                            </select>                                     
-                                    </div>
+                                            <label>Final HEI outcome at exit</label>
+                                            <select class="form-control" name="hei_outcome">
+                                                <option value="" selected="selected">Select HEI outcome at exit</option>
+                                                <option value="1" <?php if($select_record["hei_outcome"]=="1") { echo 'selected="selected"';} ?>>Discharged  at 18 months </option>
+                                                <option value="2" <?php if($select_record["hei_outcome"]=="2") { echo 'selected="selected"';} ?>>Referred to CCC </option>
+                                                <option value="3" <?php if($select_record["hei_outcome"]=="3") { echo 'selected="selected"';} ?>>Transfer out</option>
+                                                <option value="4" <?php if($select_record["hei_outcome"]=="4") { echo 'selected="selected"';} ?>>Lost to follow up</option>
+                                                <option value="5" <?php if($select_record["hei_outcome"]=="5") { echo 'selected="selected"';} ?>>Dead</option>
+                                            </select>
+                                        </div>
+                                       
                                         <button type="update" class="btn btn-success">Update</button>
                                         <button type="reset" class="btn btn-warning">Clear</button>
                                     </form>

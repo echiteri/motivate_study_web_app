@@ -265,7 +265,7 @@ $_SESSION['timeout'] = time();
                                                    placeholder="Enter participant study identification number" name="study_id" required="TRUE" autofocus>
                                         </div>
                                         <div class="form-group">
-                                            <label>Date of data abstraction</label>
+                                            <label>Date of Enrollment</label>
                                             <input max="<?php echo date("Y-m-d");?>" type="date"  class="form-control" value="<?php if($action == "edit"){echo ($select_record["abs_date"]);} ?>" name="abs_date" required="TRUE" >
                                         </div>
                                         <div class="form-group">
