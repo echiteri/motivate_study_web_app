@@ -94,6 +94,12 @@ handlers:
 
 - url: /demographic-grid-data.php
   script: demographic-grid-data.php
+  
+- url: /women_summary.php
+  script: women_summary.php
+  
+- url: /infant_summary.php
+  script: infant_summary.php
 
 - url: /logout.php
   script: logout.php

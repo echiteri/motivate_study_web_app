@@ -146,6 +146,7 @@ $_SESSION['timeout'] = time();
                             $tbl_id = "diagnosis_id";
                             $db = new db_transactions();
                             $immunization = getImmunizations();
+                            
                                 if($mode == "diagnosis")
                                     {
                                     $hei_id = $_POST['hei_id'];
@@ -402,82 +403,97 @@ $_SESSION['timeout'] = time();
                                             <label>Immunization history</label>
                                             <p class="help-block">Select immunizations received by infant</p>
                                             <?php
-                                            $arr = split(";", $select_record["imm_history"]);
+                                            $arr = [];
+                                            $count = 0;
+                                            if ($action == "add")//get previous given immunization
+                                            {
+                                                $immunization_administered = $db->selectDefinedRecords("imm_history", $table, "i_hei_id", $_REQUEST['hei_id']);
+                                                //print_r($immunization_administered);
+                                                foreach ($immunization_administered as $imm_admin)
+                                                {
+                                                    $arr_tmp = split(";", $imm_admin['imm_history']);
+                                                    $arr = array_merge($arr, $arr_tmp);
+                                                }
+                                            } else
+                                            {
+                                                $arr = split(";", $select_record["imm_history"]);
+                                            }
+                                            
                                             ?>
                                             
                                             <div class="checkbox">
                                                 <label class="checkbox-inline">
-                                                    <input type="checkbox" value="BCG" name="bcg" <?php if(in_array("BCG", $arr)) {echo 'checked="true"';} ?>>BCG
+                                                    <input type="checkbox" value="BCG"  name="bcg" <?php if(in_array("BCG", $arr) && $action =="add") {echo 'checked="true" disabled="true"';} else if(in_array("BCG", $arr)) {echo 'checked="true"';} ?> >BCG
                                                 </label>
                                            </div>
                                             <div class="checkbox">
                                                 <label class="checkbox-inline">
-                                                    <input type="checkbox" value="OPV at birth" name="opv_1" <?php if(in_array("OPV at birth", $arr)) {echo 'checked="true"';} ?>>OPV at birth
+                                                    <input type="checkbox" value="OPV at birth" name="opv" <?php if(in_array("OPV at birth", $arr) && $action =="add") {echo 'checked="true" disabled="true"';} else if(in_array("OPV at birth", $arr)) {echo 'checked="true"';} ?>>OPV at birth
                                                 </label>
                                                 </div>
                                             <div class="checkbox">
                                                 <label class="checkbox-inline">
-                                                    <input type="checkbox" value="OPV1" name="opv_2" <?php if(in_array("OPV1", $arr)) {echo 'checked="true"';} ?>>OPV1
+                                                    <input type="checkbox" value="OPV1" name="opv_1" <?php if(in_array("OPV1", $arr) && $action =="add") {echo 'checked="true" disabled="true"';} else if(in_array("OPV1", $arr)) {echo 'checked="true"';} ?>>OPV1
                                                 </label>
                                                 </div>
                                             <div class="checkbox">
                                                 <label class="checkbox-inline" >
-                                                    <input type="checkbox" value="Pentavalent 1" name="pent1" <?php if(in_array("Pentavalent 1", $arr)) {echo 'checked="true"';} ?>>Pentavalent 1
+                                                    <input type="checkbox" value="Pentavalent 1" name="pent1" <?php if(in_array("Pentavalent 1", $arr) && $action =="add") {echo 'checked="true" disabled="true"';} else if(in_array("Pentavalent 1", $arr)) {echo 'checked="true"';} ?>>Pentavalent 1
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label class="checkbox-inline">
-                                                    <input type="checkbox" value="PCV-10-1" name="pcv_1" <?php if(in_array("PCV-10-1", $arr)) {echo 'checked="true"';} ?>>PCV-10-1
+                                                    <input type="checkbox" value="PCV-10-1" name="pcv_1" <?php if(in_array("PCV-10-1", $arr) && $action =="add") {echo 'checked="true" disabled="true"';} else if(in_array("PCV-10-1", $arr)) {echo 'checked="true"';} ?>>PCV-10-1
                                                 </label>
                                                 </div>
                                             <div class="checkbox">
                                                 <label class="checkbox-inline">
-                                                    <input type="checkbox" value="Rotavirus 1" name="rota_1" <?php if(in_array("Rotavirus 1", $arr)) {echo 'checked="true"';} ?>>Rotavirus 1
+                                                    <input type="checkbox" value="Rotavirus 1" name="rota_1" <?php if(in_array("Rotavirus 1", $arr) && $action =="add") {echo 'checked="true" disabled="true"';} else if(in_array("Rotavirus 1", $arr)) {echo 'checked="true"';} ?>>Rotavirus 1
                                                 </label>
                                                 </div>
                                             <div class="checkbox">
                                                 <label class="checkbox-inline" >
-                                                    <input type="checkbox" value="Penta 2" name="pent_2" <?php if(in_array("Penta 2", $arr)) {echo 'checked="true"';} ?>>Penta 2
+                                                    <input type="checkbox" value="Penta 2" name="pent_2" <?php if(in_array("Penta 2", $arr) && $action =="add") {echo 'checked="true" disabled="true"';} else if(in_array("Penta 2", $arr)) {echo 'checked="true"';} ?>>Penta 2
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label class="checkbox-inline">
-                                                    <input type="checkbox" value="PCV 10-2" name="pcv_2" <?php if(in_array("PCV 10-2", $arr)) {echo 'checked="true"';} ?>>PCV 10-2
+                                                    <input type="checkbox" value="PCV 10-2" name="pcv_2" <?php if(in_array("PCV 10-2", $arr) && $action =="add") {echo 'checked="true" disabled="true"';} else if(in_array("PCV 10-2", $arr)) {echo 'checked="true"';} ?>>PCV 10-2
                                                 </label>
                                                 </div>
                                             <div class="checkbox">
                                                 <label class="checkbox-inline">
-                                                    <input type="checkbox" value="Rotavirus 2" name="rota_2" <?php if(in_array("Rotavirus 2", $arr)) {echo 'checked="true"';} ?>>Rotavirus 2
+                                                    <input type="checkbox" value="Rotavirus 2" name="rota_2" <?php if(in_array("Rotavirus 2", $arr) && $action =="add") {echo 'checked="true" disabled="true"';} else if(in_array("Rotavirus 2", $arr)) {echo 'checked="true"';} ?>>Rotavirus 2
                                                 </label>
                                                 </div>
                                             <div class="checkbox">
                                                 <label class="checkbox-inline" >
-                                                    <input type="checkbox" value="OPV 2" name="opv_2" <?php if(in_array("OPV 2", $arr)) {echo 'checked="true"';} ?>>OPV 2
+                                                    <input type="checkbox" value="OPV 2" name="opv_2" <?php if(in_array("OPV 2", $arr) && $action =="add") {echo 'checked="true" disabled="true"';} else if(in_array("OPV 2", $arr)) {echo 'checked="true"';} ?>>OPV 2
                                                 </label>
                                                 </div>
                                             <div class="checkbox">
                                                 <label class="checkbox-inline">
-                                                    <input type="checkbox" value="OPV 3" name="opv_3" <?php if(in_array("OPV 3", $arr)) {echo 'checked="true"';} ?>>OPV 3
+                                                    <input type="checkbox" value="OPV 3" name="opv_3" <?php if(in_array("OPV 3", $arr) && $action =="add") {echo 'checked="true" disabled="true"';} else if(in_array("OPV 3", $arr)) {echo 'checked="true"';} ?>>OPV 3
                                                  </label>
                                                 </div>
                                             <div class="checkbox">
                                                 <label class="checkbox-inline">
-                                                    <input type="checkbox" value="Penta 3" name="pent3" <?php if(in_array("Penta 3", $arr)) {echo 'checked="true"';} ?>>Penta 3
+                                                    <input type="checkbox" value="Penta 3" name="pent3" <?php if(in_array("Penta 3", $arr) && $action =="add") {echo 'checked="true" disabled="true"';} else if(in_array("Penta 3", $arr)) {echo 'checked="true"';} ?>>Penta 3
                                                 </label>
                                                 </div>
                                             <div class="checkbox">
                                                 <label class="checkbox-inline" >
-                                                    <input type="checkbox" value="PCV 10-3" name="pcv_3" <?php if(in_array("PCV 10-3", $arr)) {echo 'checked="true"';} ?>>PCV 10-3
+                                                    <input type="checkbox" value="PCV 10-3" name="pcv_3" <?php if(in_array("PCV 10-3", $arr) && $action =="add") {echo 'checked="true" disabled="true"';} else if(in_array("PCV 10-3", $arr)) {echo 'checked="true"';} ?>>PCV 10-3
                                                 </label>
                                                 </div>
                                             <div class="checkbox">
                                                 <label class="checkbox-inline">
-                                                    <input type="checkbox" value="Measles at 6 months" name="mea_6" <?php if(in_array("Measles at 6 months", $arr)) {echo 'checked="true"';} ?>>Measles at 6 months
+                                                    <input type="checkbox" value="Measles at 6 months" name="mea_6" <?php if(in_array("Measles at 6 months", $arr) && $action =="add") {echo 'checked="true" disabled="true"';} else if(in_array("Measles at 6 months", $arr)) {echo 'checked="true"';} ?>>Measles at 6 months
                                                  </label>
                                                 </div>
                                             <div class="checkbox">
                                                 <label class="checkbox-inline" >
-                                                    <input type="checkbox" value="Measles at 9 months" name="mea_9" <?php if(in_array("Measles at 9 months", $arr)) {echo 'checked="true"';} ?>>Measles at 9 months
+                                                    <input type="checkbox" value="Measles at 9 months" name="mea_9" <?php if(in_array("Measles at 9 months", $arr) && $action =="add") {echo 'checked="true" disabled="true"';} else if(in_array("Measles at 9 months", $arr)) {echo 'checked="true"';} ?>>Measles at 9 months
                                                 </label>
                                             </div>
                                         </div>
@@ -816,10 +832,10 @@ function getImmunizations()
     $immunization = "";
     if (isset($_POST["bcg"]).";")
     {  $immunization .= trim($_POST["bcg"]).";";  }
+    if (isset($_POST["opv"]))
+    {  $immunization .= trim($_POST["opv"]).";";  }
     if (isset($_POST["opv_1"]))
     {  $immunization .= trim($_POST["opv_1"]).";";  }
-    if (isset($_POST["opv_2"]))
-    {  $immunization .= trim($_POST["opv_2"]).";";  }
     if (isset($_POST["pent1"]))
     {  $immunization .= trim($_POST["pent1"]).";";  }
     if (isset($_POST["pcv_1"]))

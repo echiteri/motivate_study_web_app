@@ -153,7 +153,7 @@ $db = new db_transactions();
                 <div class="col-lg-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="text-danger"><strong>Demographic and identifier summary</strong></h3>
+                            <h3 class="text-danger">Demographic and identifier summary</h3>
                             <?php $select_record = $db->selectRecord($demographics_table, $demographics_table_id, $demographic_study_id);?>
                         </div>
                         <div class="panel-body">
@@ -170,14 +170,14 @@ $db = new db_transactions();
                     <!-- /.panel -->
                 </div>
                 
-                <div class="col-lg-5">
+                <div class="col-lg-8">
                    <!-- women variable panel begins -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="text-danger">Women Variables <span class="pull-right"> <a href="variables.php?action=add&study_id=<?php echo $demographic_study_id ; ?>"  class="fa fa-pencil"> Add new</a></span></h4>
                             <?php 
                             $number = 1;
-                            $select_variables = "variables_id, weight, height, edd";
+                            $select_variables = "variables_id, visit_date, weight, height, edd, next_visit_date, created_date";
                             $select_record = $db->selectDefinedRecords($select_variables, $women_variables_table, $women_variables_table_id, $demographic_study_id);
                             ?>
                         </div>
@@ -194,10 +194,12 @@ $db = new db_transactions();
                                 {
                                     echo '<p class="text-success">';
                                     echo $number;
-                                    echo " Visit Date: <strong>".$rec["variables_id"]."</strong> "
+                                    echo " <strong>Visit Date: ".$rec["visit_date"]."</strong> "
                                             . "Weight: <strong>".$rec["weight"]."</strong> "
                                             . "Height: <strong>".$rec["height"]."</strong> "
-                                            . "EDD: <strong>".$rec["edd"]."</strong> ";
+                                            . "EDD: <strong>".$rec["edd"]."</strong> "
+                                            . "Next visit date: <strong>".$rec["next_visit_date"]."</strong> "
+                                            . "Abstraction Date: <strong>".$rec["created_date"]."</strong> .";
                                     echo "<span class='pull-right'>";
                                     echo "<a href='variables.php?action=edit&id=".$rec["variables_id"]."' class='fa fa-edit' alt='Edit current record'></a> |  "
                                                         . "<a href='variables.php?action=delete&id=".$rec["variables_id"]."' class='fa fa-times-circle' alt='Delete current record'></a>";
@@ -219,7 +221,7 @@ $db = new db_transactions();
                             <h4 class="text-danger">Women Adherence<span class="pull-right"> <a href="adherence.php?action=add&study_id=<?php echo $demographic_study_id ; ?>"  class="fa fa-pencil"> Add new</a></span></h4>
                             <?php 
                             $number = 1;
-                            $select_variables = "adherence_id, haart_regimen, cd4_count, viral_load";
+                            $select_variables = "adherence_id, visit_date, haart_regimen, cd4_count, viral_load, next_visit_date, created_date";
                             $select_record = $db->selectDefinedRecords($select_variables, $women_adherence_table, $women_adherence_table_id, $demographic_study_id);
                             ?>
                         </div>
@@ -235,10 +237,12 @@ $db = new db_transactions();
                                 {
                                 echo '<p class="text-success"';
                                 echo $number;
-                                echo " <strong> Visit Date: ".$rec["adherence_id"]."</strong> "
+                                echo " <strong> Visit Date: ".$rec["visit_date"]."</strong> "
                                         . "Haart Regimen: <strong>".$rec["haart_regimen"]."</strong> "
                                         . "CD4 count: <strong>".$rec["cd4_count"]."</strong> "
-                                        . "Viral Load: <strong>".$rec["viral_load"]."</strong> .";
+                                        . "Viral Load: <strong>".$rec["viral_load"]."</strong> "
+                                        . "Next visit date: <strong>".$rec["next_visit_date"]."</strong> "
+                                        . "Abstraction Date: <strong>".$rec["created_date"]."</strong> .";
                                 echo "<span class='pull-right'>";
                                 echo "<a href='adherence.php?action=edit&id=".$rec["adherence_id"]."' class='fa fa-edit' alt='Edit current record'></a> |  "
                                                         . "<a href='adherence.php?action=delete&id=".$rec["adherence_id"]."' class='fa fa-times-circle' alt='Delete current record'></a>";
@@ -259,7 +263,7 @@ $db = new db_transactions();
                             <h4 class="text-danger">Women Retention <span class="pull-right"> <a href="retention.php?action=add&study_id=<?php echo $demographic_study_id ; ?>"  class="fa fa-pencil"> Add new</a></span></h4>
                             <?php 
                             $number = 1;
-                            $select_variables = "retention_id, hiv_visit, next_visit";
+                            $select_variables = "retention_id, hiv_visit, next_visit, created_date";
                             $select_record = $db->selectDefinedRecords($select_variables, $women_retention_table, $women_retention_table_id, $demographic_study_id);
                             ?>
                         </div>
@@ -277,7 +281,8 @@ $db = new db_transactions();
                                         echo '<p class="text-success">';
                                         echo $number;
                                         echo " Visit Date: <strong>".$rec["hiv_visit"]."</strong>  "
-                                                . "Next Visit: <strong>".$rec["next_visit"]."</strong>  ";
+                                                . "Next Visit: <strong>".$rec["next_visit"]."</strong>  "
+                                                . "Abstraction Date: <strong>".$rec["created_date"]."</strong> ";
                                         echo "<span class='pull-right'>";
                                         echo "<a href='retention.php?action=edit&id=".$rec["retention_id"]."' class='fa fa-edit' alt='Edit current record'></a> |  "
                                                         . "<a href='retention.php?action=delete&id=".$rec["retention_id"]."' class='fa fa-times-circle' alt='Delete current record'></a>";
@@ -297,7 +302,7 @@ $db = new db_transactions();
                             <h4 class="text-danger">Participants infants on HEI <span class="pull-right"> <a href="registration.php?action=add&study_id=<?php echo $demographic_study_id ; ?>"  class="fa fa-pencil"> Add new</a></span></h4>
                             <?php 
                             $number = 1;
-                            $select_variables = "hei_id, birth_date, birth_weight, sex, delivery_place";
+                            $select_variables = "hei_id, birth_date, birth_weight, sex, delivery_place, created_date";
                             $select_record = $db->selectDefinedRecords($select_variables, $infant_registration_table, $infant_registration_table_id, $demographic_study_id);
                             ?>
                         </div>

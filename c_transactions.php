@@ -148,12 +148,12 @@ class db_transactions {
     {
         try
         {
-            $sql = "INSERT INTO adherence(a_study_id, haart_start_date, haart_regimen, art_effect, "
+            $sql = "INSERT INTO adherence(a_study_id, visit_date, haart_start_date, haart_regimen, art_effect, "
                     . "self_art_adherence, self_ctx_adherence, cd4_count, cd4_date, viral_load, "
-                    . "viral_date, who_stage, user_initial) "
+                    . "viral_date, who_stage, user_initial, next_visit_date) "
                     . "VALUES ('".$arr_val[0]."','".$arr_val[1]. "','" .$arr_val[2]."','" .$arr_val[3]."','" .$arr_val[4]."'"
                     . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."','" .$arr_val[8]."','" .$arr_val[9]."'"
-                    . ",'" .$arr_val[10]."','". $_SESSION["username"]."')";
+                    . ",'" .$arr_val[10]."','" .$arr_val[11]."','". $_SESSION["username"]."','". $arr_val[12]."')";
 
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
@@ -167,12 +167,12 @@ class db_transactions {
     public function insertVariables($arr_val)
     {
         try{
-            $sql = "INSERT INTO variables(v_study_id, weight, height, hemoglobin, hemoglobin_date, "
+            $sql = "INSERT INTO variables(v_study_id, visit_date, weight, height, hemoglobin, hemoglobin_date, "
                     . "tb_status, preg_status, edd, fp_status, fp_method, "
-                    . "disclosure, patner_tested, user_initial) "
+                    . "disclosure, patner_tested, user_initial, next_visit_date) "
                     . "VALUES ('".$arr_val[0]."','".$arr_val[1]. "','" .$arr_val[2]."','" .$arr_val[3]."','" .$arr_val[4]."'"
                     . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."','" .$arr_val[8]."','" .$arr_val[9]."'"
-                    . ",'" .$arr_val[10]."','" .$arr_val[11]."','". $_SESSION["username"]."')";
+                    . ",'" .$arr_val[10]."','" .$arr_val[11]."','" .$arr_val[12]."','". $_SESSION["username"]."','" .$arr_val[13]."')";
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
             $adh = $stmt->rowCount();
@@ -303,9 +303,9 @@ class db_transactions {
     {
         try{
             $sql = "UPDATE adherence "
-                . "SET a_study_id='".$arr_val[0]."',haart_start_date='".$arr_val[1]."',haart_regimen='".$arr_val[2]."',art_effect='".$arr_val[3]."',"
-                . "self_art_adherence='".$arr_val[4]."',self_ctx_adherence='".$arr_val[5]."',cd4_count='".$arr_val[6]."',cd4_date='".$arr_val[7]."',viral_load='".$arr_val[8]."',"
-                . "viral_date='".$arr_val[9]."',who_stage='".$arr_val[10]."', user_initial = '". $_SESSION["username"]."'"
+                . "SET a_study_id='".$arr_val[0]."', visit_date='".$arr_val[1]."' ,haart_start_date='".$arr_val[2]."',haart_regimen='".$arr_val[3]."',art_effect='".$arr_val[4]."',"
+                . "self_art_adherence='".$arr_val[5]."',self_ctx_adherence='".$arr_val[6]."',cd4_count='".$arr_val[7]."',cd4_date='".$arr_val[8]."',viral_load='".$arr_val[9]."',"
+                . "viral_date='".$arr_val[10]."',who_stage='".$arr_val[11]."', user_initial = '". $_SESSION["username"]."', next_visit_date = '". $arr_val[12]."'"
                 . "WHERE adherence_id = '".$record_id."'";
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
@@ -320,9 +320,9 @@ class db_transactions {
     {
           try{
             $sql = "UPDATE variables "
-                . "SET v_study_id='".$arr_val[0]."',weight='".$arr_val[1]."',height='".$arr_val[2]."',hemoglobin='".$arr_val[3]."',"
-                . "hemoglobin_date='".$arr_val[4]."',tb_status='".$arr_val[5]."',preg_status='".$arr_val[6]."',edd='".$arr_val[7]."',fp_status='".$arr_val[8]."',"
-                . "fp_method='".$arr_val[9]."', disclosure='".$arr_val[10]."',patner_tested='".$arr_val[11]."', user_initial = '". $_SESSION["username"]."'"
+                . "SET v_study_id='".$arr_val[0]."',visit_date='".$arr_val[1]."',weight='".$arr_val[2]."',height='".$arr_val[3]."',hemoglobin='".$arr_val[4]."',"
+                . "hemoglobin_date='".$arr_val[5]."',tb_status='".$arr_val[6]."',preg_status='".$arr_val[7]."',edd='".$arr_val[8]."',fp_status='".$arr_val[9]."',"
+                . "fp_method='".$arr_val[10]."', disclosure='".$arr_val[11]."',patner_tested='".$arr_val[12]."', user_initial = '". $_SESSION["username"]."',next_visit_date='".$arr_val[13]."'"
                 . "WHERE variables_id = '".$record_id."'";
         
             $stmt = $this->dbCon()->prepare($sql);

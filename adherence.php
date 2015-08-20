@@ -157,6 +157,7 @@ $_SESSION['timeout'] = time();
                                 if($mode == "adherence")
                                     {
                                     $a_study_id = $_POST['a_study_id'];
+                                    $visit = $_POST['visit_date'];
                                     $haart_start_date= $_POST['haart_start_date'];
                                     $haart_regimen = $_POST['haart_regimen'];
                                     //$art_effect = $_POST['art_effect'];
@@ -168,10 +169,11 @@ $_SESSION['timeout'] = time();
                                     $viral_date = $_POST['viral_date'];
                                     $who_stage = $_POST['who_stage'];
                                     $btn = $_POST['btn'];
+                                    $next_visit = $_POST['next_visit_date'];
                                         $adherence = array(
-                                            $a_study_id, $haart_start_date, $haart_regimen , $art_effect,
+                                            $a_study_id,$visit, $haart_start_date, $haart_regimen , $art_effect,
                                             $self_art_adherence, $self_ctx_adherence, $cd4_count, $cd4_date,
-                                            $viral_load, $who_stage
+                                            $viral_load, $viral_date, $who_stage, $next_visit
                                             );
                                         
                                         if ($btn == "submit")
@@ -205,6 +207,10 @@ $_SESSION['timeout'] = time();
                                         <div class="form-group">
                                             <label>Participant Study ID</label>
                                             <input class="form-control" value="<?php if($action == "edit"){echo $select_record["a_study_id"];} else if($_REQUEST["action"] == "add"){ echo trim($_REQUEST["study_id"]);} ?>" placeholder="Enter participant study identification number" name="a_study_id" required="TRUE" >
+                                        </div>
+                                         <div class="form-group">
+                                            <label>Visit date</label>
+                                            <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["visit_date"];} ?>" name="visit_date">
                                         </div>
                                         <div class="form-group">
                                             <label>Date of starting HAART</label>
@@ -339,6 +345,10 @@ $_SESSION['timeout'] = time();
                                                 <option value="WHO stage III"<?php if($select_record["who_stage"]=="WHO stage III") { echo 'selected="selected"';} ?>>WHO stage III</option>
                                                 <option value="WHO stage IV"<?php if($select_record["who_stage"]=="WHO stage IV") { echo 'selected="selected"';} ?>>WHO stage IV</option>
                                             </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Next Visit date</label>
+                                            <input min="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_visit_date"];} ?>" name="next_visit_date" >
                                         </div>
                                          
                                         <?php if($action == "add") { ?>

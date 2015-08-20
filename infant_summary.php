@@ -22,7 +22,7 @@ $_SESSION['timeout'] = time();
 $infant_registation_hei_id = $_REQUEST["id"];
 $infant_registration_table = "infant_registration";
 $infant_registration_table_id = "hei_id";
-//women variable variables
+//infant diagnosis variables
 $infant_diagnosis_table = "infant_diagnosis";
 $infant_diagnosis_table_id = "i_hei_id";
 
@@ -143,7 +143,7 @@ $db = new db_transactions();
                 <div class="col-lg-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="text-danger"><strong>Infant identifier summary</strong></h3>
+                            <h3 class="text-danger">Infant identifier summary </h3>
                             <?php $select_record = $db->selectRecord($infant_registration_table, $infant_registration_table_id, $infant_registation_hei_id);?>
                         </div>
                         <div class="panel-body">
@@ -159,14 +159,14 @@ $db = new db_transactions();
                     <!-- /.panel -->
                 </div>
                 
-                <div class="col-lg-5">
+                <div class="col-lg-7">
                    <!-- infant diagnosis panel begins -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4 class="text-danger">Women Variables <span class="pull-right"> <a href="diagnosis.php?action=add&hei_id=<?php echo $infant_registation_hei_id ; ?>" class="fa fa-pencil"> Add new</a></span></h4>
+                            <h4 class="text-danger">Infant diagnosis <span class="pull-right"> <a href="diagnosis.php?action=add&hei_id=<?php echo $infant_registation_hei_id ; ?>" class="fa fa-pencil"> Add new</a></span></h4>
                             <?php 
                             $number = 1;
-                            $select_variables = "diagnosis_id, visit_date, weight, height, next_appointment";
+                            $select_variables = "diagnosis_id, visit_date, weight, height, next_appointment, created_date";
                             $select_record = $db->selectDefinedRecords($select_variables, $infant_diagnosis_table, $infant_diagnosis_table_id, $infant_registation_hei_id);
                             ?>
                         </div>
@@ -186,7 +186,8 @@ $db = new db_transactions();
                                     echo " Visit Date: <strong>".$rec["visit_date"]."</strong> "
                                             . "Weight: <strong>".$rec["weight"]."</strong> "
                                             . "Height: <strong>".$rec["height"]."</strong> "
-                                            . "Next Appointment: <strong>".$rec["next_appointment"]."</strong> ";
+                                            . "Next Appointment: <strong>".$rec["next_appointment"]."</strong> "
+                                            . "Abstraction Date: <strong>".$rec["created_date"]."</strong> .";
                                     echo "<span class='pull-right'>";
                                     echo "<a href='diagnosis.php?action=edit&id=".$rec["diagnosis_id"]."' class='fa fa-edit' alt='Edit current record'></a> |  "
                                                         . "<a href='diagnosis.php?action=delete&id=".$rec["diagnosis_id"]."' class='fa fa-times-circle' alt='Delete current record'></a>";

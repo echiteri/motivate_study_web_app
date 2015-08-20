@@ -203,6 +203,7 @@ $_SESSION['timeout'] = time();
                                 if($mode == "variables")
                                     {
                                     $v_study_id = $_POST['v_study_id'];
+                                    $visit = $_POST['visit_date'];
                                     $weight= $_POST['weight'];
                                     $height = $_POST['height'];
                                     $hemoglobin = $_POST['hemoglobin'];
@@ -214,13 +215,14 @@ $_SESSION['timeout'] = time();
                                     //$fp_method = $_POST['fp_method'];
                                     $disclosure = $_POST['disclosure'];
                                     $patner_tested = $_POST['patner_tested'];
+                                    $next_visit = $_POST['next_visit_date'];
                                     $btn = $_POST['btn'];
                                     
                                     
                                         $variables = array(
-                                            $v_study_id, $weight, $height, $hemoglobin, $hemoglobin_date,
+                                            $v_study_id, $visit, $weight, $height, $hemoglobin, $hemoglobin_date,
                                             $tb_status, $preg_status, $edd, $fp_status, $fp_method, 
-                                            $disclosure, $patner_tested
+                                            $disclosure, $patner_tested, $next_visit
                                             );
                                         if ($btn == "submit")
                                         {
@@ -252,6 +254,10 @@ $_SESSION['timeout'] = time();
                                         <div class="form-group">
                                             <label>Participant Study ID</label>
                                             <input class="form-control" value="<?php if($action == "edit"){echo $select_record["v_study_id"];}  else if($_REQUEST["action"] == "add"){ echo trim($_REQUEST["study_id"]);} ?>" placeholder="Enter participant study identification number" name="v_study_id" required="TRUE" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Visit date</label>
+                                            <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["visit_date"];} ?>" name="visit_date">
                                         </div>
                                         <div class="form-group">
                                             <label>Weight (Kgs)</label>
@@ -394,6 +400,10 @@ $_SESSION['timeout'] = time();
                                                 <input type="radio" name="patner_tested"  value="N" <?php if($select_record["patner_tested"]=="N") {echo 'checked="true"';} ?>>No
                                             </label>
                                             
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Next visit date</label>
+                                            <input min="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_visit_date"];} ?>" name="next_visit_date">
                                         </div>
                                          
                                          <?php if($action == "add") { ?>
