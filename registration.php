@@ -181,9 +181,9 @@ $_SESSION['timeout'] = time();
                                         } else if ($btn == "update"){
                                             if($db->editInfantRegistration($registration, $hei_id)>0)
                                                 {
-                                                    echo '<label class="control-label" for="inputSuccess">Early Infant Registration updated successfully</label> <br \> Return to <a href="dashboard.php" >Dashboard</a>';
+                                                    echo '<label class="control-label" for="inputSuccess"> '.$birth_weight.'Early Infant Registration updated successfully</label> <br \> Return to <a href="dashboard.php" >Dashboard</a>';
                                                 } else {
-                                                    echo '<label class="control-label" for="inputError">Early Infant Registration was not updated.</label><br \>Return to <a href="dashboard.php" >Dashboard</a>';
+                                                    echo '<label class="control-label" for="inputError">'.$birth_weight.'Early Infant Registration was not updated.</label><br \>Return to <a href="dashboard.php" >Dashboard</a>';
                                                 }
                                         }
                                     } 
@@ -227,7 +227,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Infant birth weight</label>
-                                            <input type="number" step="any" min="0" class="form-control" value="<?php if($action == "edit"){echo $select_record["birth_weight"];} ?>" 
+                                            <input type="number" step="0.01" min="0" class="form-control" value="<?php if($action == "edit"){echo $select_record["birth_weight"];} ?>" 
                                                    placeholder="Enter weight of infant at birth" name="birth_weight"  autofocus>
                                         </div>
                                         <div class="form-group">
@@ -242,8 +242,12 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Place of delivery</label>
-                                            <input class="form-control"  value="<?php if($action == "edit"){echo $select_record["delivery_place"];} ?>" 
-                                                   placeholder="Enter birth place of infant" name="delivery_place"  >
+                                            <select class="form-control" name="delivery_place">
+                                                <option value="" selected="">Select birth place of infant</option>
+                                                <option value="HOS" <?php if($select_record["delivery_place"]=="HOS") { echo 'selected="selected"';} ?> >Hospital Delivery</option>
+                                                <option value="HOME" <?php if($select_record["delivery_place"]=="HOME") { echo 'selected="selected"';} ?>>Home Delivery</option>
+                                                <option value="OTHER" <?php if($select_record["delivery_place"]=="OTHER") { echo 'selected="selected"';} ?>>Other</option>
+                                            </select>
                                         </div>
                                          <div class="form-group">
                                             <label>ARV Prophylaxis</label>
@@ -266,7 +270,7 @@ $_SESSION['timeout'] = time();
                                             <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["enrol_date"];} ?>" name="enrol_date"  >
                                         </div>
                                         <div class="form-group">
-                                            <label>Age at enrollment(months)</label>
+                                            <label>Age at enrollment(weeks)</label>
                                             <input type="number" min="0" class="form-control" value="<?php if($action == "edit"){echo $select_record["enrol_age"];} ?>" 
                                                    placeholder="Enter age of the infant at enrollment" name="enrol_age"  >
                                         </div>

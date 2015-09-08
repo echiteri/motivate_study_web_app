@@ -333,13 +333,13 @@ class db_transactions {
             echo $ex->getMessage();
         }    
     }
-
+    
     public function editInfantRegistration($arr_val, $record_id)
     {
         try{
-            $sql = "UPDATE infant_registration SET d_study_id='".$arr_val[0]."', birth_date='".$arr_val[1]."',"
-                . "birth_weight='".$arr_val[2]."',sex='".$arr_val[3]."',delivery_place='".$arr_val[4]."',arv_prophylaxis='".$arr_val[5]."',arv_pro_other='".$arr_val[6]."',"
-                . "enrol_date='".$arr_val[7]."',enrol_age='".$arr_val[8]."', user_initial = '". $_SESSION["username"]."'"
+            $sql = "UPDATE infant_registration SET d_study_id='".$arr_val[1]."', birth_date='".$arr_val[2]."',"
+                . "birth_weight='".$arr_val[3]."',sex='".$arr_val[4]."',delivery_place='".$arr_val[5]."',arv_prophylaxis='".$arr_val[6]."',arv_pro_other='".$arr_val[7]."',"
+                . "enrol_date='".$arr_val[8]."',enrol_age='".$arr_val[9]."', user_initial = '". $_SESSION["username"]."'"
                 . "WHERE hei_id = '".$record_id."'";
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();

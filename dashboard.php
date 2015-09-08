@@ -141,7 +141,7 @@ $_SESSION['timeout'] = time();
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="demographics.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -159,11 +159,11 @@ $_SESSION['timeout'] = time();
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><?php echo $db->getTableCount('infant_diagnosis'); ?></div>
-                                    <div>Early Infants diagonized</div>
+                                    <div>Early Infants diagnosis</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="infant_diagnosis.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -185,7 +185,7 @@ $_SESSION['timeout'] = time();
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="women_adherence.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -207,7 +207,7 @@ $_SESSION['timeout'] = time();
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="women_retention.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -259,7 +259,7 @@ $_SESSION['timeout'] = time();
                                         Actions
                                         <span class="caret"></span>
                                     </button>
-                                    <ul class="dropdown-menu pull-right" role="menu">
+                            T        <ul class="dropdown-menu pull-right" role="menu">
                                         <li><a href="#">Action</a>
                                         </li>
                                         <li><a href="#">Another action</a>
@@ -357,64 +357,7 @@ $_SESSION['timeout'] = time();
                 </div>
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> Notifications Panel
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small"><em>4 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small"><em>12 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small"><em>27 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small"><em>43 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small"><em>11:32 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-bolt fa-fw"></i> Server Crashed!
-                                    <span class="pull-right text-muted small"><em>11:13 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-warning fa-fw"></i> Server Not Responding
-                                    <span class="pull-right text-muted small"><em>10:57 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
-                                    <span class="pull-right text-muted small"><em>9:49 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-money fa-fw"></i> Payment Received
-                                    <span class="pull-right text-muted small"><em>Yesterday</em>
-                                    </span>
-                                </a>
-                            </div>
-                            <!-- /.list-group -->
-                            <a href="#" class="btn btn-default btn-block">View All Alerts</a>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
+                    
                     <!-- /.panel -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
