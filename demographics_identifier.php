@@ -46,7 +46,7 @@ $_SESSION['timeout'] = time();
     maxDate: 0,
     onSelect: function(dateText, inst) {
        var actualDate = new Date(dateText);
-       var newDate = new Date(actualDate.getFullYear(), actualDate.getMonth(), actualDate.getDate()+282);
+       var newDate = new Date(actualDate.getFullYear()+1, actualDate.getMonth()-3, actualDate.getDate()+7);
         $('#edd_date').datepicker('option', 'minDate', newDate );
     }
 });
