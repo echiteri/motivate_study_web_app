@@ -158,12 +158,12 @@ $_SESSION['timeout'] = time();
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"><?php echo $db->getTableCount('infant_diagnosis'); ?></div>
-                                    <div>Early Infants diagnosis</div>
+                                    <div class="huge"><?php echo $db->getTableCount('infant_registration'); ?></div>
+                                    <div>Early Infants Registration</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="infant_diagnosis.php">
+                        <a href="infant_registration.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

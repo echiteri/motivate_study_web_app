@@ -67,7 +67,6 @@ $_SESSION['timeout'] = time();
                 document.getElementById("v").disabled = false;
                 document.getElementById("undtl").disabled = false;
                 document.getElementById("no").disabled = false;
-                alert("it has been set to false");
 
             }else
             {
@@ -84,21 +83,32 @@ $_SESSION['timeout'] = time();
                 document.getElementById("v").disabled = true;
                 document.getElementById("undtl").disabled = true;
                 document.getElementById("no").disabled = true;            
-                alert("it has been set to true");
             }
         }
         
         function togglePregStatus(){
-             if (document.getElementById("preg_status").value === "AB" || document.getElementById("preg_status").value === "MC")
+             if (document.getElementById("preg_status").value === "PRN")
                 {
                     document.getElementById("edd_date").disabled = false;
                 } 
-            else
+            else if (document.getElementById("preg_status").value === "NPRN")
                 {
                     document.getElementById("edd_date").disabled = true;
 
                 }
             }
+            
+        function toggleHb(){
+             if (document.getElementById("optionsRadiosInline1").checked)
+            {
+                document.getElementById("hemoglobin_id").disabled = false;
+                document.getElementById("hemoglobin_date_id").disabled = false;
+            }else if (document.getElementById("optionsRadiosInline2").checked)
+            {
+                document.getElementById("hemoglobin_id").disabled = true;
+                document.getElementById("hemoglobin_date_id").disabled = true;
+            }            
+        }
     </script>
     <script type="text/javascript">
        setTimeout(function() { window.location.href = "logout.php"; }, 6000000);
@@ -206,6 +216,7 @@ $_SESSION['timeout'] = time();
                                     $visit = $_POST['visit_date'];
                                     $weight= $_POST['weight'];
                                     $height = $_POST['height'];
+                                    $hb_taken = $_POST['hb_taken'];
                                     $hemoglobin = $_POST['hemoglobin'];
                                     $hemoglobin_date= $_POST['hemoglobin_date'];
                                     $tb_status = $_POST['tb_status'];
@@ -220,7 +231,7 @@ $_SESSION['timeout'] = time();
                                     
                                     
                                         $variables = array(
-                                            $v_study_id, $visit, $weight, $height, $hemoglobin, $hemoglobin_date,
+                                            $v_study_id, $visit, $weight, $height, $hb_taken, $hemoglobin, $hemoglobin_date,
                                             $tb_status, $preg_status, $edd, $fp_status, $fp_method, 
                                             $disclosure, $patner_tested, $next_visit
                                             );
@@ -268,12 +279,22 @@ $_SESSION['timeout'] = time();
                                             <input type="number" step="any" min="0" class="form-control" value="<?php if($action == "edit"){echo $select_record["height"];} ?>" placeholder="Enter measurement of how tall the participant is" name="height" required="TRUE" autofocus>
                                         </div>
                                         <div class="form-group">
+                                            <label>Hemoglobin taken</label>
+                                            <p class="help-block">Select whether Hemoglobin was taken or not <?php echo $select_record["hb_taken"]; ?></p>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" onclick="toggleHb()" type="radio" name="hb_taken" id="optionsRadiosInline1" value="Y" <?php if($select_record["hb_taken"]=="Y") { echo 'checked="true"';} ?> >Yes
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" onclick="toggleHb()" type="radio" name="hb_taken" id="optionsRadiosInline2" value="N" <?php if($select_record["hb_taken"]=="N") { echo 'checked="true"';} ?> >No
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
                                             <label>Hemoglobin</label>
-                                            <input type="number" step="any" min="0" class="form-control" value="<?php if($action == "edit"){echo $select_record["hemoglobin"];} ?>" placeholder="Enter measurement of level of hemoglobin in the participant's blood" name="hemoglobin" required="TRUE" >
+                                            <input required="TRUE" id="hemoglobin_id" type="number" step="any" min="0" class="form-control" value="<?php if($action == "edit"){echo $select_record["hemoglobin"];} ?>" placeholder="Enter measurement of level of hemoglobin in the participant's blood" name="hemoglobin" required="TRUE" >
                                         </div>
                                         <div class="form-group">
                                             <label>Hemoglobin date</label>
-                                            <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["hemoglobin_date"];} ?>" name="hemoglobin_date" required="TRUE" >
+                                            <input required="TRUE" id="hemoglobin_date_id" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["hemoglobin_date"];} ?>" name="hemoglobin_date" required="TRUE" >
                                         </div>
                                          <div class="form-group">
                                             <label>TB Status</label>
@@ -289,10 +310,8 @@ $_SESSION['timeout'] = time();
                                             <label>Pregnancy status</label>
                                             <select onchange="togglePregStatus()"  id="preg_status" class="form-control" id="preg" name="preg_status">
                                                 <option value="" selected="">Select Pregnancy status of the client</option>
-                                                <option value="P" <?php if($select_record["preg_status"]=="P") { echo 'selected="selected"';} ?>>ANC Number</option>
-                                                <option value="PD" <?php if($select_record["preg_status"]=="PD") { echo 'selected="selected"';} ?>>EDD</option>
-                                                <option value="AB" <?php if($select_record["preg_status"]=="AB") { echo 'selected="selected"';} ?>>Abortion</option>
-                                                <option value="MC" <?php if($select_record["preg_status"]=="MC") { echo 'selected="selected"';} ?>>Miscarriage</option>
+                                                <option value="PRN" <?php if($select_record["preg_status"]=="PRN") { echo 'selected="selected"';} ?>>Pregnant</option>
+                                                <option value="NPRN" <?php if($select_record["preg_status"]=="NPRN") { echo 'selected="selected"';} ?>>Not Pregnant</option>
                                             </select>
                                         </div>
                                          <div class="form-group">
@@ -384,10 +403,10 @@ $_SESSION['timeout'] = time();
                                             <label>Disclosure</label>
                                             <p class="help-block">Select whether the participant has disclosed HIV status  or not</p>
                                             <label class="radio-inline">
-                                                <input type="radio" name="disclosure" id="optionsRadiosInline1" value="Y" <?php if($select_record["disclosure"]=="Y") {echo 'checked="true"';} ?>>Yes
+                                                <input type="radio" name="disclosure" id="optionsRadiosInline3" value="Y" <?php if($select_record["disclosure"]=="Y") {echo 'checked="true"';} ?>>Yes
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="disclosure" id="optionsRadiosInline2" value="N" <?php if($select_record["disclosure"]=="N") {echo 'checked="true"';} ?>>No
+                                                <input type="radio" name="disclosure" id="optionsRadiosInline4" value="N" <?php if($select_record["disclosure"]=="N") {echo 'checked="true"';} ?>>No
                                             </label>
                                         </div>
                                         <div class="form-group">
@@ -403,7 +422,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Next visit date</label>
-                                            <input min="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_visit_date"];} ?>" name="next_visit_date">
+                                            <input type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_visit_date"];} ?>" name="next_visit_date">
                                         </div>
                                          
                                          <?php if($action == "add") { ?>

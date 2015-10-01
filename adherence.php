@@ -54,6 +54,28 @@ $_SESSION['timeout'] = time();
     <![endif]-->
     <script type="text/javascript">
    setTimeout(function() { window.location.href = "logout.php"; }, 6000000);
+   function toggleCd4(){
+             if (document.getElementById("optionsRadiosInline1").checked)
+            {
+                document.getElementById("cd4_count_id").disabled = false;
+                document.getElementById("cd4_date_id").disabled = false;
+            }else if (document.getElementById("optionsRadiosInline2").checked)
+            {
+                document.getElementById("cd4_count_id").disabled = true;
+                document.getElementById("cd4_date_id").disabled = true;
+            }            
+        }
+   function toggleVl(){
+             if (document.getElementById("optionsRadiosInline3").checked)
+            {
+                document.getElementById("viral_load_id").disabled = false;
+                document.getElementById("viral_date_id").disabled = false;
+            }else if (document.getElementById("optionsRadiosInline4").checked)
+            {
+                document.getElementById("viral_load_id").disabled = true;
+                document.getElementById("viral_date_id").disabled = true;
+            }            
+        }
 </script>
 
 </head>
@@ -153,6 +175,7 @@ $_SESSION['timeout'] = time();
                                 $tbl_id = "adherence_id";
                                 $db = new db_transactions();
                                 $art_effect = getArtSideEffect();
+                                echo $art_effect;
                                 
                                 if($mode == "adherence")
                                     {
@@ -163,8 +186,10 @@ $_SESSION['timeout'] = time();
                                     //$art_effect = $_POST['art_effect'];
                                     $self_art_adherence = $_POST['self_art_adherence'];
                                     $self_ctx_adherence = $_POST['self_ctx_adherence'];
+                                    $cd4_taken = $_POST['cd4_taken'];
                                     $cd4_count = $_POST['cd4_count'];
                                     $cd4_date = $_POST['cd4_date'];
+                                    $vl_taken = $_POST['vl_taken'];
                                     $viral_load = $_POST['viral_load'];
                                     $viral_date = $_POST['viral_date'];
                                     $who_stage = $_POST['who_stage'];
@@ -172,7 +197,7 @@ $_SESSION['timeout'] = time();
                                     $next_visit = $_POST['next_visit_date'];
                                         $adherence = array(
                                             $a_study_id,$visit, $haart_start_date, $haart_regimen , $art_effect,
-                                            $self_art_adherence, $self_ctx_adherence, $cd4_count, $cd4_date,
+                                            $self_art_adherence, $self_ctx_adherence,$cd4_taken, $cd4_count, $cd4_date, $vl_taken,
                                             $viral_load, $viral_date, $who_stage, $next_visit
                                             );
                                         
@@ -321,20 +346,40 @@ $_SESSION['timeout'] = time();
                                             </select>
                                         </div>
                                         <div class="form-group">
+                                            <label>CD 4 taken</label>
+                                            <p class="help-block">Select whether CD 4 was taken or not</p>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" onclick="toggleCd4()" type="radio" name="cd4_taken" id="optionsRadiosInline1" value="Y" <?php if($select_record["cd4_taken"]=="Y") { echo 'checked="true"';} ?> >Yes
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" onclick="toggleCd4()" type="radio" name="cd4_taken" id="optionsRadiosInline2" value="N" <?php if($select_record["cd4_taken"]=="N") { echo 'checked="true"';} ?> >No
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
                                             <label>CD4 count</label>
-                                            <input type="number" step="any" min="0" class="form-control" placeholder="Enter the number of CD4 T lymphocytes (CD4 cells) in a sample of blood" value="<?php if($action == "edit"){echo $select_record["cd4_count"];} ?>" name="cd4_count" >
+                                            <input required="TRUE" id="cd4_count_id" type="number" step="any" min="0" class="form-control" placeholder="Enter the number of CD4 T lymphocytes (CD4 cells) in a sample of blood" value="<?php if($action == "edit"){echo $select_record["cd4_count"];} ?>" name="cd4_count" >
                                         </div>
                                         <div class="form-group">
                                             <label>CD4 Date</label>
-                                            <input max="<?php echo date("Y-m-d");?>" type="date"class="form-control"  value="<?php if($action == "edit"){echo $select_record["cd4_date"];} ?>"  name="cd4_date">
+                                            <input required="TRUE" id="cd4_date_id" max="<?php echo date("Y-m-d");?>" type="date"class="form-control"  value="<?php if($action == "edit"){echo $select_record["cd4_date"];} ?>"  name="cd4_date">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Viral Load taken</label>
+                                            <p class="help-block">Select whether viral load was taken or not</p>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" onclick="toggleVl()" type="radio" name="vl_taken" id="optionsRadiosInline3" value="Y" <?php if($select_record["vl_taken"]=="Y") { echo 'checked="true"';} ?> >Yes
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" onclick="toggleVl()" type="radio" name="vl_taken" id="optionsRadiosInline4" value="N" <?php if($select_record["vl_taken"]=="N") { echo 'checked="true"';} ?> >No
+                                            </label>
                                         </div>
                                         <div class="form-group">
                                             <label>Viral load </label>
-                                            <input type="text" class="form-control" placeholder="Enter amount of HIV in a sample of blood reported as the number of HIV RNA copies per milliliter of blood"  value="<?php if($action == "edit"){echo $select_record["viral_load"];} ?>" name="viral_load">
+                                            <input required="TRUE" type="text" id="viral_load_id" class="form-control" placeholder="Enter amount of HIV in a sample of blood reported as the number of HIV RNA copies per milliliter of blood"  value="<?php if($action == "edit"){echo $select_record["viral_load"];} ?>" name="viral_load">
                                         </div>
                                         <div class="form-group">
                                             <label>Viral load date</label>
-                                            <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["viral_date"];} ?>" name="viral_date" >
+                                            <input required="TRUE" id="viral_date_id" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["viral_date"];} ?>" name="viral_date" >
                                         </div>
                                            <div class="form-group">
                                             <label>WHO Stage</label>
@@ -348,7 +393,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Next Visit date</label>
-                                            <input min="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_visit_date"];} ?>" name="next_visit_date" >
+                                            <input  type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_visit_date"];} ?>" name="next_visit_date" >
                                         </div>
                                          
                                         <?php if($action == "add") { ?>

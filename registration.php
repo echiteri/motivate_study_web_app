@@ -212,12 +212,12 @@ $_SESSION['timeout'] = time();
                                      <div class="col-lg-6">
                                         <input type="hidden" name="mode" value="registration" />
                                         <div class="form-group">
-                                            <label>Study ID</label>
+                                            <label>Mother Study ID</label>
                                             <input class="form-control" value="<?php if($action == "edit"){echo $select_record["d_study_id"];} else if($_REQUEST["action"] == "add"){ echo trim($_REQUEST["study_id"]);}?>"
                                                    placeholder="Enter participant study identification number" name="d_study_id" required="TRUE" >
                                         </div>
                                         <div class="form-group">
-                                            <label>HEI Study ID</label>
+                                            <label>HEI ID</label>
                                             <input class="form-control" value="<?php if($action == "edit"){echo $select_record["hei_id"];} ?>" 
                                                    placeholder="Enter identification number of the infant" name="hei_id" required="TRUE" >
                                         </div>
@@ -226,7 +226,7 @@ $_SESSION['timeout'] = time();
                                             <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["birth_date"];} ?>" name="birth_date"  >
                                         </div>
                                         <div class="form-group">
-                                            <label>Infant birth weight</label>
+                                            <label>Infant birth weight (KG)</label>
                                             <input type="number" step="0.01" min="0" class="form-control" value="<?php if($action == "edit"){echo $select_record["birth_weight"];} ?>" 
                                                    placeholder="Enter weight of infant at birth" name="birth_weight"  autofocus>
                                         </div>

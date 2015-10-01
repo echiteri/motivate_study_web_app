@@ -35,6 +35,7 @@ $_SESSION['timeout'] = time();
             $( document ).ready(function() {
                 $('#retention').dataTable({
                     "bProcessing": true,
+                    "fixedHeader": true,
                     "sAjaxSource": "retention_response.php",
                      aoColumns: [
                            { mData: 'VisitID' } ,

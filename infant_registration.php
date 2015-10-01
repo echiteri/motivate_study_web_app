@@ -42,6 +42,7 @@ $_SESSION['timeout'] = time();
             $( document ).ready(function() {
                 $('#registration').dataTable({
                     "bProcessing": true,
+                    "fixedHeader": true,
                     "sAjaxSource": "registration_response.php",
                      aoColumns: [
                            { mData: 'RegID' } ,

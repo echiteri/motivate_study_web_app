@@ -42,6 +42,7 @@ $_SESSION['timeout'] = time();
             $( document ).ready(function() {
                 $('#demographics').dataTable({
                     "bProcessing": true,
+                    "fixedHeader": true,
                     "sAjaxSource": "demographic_response.php",
                      aoColumns: [
                            { mData: 'StudyID' } ,

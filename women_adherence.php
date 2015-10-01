@@ -43,6 +43,7 @@ $_SESSION['timeout'] = time();
             $( document ).ready(function() {
                 $('#adherence').dataTable({
                     "bProcessing": true,
+                    "fixedHeader": true,
                     "sAjaxSource": "adherence_response.php",
                      aoColumns: [
                            { mData: 'AdherenceID' } ,

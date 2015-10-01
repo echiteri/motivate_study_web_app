@@ -502,16 +502,16 @@ $_SESSION['timeout'] = time();
                                         <?php
                                             $dob = date();
                                             $today = date("Y-m-d");
-                                            $infant_registration_record = $db->selectDefinedRecords("birth_date", "infant_registration", "hei_id", $_REQUEST["hei_id"]);
+                                            $infant_registration_record = $db->selectDefinedRecords("birth_date", "infant_registration", "hei_id", $select_record["i_hei_id"]);
                                             foreach ($infant_registration_record as $rec)
                                             {
-                                                $dob = $rec["birth_date"];
+                                                $dob = $rec["birth_date"];                                               
                                             }
                                             $diff = abs(strtotime($today) - strtotime($dob));
                                             $weeks = $diff/(60*60*24*7);
                                             $months = $diff/(60*60*24*30);
                                                                                         
-                                         if ($weeks >= 6 && $weeks < 10)   { ?>  
+                                         if (($weeks >= 6 && $weeks < 10) || $action == "add")   { ?>  
                                         <label>Infant feeding method at 6 weeks</label>
                                             <select class="form-control" name="feeding_6wks">
                                                 <option value="" selected="selected" >Select infant feeding method at 6 weeks</option>
@@ -576,7 +576,7 @@ $_SESSION['timeout'] = time();
                                         <!-- infant feeding methods ends -->
                                          <div class="form-group">
                                             <label>Date of next appointment</label>
-                                            <input min="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_appointment"];} ?>" name="next_appointment"  >
+                                            <input type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_appointment"];} ?>" name="next_appointment"  >
                                         </div>
                                          <?php if($action == "add") { ?>
                                             <button type="submit" name="btn" value="submit" class="btn btn-success">Submit</button>

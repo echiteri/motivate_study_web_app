@@ -38,6 +38,7 @@ $_SESSION['timeout'] = time();
             $( document ).ready(function() {
                 $('#variables').dataTable({
                     "bProcessing": true,
+                    "fixedHeader": true,
                     "sAjaxSource": "variable_response.php",
                      aoColumns: [
                            { mData: 'VariableID' } ,

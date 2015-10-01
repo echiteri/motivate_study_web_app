@@ -195,7 +195,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Date of next appointment</label>
-                                            <input min="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_visit"];}?>" name="next_visit" >
+                                            <input type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_visit"];}?>" name="next_visit" >
                                         </div>
                                     
                                          <?php if($action == "add") { ?>

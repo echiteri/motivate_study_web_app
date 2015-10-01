@@ -43,6 +43,7 @@ $_SESSION['timeout'] = time();
             $( document ).ready(function() {
                 $('#diagnosis').dataTable({
                     "bProcessing": true,
+                    "fixedHeader": true,
                     "sAjaxSource": "diagnosis_response.php",
                      aoColumns: [
                            { mData: 'DiagID' } ,

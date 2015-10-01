@@ -2,20 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/var/www/html/gae/config.php</file>
-            <file>file:/var/www/html/gae/demographics.php</file>
-            <file>file:/var/www/html/gae/registration.php</file>
-            <file>file:/var/www/html/gae/women_summary.php</file>
-            <file>file:/var/www/html/gae/c_transactions.php</file>
-            <file>file:/var/www/html/gae/diagnosis_response.php</file>
-            <file>file:/var/www/html/gae/login.php</file>
-            <file>file:/var/www/html/gae/infant_diagnosis.php</file>
-            <file>file:/var/www/html/gae/admin.php</file>
-            <file>file:/var/www/html/gae/infant_summary.php</file>
-            <file>file:/var/www/html/gae/diagnosis.php</file>
-            <file>file:/var/www/html/gae/demographics_identifier.php</file>
-            <file>file:/var/www/html/gae/infant_registration.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
