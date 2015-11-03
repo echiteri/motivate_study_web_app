@@ -191,11 +191,11 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Date of HIV care visit</label>
-                                            <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["hiv_visit"];}?>" placeholder="<?php if($action == "edit"){echo $select_record["hiv_visit"];}?>" name="hiv_visit" >
+                                            <input required="TRUE" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["hiv_visit"];}?>" placeholder="<?php if($action == "edit"){echo $select_record["hiv_visit"];}?>" name="hiv_visit" >
                                         </div>
                                         <div class="form-group">
                                             <label>Date of next appointment</label>
-                                            <input type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_visit"];}?>" name="next_visit" >
+                                            <input required="TRUE" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_visit"];}?>" name="next_visit" >
                                         </div>
                                     
                                          <?php if($action == "add") { ?>

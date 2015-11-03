@@ -156,11 +156,19 @@ $_SESSION['timeout'] = time();
                                     $tb_contact = $_POST['tb_contact'];
                                     $tb_ass_outcome = $_POST['tb_ass_outcome'];
                                     $inf_milestones = $_POST['inf_milestones'];
+                                    $feeding_6wks = $_POST['feeding_6wks'];
+                                    $feeding_10wks = $_POST['feeding_10wks'];
+                                    $feeding_14wks = $_POST['feeding_14wks'];
+                                    $feeding_9mths = $_POST['feeding_9mths'];
+                                    $feeding_12mths = $_POST['feeding_12mths'];
+                                    $feeding_15mths = $_POST['feeding_15mths'];
+                                    $feeding_18mths = $_POST['feeding_18mths'];
                                     $next_appointment = $_POST['next_appointment'];
                                     $btn = $_POST['btn'];
                                     $diagnosis = array(
                                             $hei_id, $visit_date, $weight, $height, $tb_contact, 
-                                            $tb_ass_outcome,  $inf_milestones, $immunization, $next_appointment
+                                            $tb_ass_outcome,  $inf_milestones, $immunization, $feeding_6wks, $feeding_10wks, $feeding_14wks, $feeding_9mths,
+                                            $feeding_12mths, $feeding_15mths, $feeding_18mths, $next_appointment
                                                  );
                                               if ($btn == "submit")
                                         {
@@ -232,7 +240,6 @@ $_SESSION['timeout'] = time();
                                             echo '<br \>';
                                             echo 'Return to <a href="dashboard.php" >Dashboard</a>';
                                         }
-                                    echo $mode;
                                 }
                                 else if($mode == "CON_PCR"){
                                     $forth_sample_collection = $_POST['forth_sample_collection'];
@@ -251,7 +258,6 @@ $_SESSION['timeout'] = time();
                                             echo '<br \>';
                                             echo 'Return to <a href="dashboard.php" >Dashboard</a>';
                                         }
-                                    echo $mode;
                                 }
                                 else if($mode == "RPT_CON_PCR"){
                                     $fifth_sample_collection = $_POST['fifth_sample_collection'];
@@ -275,9 +281,7 @@ $_SESSION['timeout'] = time();
                                     $sixth_sample_collection = $_POST['sixth_sample_collection'];
                                     $sixth_results_collected = $_POST['sixth_results_collected'];
                                     $sixth_results = $_POST['sixth_results'];
-                                    $hei_outcome = $_POST['hei_outcome'];
-                                    $exit_date = $_POST['exit_date'];
-                                    $diagnosis = array($sixth_sample_collection, $sixth_results_collected, $sixth_results, $hei_outcome, $exit_date, $_SESSION["username"]);
+                                    $diagnosis = array($sixth_sample_collection, $sixth_results_collected, $sixth_results, $_SESSION["username"]);
                                     if ($db->updateInfantHivTests($diagnosis, $Diag_id, "sixth", $mode))
                                         {
                                             echo '<label class="control-label" for="inputSuccess">Early Infant Diagnosis updated successfully!</label>';
@@ -292,16 +296,10 @@ $_SESSION['timeout'] = time();
                                         }
                                 }
                                 else if($mode == "EXIT"){
-                                    $feeding_6wks = $_POST['feeding_6wks'];
-                                    $feeding_10wks = $_POST['feeding_10wks'];
-                                    $feeding_14wks = $_POST['feeding_14wks'];
-                                    $feeding_9mths = $_POST['feeding_9mths'];
-                                    $feeding_12mths = $_POST['feeding_12mths'];
-                                    $feeding_15mths = $_POST['feeding_15mths'];
-                                    $feeding_18mths = $_POST['feeding_18mths'];
+                                    $hei_outcome = $_POST['hei_outcome'];
+                                    $exit_date = $_POST['exit_date'];
                                     
-                                    $diagnosis = array($feeding_6wks, $feeding_10wks, $feeding_14wks, $feeding_9mths, $feeding_12mths, 
-                                        $feeding_15mths, $feeding_18mths, $_SESSION["username"]);
+                                    $diagnosis = array($hei_outcome, $exit_date, $_SESSION["username"]);
                                     if ($db->updateInfantHivTests($diagnosis, $Diag_id, "feeding", $mode))
                                         {
                                             echo '<label class="control-label" for="inputSuccess">Early Infant Diagnosis updated successfully!</label>';
@@ -363,27 +361,27 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Infant weight (KG)</label>
-                                            <input type="number" step="any" min="0" value="<?php if($action == "edit"){echo $select_record["weight"];} ?>" class="form-control" 
+                                            <input required="TRUE" type="number" step="any" min="0" value="<?php if($action == "edit"){echo $select_record["weight"];} ?>" class="form-control" 
                                                    placeholder="Enter weight of infant during visit date" name="weight"  >
                                         </div>
                                         <div class="form-group">
                                             <label>Infant height (CM)</label>
-                                            <input type="number" step="any" min="0" class="form-control" value="<?php if($action == "edit"){echo $select_record["height"];} ?>" 
+                                            <input required="TRUE" type="number" step="any" min="0" class="form-control" value="<?php if($action == "edit"){echo $select_record["height"];} ?>" 
                                                    placeholder="Enter height of infant during visit date" name="height"  >
                                         </div>
                                         <div class="form-group">
                                             <label>TB contact in household</label>
                                             <p class="help-block">Select history of TB contact in household</p>
                                             <label class="radio-inline">
-                                                <input type="radio" name="tb_contact" id="optionsRadiosInline1" value="Y" <?php if($select_record["tb_contact"]=="Y") {echo 'checked="true"';} ?>>Yes
+                                                <input required="TRUE" type="radio" name="tb_contact" id="optionsRadiosInline1" value="Y" <?php if($select_record["tb_contact"]=="Y") {echo 'checked="true"';} ?>>Yes
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="tb_contact" id="optionsRadiosInline2" value="N" <?php if($select_record["tb_contact"]=="N") {echo 'checked="true"';} ?>>No
+                                                <input required="TRUE" type="radio" name="tb_contact" id="optionsRadiosInline2" value="N" <?php if($select_record["tb_contact"]=="N") {echo 'checked="true"';} ?>>No
                                             </label>
                                         </div>
                                         <div class="form-group">
                                             <label>TB assessment outcome</label>
-                                            <select class="form-control" name="tb_ass_outcome">
+                                            <select required="TRUE" class="form-control" name="tb_ass_outcome">
                                                 <option value=""  selected="selected">Select TB status</option>
                                                 <option value="No signs" <?php if($select_record["tb_ass_outcome"]=="No signs") { echo 'selected="selected"';} ?>>No signs or symptoms of TB</option>
                                                 <option value="Suspect" <?php if($select_record["tb_ass_outcome"]=="Suspect") { echo 'selected="selected"';} ?>>TB referral or sputum sent</option>
@@ -392,7 +390,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Infant milestones</label>
-                                            <select class="form-control" name="inf_milestones">
+                                            <select required="TRUE" class="form-control" name="inf_milestones">
                                                 <option value="" selected="TRUE">Select developmental milestones by age</option>
                                                 <option value="N" <?php if($select_record["inf_milestones"]=="N") { echo 'selected="selected"';} ?>>Normal</option>
                                                 <option value="D" <?php if($select_record["inf_milestones"]=="D") { echo 'selected="selected"';} ?>>Delayed</option>
@@ -511,9 +509,9 @@ $_SESSION['timeout'] = time();
                                             $weeks = $diff/(60*60*24*7);
                                             $months = $diff/(60*60*24*30);
                                                                                         
-                                         if (($weeks >= 6 && $weeks < 10) || $action == "add")   { ?>  
+                                         if (($diff >= 1 && $weeks < 10) || $action == "add")   { ?>  
                                         <label>Infant feeding method at 6 weeks</label>
-                                            <select class="form-control" name="feeding_6wks">
+                                            <select required="TRUE" class="form-control" name="feeding_6wks">
                                                 <option value="" selected="selected" >Select infant feeding method at 6 weeks</option>
                                                 <option value="EBF" <?php if($select_record["feeding_6wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
                                                 <option value="ERF" <?php if($select_record["feeding_6wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
@@ -523,7 +521,7 @@ $_SESSION['timeout'] = time();
                                         
                                         if ($weeks >= 10 && $weeks < 14)   { ?> 
                                         <label>Infant feeding method at 10 weeks</label>
-                                            <select class="form-control" name="feeding_10wks">
+                                            <select required="TRUE" class="form-control" name="feeding_10wks">
                                                 <option value="" selected="selected">Select infant feeding method at 10 weeks</option>
                                                <option value="EBF" <?php if($select_record["feeding_10wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
                                                 <option value="ERF" <?php if($select_record["feeding_10wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
@@ -532,7 +530,7 @@ $_SESSION['timeout'] = time();
                                         <?php } 
                                         if ($weeks >= 14 && $weeks < 16)   { ?> 
                                         <label>Infant feeding method at 14 weeks</label>
-                                            <select class="form-control" name="feeding_14wks">
+                                            <select required="TRUE" class="form-control" name="feeding_14wks">
                                                 <option value="" selected="selected">Select infant feeding method at 14 weeks</option>
                                                 <option value="EBF" <?php if($select_record["feeding_14wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
                                                 <option value="ERF" <?php if($select_record["feeding_14wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
@@ -541,7 +539,7 @@ $_SESSION['timeout'] = time();
                                         <?php } 
                                         if ($weeks >= 16 && $months < 9)   { ?> 
                                           <label>Infant feeding method at 9 months</label>
-                                            <select class="form-control" name="feeding_9mths">
+                                            <select required="TRUE" class="form-control" name="feeding_9mths">
                                                 <option value="" selected="selected">Select infant feeding method at 9 months</option>
                                                 <option value="BF" <?php if($select_record["feeding_9mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
                                                 <option value="No BF" <?php if($select_record["feeding_9mths"]=="No BF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
@@ -549,7 +547,7 @@ $_SESSION['timeout'] = time();
                                         <?php } 
                                         if ($months >= 9 && $months < 12)   { ?> 
                                         <label>Infant feeding method at 12 months</label>
-                                            <select class="form-control" name="feeding_12mths">
+                                            <select required="TRUE" class="form-control" name="feeding_12mths">
                                                 <option value="" selected="selected">Select infant feeding method at 12 months</option>
                                                 <option value="BF" <?php if($select_record["feeding_12mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
                                                 <option value="No BF" <?php if($select_record["feeding_12mths"]=="No BF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
@@ -557,7 +555,7 @@ $_SESSION['timeout'] = time();
                                         <?php } 
                                         if ($months >= 12 && $months < 15)   { ?> 
                                         <label>Infant feeding method at 15 months</label>
-                                            <select class="form-control" name="feeding_15mths">
+                                            <select required="TRUE" class="form-control" name="feeding_15mths">
                                                 <option value="" selected="selected">Select infant feeding method at 15 months</option>
                                                 <option value="BF" <?php if($select_record["feeding_15mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
                                                 <option value="No BF" <?php if($select_record["feeding_15mths"]=="No BF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
@@ -565,7 +563,7 @@ $_SESSION['timeout'] = time();
                                         <?php } 
                                         if ($months >= 15 && $months < 18)   { ?> 
                                         <label>Infant feeding method at 18 months</label>
-                                            <select class="form-control" name="feeding_18mths">
+                                            <select required="TRUE" class="form-control" name="feeding_18mths">
                                                 <option value="" selected="selected">Select infant feeding method at 18 months</option>
                                                 <option value="BF" <?php if($select_record["feeding_18mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
                                                 <option value="No BF" <?php if($select_record["feeding_18mths"]=="No BF") echo 'selected="selected"'; ?>>Not Breastfed</option>
@@ -576,7 +574,7 @@ $_SESSION['timeout'] = time();
                                         <!-- infant feeding methods ends -->
                                          <div class="form-group">
                                             <label>Date of next appointment</label>
-                                            <input type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_appointment"];} ?>" name="next_appointment"  >
+                                            <input required="TRUE" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_appointment"];} ?>" name="next_appointment"  >
                                         </div>
                                          <?php if($action == "add") { ?>
                                             <button type="submit" name="btn" value="submit" class="btn btn-success">Submit</button>
@@ -605,20 +603,20 @@ $_SESSION['timeout'] = time();
 
                                     <div class="form-group">
                                         <label>Date of sample collection</label>
-                                        <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["first_sample_collection"];} ?>" name="first_sample_collection"  >
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["first_sample_collection"];} ?>" name="first_sample_collection"  >
                                     </div>
                                     <div class="form-group">
                                         <label>Date results collected</label>
-                                        <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["first_results_collected"];} ?>" name="first_results_collected"  >
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["first_results_collected"];} ?>" name="first_results_collected"  >
                                     </div>
                                     <div class="form-group">
                                         <label>Results</label>
                                         <p class="help-block">Select results of Infant's 1st DNA PCR</p>
                                         <label class="radio-inline">
-                                            <input type="radio" name="first_results" id="optionsRadiosInline1" value="POS" <?php if($select_record["first_results"]=="POS") {echo 'checked="true"';} ?>>Positive
+                                            <input required="TRUE"  type="radio" name="first_results" id="optionsRadiosInline1" value="POS" <?php if($select_record["first_results"]=="POS") {echo 'checked="true"';} ?>>Positive
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="first_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["first_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
+                                            <input required="TRUE"  type="radio" name="first_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["first_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
                                         </label>
                                             
                                     </div>
@@ -633,20 +631,20 @@ $_SESSION['timeout'] = time();
                                         <input type="hidden" name="mode" value="RPT_PCR" />
                                     <div class="form-group">
                                         <label>Date of sample collection</label>
-                                        <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["second_sample_collection"];} ?>" name="second_sample_collection"  >
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["second_sample_collection"];} ?>" name="second_sample_collection"  >
                                     </div>
                                     <div class="form-group">
                                         <label>Date results collected</label>
-                                        <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["second_sample_collection"];} ?>" name="second_results_collected"  >
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["second_sample_collection"];} ?>" name="second_results_collected"  >
                                     </div>
                                     <div class="form-group">
                                         <label>Results</label>
                                         <p class="help-block">Select results of Infant's repeat PCR</p>
                                         <label class="radio-inline">
-                                            <input type="radio" name="second_results" id="optionsRadiosInline1" value="POS" <?php if($select_record["second_results"]=="POS") {echo 'checked="true"';} ?>>Positive
+                                            <input required="TRUE"  type="radio" name="second_results" id="optionsRadiosInline1" value="POS" <?php if($select_record["second_results"]=="POS") {echo 'checked="true"';} ?>>Positive
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="second_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["second_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
+                                            <input required="TRUE"  type="radio" name="second_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["second_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
                                         </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
@@ -660,20 +658,20 @@ $_SESSION['timeout'] = time();
                                         <input type="hidden" name="mode" value="ANT_BDY" />
                                     <div class="form-group">
                                         <label>Date of sample collection</label>
-                                        <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["third_sample_collection"];} ?>" name="third_sample_collection"  >
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["third_sample_collection"];} ?>" name="third_sample_collection"  >
                                     </div>
                                     <div class="form-group">
                                         <label>Date results collected</label>
-                                        <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["third_results_collected"];} ?>" name="third_results_collected"  >
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["third_results_collected"];} ?>" name="third_results_collected"  >
                                     </div>
                                     <div class="form-group">
                                         <label>Results</label>
                                         <p class="help-block">Select results of 1st Antibody test  </p>
                                         <label class="radio-inline">
-                                            <input type="radio" name="third_results" id="optionsRadiosInline1" value="POS" <?php if($select_record["third_results"]=="POS") {echo 'checked="true"';} ?>>Positive
+                                            <input required="TRUE"  type="radio" name="third_results" id="optionsRadiosInline1" value="POS" <?php if($select_record["third_results"]=="POS") {echo 'checked="true"';} ?>>Positive
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="third_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["third_results"]=="NEG") {echo 'checked="true"';} ?>> Negative
+                                            <input required="TRUE"  type="radio" name="third_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["third_results"]=="NEG") {echo 'checked="true"';} ?>> Negative
                                         </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
@@ -687,20 +685,20 @@ $_SESSION['timeout'] = time();
                                        <input type="hidden" name="mode" value="CON_PCR" />
                                     <div class="form-group">
                                         <label>Date of sample collection</label>
-                                        <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["forth_sample_collection"];} ?>" name="forth_sample_collection"  >
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["forth_sample_collection"];} ?>" name="forth_sample_collection"  >
                                     </div>
                                     <div class="form-group">
                                         <label>Date results collected</label>
-                                        <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["forth_sample_collection"];} ?>" name="forth_results_collected"  >
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["forth_sample_collection"];} ?>" name="forth_results_collected"  >
                                     </div>
                                     <div class="form-group">
                                         <label>Results</label>
                                         <p class="help-block">Select results of confirmatory PCR </p>
                                         <label class="radio-inline">
-                                            <input type="radio" name="forth_results" id="optionsRadiosInline1" value="POS" <?php if($select_record["forth_results"]=="POS") {echo 'checked="true"';} ?>>Positive
+                                            <input required="TRUE"  type="radio" name="forth_results" id="optionsRadiosInline1" value="POS" <?php if($select_record["forth_results"]=="POS") {echo 'checked="true"';} ?>>Positive
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="forth_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["forth_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
+                                            <input required="TRUE"  type="radio" name="forth_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["forth_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
                                         </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
@@ -714,20 +712,20 @@ $_SESSION['timeout'] = time();
                                         <input type="hidden" name="mode" value="RPT_CON_PCR" />
                                     <div class="form-group">
                                         <label>Date of sample collection</label>
-                                        <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["fifth_results_collected"];} ?>" name="fifth_sample_collection"  >
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["fifth_results_collected"];} ?>" name="fifth_sample_collection"  >
                                     </div>
                                     <div class="form-group">
                                         <label>Date results collected</label>
-                                        <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["fifth_results_collected"];} ?>" name="fifth_results_collected"  >
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["fifth_results_collected"];} ?>" name="fifth_results_collected"  >
                                     </div>
                                     <div class="form-group">
                                         <label>Results</label>
                                         <p class="help-block">Select result of confirmatory PCR</p>
                                         <label class="radio-inline">
-                                            <input type="radio" name="fifth_results" id="optionsRadiosInline1" value="POS" <?php if($select_record["fifth_results"]=="POS") {echo 'checked="true"';} ?>>Positive
+                                            <input required="TRUE"  type="radio" name="fifth_results" id="optionsRadiosInline1" value="POS" <?php if($select_record["fifth_results"]=="POS") {echo 'checked="true"';} ?>>Positive
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="fifth_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["fifth_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
+                                            <input required="TRUE"  type="radio" name="fifth_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["fifth_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
                                         </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
@@ -741,20 +739,20 @@ $_SESSION['timeout'] = time();
                                         <input type="hidden" name="mode" value="ANT_BDY_18" />
                                     <div class="form-group">
                                         <label>Date of sample collection</label>
-                                        <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["sixth_sample_collection"];} ?>" name="sixth_sample_collection"  >
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["sixth_sample_collection"];} ?>" name="sixth_sample_collection"  >
                                     </div>
                                     <div class="form-group">
                                         <label>Date results collected</label>
-                                        <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["sixth_results_collected"];} ?>" name="sixth_results_collected"  >
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["sixth_results_collected"];} ?>" name="sixth_results_collected"  >
                                     </div>
                                     <div class="form-group">
                                         <label>Results</label>
                                         <p class="help-block">Select results of final antibody test</p>
                                         <label class="radio-inline">
-                                            <input type="radio" name="sixth_results" id="optionsRadiosInline1" value="POS" <?php if($select_record["sixth_results"]=="POS") {echo 'checked="true"';} ?>>Positive
+                                            <input required="TRUE"  type="radio" name="sixth_results" id="optionsRadiosInline1" value="POS" <?php if($select_record["sixth_results"]=="POS") {echo 'checked="true"';} ?>>Positive
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="sixth_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["sixth_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
+                                            <input required="TRUE"  type="radio" name="sixth_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["sixth_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
                                         </label>
                                         
                                     </div>
@@ -769,11 +767,11 @@ $_SESSION['timeout'] = time();
                                         <input type="hidden" name="mode" value="EXIT" />
                                         <div class="form-group">
                                             <label>Date at exit</label>
-                                            <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["exit_date"];} ?>" name="exit_date"  >
+                                            <input required="TRUE" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["exit_date"];} ?>" name="exit_date"  >
                                         </div>
                                         <div class="form-group">
                                             <label>Final HEI outcome at exit</label>
-                                            <select class="form-control" name="hei_outcome">
+                                            <select required="TRUE" class="form-control" name="hei_outcome">
                                                 <option value="" selected="selected">Select HEI outcome at exit</option>
                                                 <option value="1" <?php if($select_record["hei_outcome"]=="1") { echo 'selected="selected"';} ?>>Discharged  at 18 months </option>
                                                 <option value="2" <?php if($select_record["hei_outcome"]=="2") { echo 'selected="selected"';} ?>>Referred to CCC </option>

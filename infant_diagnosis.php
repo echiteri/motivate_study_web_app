@@ -46,18 +46,23 @@ $_SESSION['timeout'] = time();
                     "fixedHeader": true,
                     "sAjaxSource": "diagnosis_response.php",
                      aoColumns: [
-                           { mData: 'DiagID' } ,
                            { mData: 'HEI_ID' },
-                           { mData: 'VisitDate'},
-                           { mData: 'WeightDate' },
-                           { mData: 'Height' },
-                           { mData: 'TB_Contact' } ,
-                           { mData: 'TB_Status' },
-                           { mData: 'Milestone' },
-                           { mData: 'ImmHistory' },
-                           { mData: 'NextAppmnt' } ,
+                           { mData: 'Feeding_method_6_Weeks' },
+                           { mData: 'Feeding_method_10_Weeks' },
+                           { mData: 'Feeding_method_14_Weeeks' },
+                           { mData: 'Feeding_method_6_Months' },
+                           { mData: 'Feeding_method_9_Months' },
+                           { mData: 'Feeding_method_12_Months' },
+                           { mData: 'Feeding_method_15_Months' },
+                           { mData: '1st_DNA_PCR' },
+                           { mData: 'Confirmatory_PCR' },
+                           { mData: '1st_Antibody_Test' },
+                           { mData: 'Repeat_Confirmatory_PCR' },
+                           { mData: 'Final_Antibody_Test' },
+                           { mData: 'HEI_Outcome'},
+                           { mData: 'Next_Visit_Date' } ,
                            {
-                           "aTargets": [10],    
+                           "aTargets": [15],    
                            "mData": "DiagID",  
                            "mRender": function (data, type, full) {
                              return '<a href=diagnosis.php?action=edit&id=' + data +'>Edit</a> | <a href=diagnosis.php?action=delete&id=' + data +'>Delete</a>';
@@ -175,16 +180,21 @@ $_SESSION['timeout'] = time();
                                         <table id="diagnosis" class="table table-striped table-bordered table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>DiagID</th>
                                                     <th>HEI_ID</th>
-                                                    <th>VisitDate</th>
-                                                    <th>WeightDate</th>
-                                                    <th>Height</th>
-                                                    <th>TB_Contact</th>
-                                                    <th>TB_Status</th>
-                                                    <th>Milestone</th>
-                                                    <th>ImmHistory</th>
-                                                    <th>NextAppmnt</th>
+                                                    <th>Feeding_method_6_Weeks</th>
+                                                    <th>Feeding_method_10_Weeks</th>
+                                                    <th>Feeding_method_14_Weeeks</th>
+                                                    <th>Feeding_method_6_Months</th>
+                                                    <th>Feeding_method_9_Months</th>
+                                                    <th>Feeding_method_12_Months</th>
+                                                    <th>Feeding_method_15_Months</th>
+                                                    <th>1st_DNA_PCR</th>
+                                                    <th>Confirmatory_PCR</th>
+                                                    <th>1st_Antibody_Test</th>
+                                                    <th>Repeat_Confirmatory_PCR</th>
+                                                    <th>Final_Antibody_Test</th>
+                                                    <th>HEI_Outcome</th>
+                                                    <th>Next_Visit_Date</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>

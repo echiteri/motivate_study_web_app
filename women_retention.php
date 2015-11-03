@@ -38,12 +38,11 @@ $_SESSION['timeout'] = time();
                     "fixedHeader": true,
                     "sAjaxSource": "retention_response.php",
                      aoColumns: [
-                           { mData: 'VisitID' } ,
                            { mData: 'StudyID' },
                            { mData: 'VisitDate' },
-                           { mData: 'NextVisit' },
+                           { mData: 'Next_Visit_Date' },
                            {
-                           "aTargets": [4],    //Edit column
+                           "aTargets": [3],    //Edit column
                            "mData": "VisitID",  //Get value from RoleId column, I assumed you used "RoleId" as the name for RoleId in your JSON, in my case, I didn't assigned any name in code behind so i used "mData": "0"
                            "mRender": function (data, type, full) {
                              return '<a href=retention.php?action=edit&id=' + data +'>Edit</a> | <a href=retention.php?action=delete&id=' + data +'>Delete</a>';
@@ -159,10 +158,9 @@ $_SESSION['timeout'] = time();
                                         <table id="retention" class="table table-striped table-bordered table-hover" >
                                             <thead>
                                                 <tr>
-                                                    <th>VisitID</th>
                                                     <th>StudyID</th>
                                                     <th>VisitDate</th>
-                                                    <th>NextVisit</th>
+                                                    <th>Next_Visit_Date</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>

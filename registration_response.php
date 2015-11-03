@@ -1,16 +1,13 @@
 <?php
 require_once("c_transactions.php");
 $db = new db_transactions();
-$sql = "SELECT id AS RegID, hei_id AS HEI_ID, "
-        . "d_study_id AS StudyID, "
+$sql = "SELECT "
+        . "d_study_id AS Mother_StudyID, "
+        . "hei_id AS HEI_ID, "
         . "birth_date AS DOB, "
-        . "birth_weight AS BTH_Weight, "
-        . "sex AS Sex, "
-        . "delivery_place AS BTH_Place, "
         . "arv_prophylaxis AS ARV_Prophylaxis, "
-        . "arv_pro_other AS ARV_Other, "
-        . "enrol_date AS Enrolled, "
-        . "enrol_age AS Enrol_Age "
+        . "enrol_date AS Enrolled_Date, "
+        . "enrol_age AS Age_Enrolled "
         . "FROM infant_registration";
 $data = $db->getAssoArray($sql);
 $results = array(

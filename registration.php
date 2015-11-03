@@ -181,9 +181,9 @@ $_SESSION['timeout'] = time();
                                         } else if ($btn == "update"){
                                             if($db->editInfantRegistration($registration, $hei_id)>0)
                                                 {
-                                                    echo '<label class="control-label" for="inputSuccess"> '.$birth_weight.'Early Infant Registration updated successfully</label> <br \> Return to <a href="dashboard.php" >Dashboard</a>';
+                                                    echo '<label class="control-label" for="inputSuccess"> Early Infant Registration updated successfully</label> <br \> Return to <a href="dashboard.php" >Dashboard</a>';
                                                 } else {
-                                                    echo '<label class="control-label" for="inputError">'.$birth_weight.'Early Infant Registration was not updated.</label><br \>Return to <a href="dashboard.php" >Dashboard</a>';
+                                                    echo '<label class="control-label" for="inputError"> Early Infant Registration was not updated.</label><br \>Return to <a href="dashboard.php" >Dashboard</a>';
                                                 }
                                         }
                                     } 
@@ -223,26 +223,26 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Infant birth date</label>
-                                            <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["birth_date"];} ?>" name="birth_date"  >
+                                            <input required="TRUE" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["birth_date"];} ?>" name="birth_date"  >
                                         </div>
                                         <div class="form-group">
                                             <label>Infant birth weight (KG)</label>
-                                            <input type="number" step="0.01" min="0" class="form-control" value="<?php if($action == "edit"){echo $select_record["birth_weight"];} ?>" 
+                                            <input required="TRUE" type="number" step="0.01" min="0" class="form-control" value="<?php if($action == "edit"){echo $select_record["birth_weight"];} ?>" 
                                                    placeholder="Enter weight of infant at birth" name="birth_weight"  autofocus>
                                         </div>
                                         <div class="form-group">
                                             <label>Sex of infant</label>
                                             <p class="help-block">Select sexual/gender identity of infant</p>
                                             <label class="radio-inline">
-                                                <input type="radio" name="sex" id="optionsRadiosInline1" value="M" checked>Male
+                                                <input required="TRUE" type="radio" name="sex" id="optionsRadiosInline1" value="M" checked>Male
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="sex" id="optionsRadiosInline2" value="F">Female
+                                                <input required="TRUE" type="radio" name="sex" id="optionsRadiosInline2" value="F">Female
                                             </label>
                                         </div>
                                         <div class="form-group">
                                             <label>Place of delivery</label>
-                                            <select class="form-control" name="delivery_place">
+                                            <select required="TRUE" class="form-control" name="delivery_place">
                                                 <option value="" selected="">Select birth place of infant</option>
                                                 <option value="HOS" <?php if($select_record["delivery_place"]=="HOS") { echo 'selected="selected"';} ?> >Hospital Delivery</option>
                                                 <option value="HOME" <?php if($select_record["delivery_place"]=="HOME") { echo 'selected="selected"';} ?>>Home Delivery</option>
@@ -251,7 +251,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                          <div class="form-group">
                                             <label>ARV Prophylaxis</label>
-                                            <select id="arv_pro" onclick="enableToggle();" class="form-control" name="arv_prophylaxis">
+                                            <select required="TRUE" id="arv_pro" onclick="enableToggle();" class="form-control" name="arv_prophylaxis">
                                                 <option value="" selected="">Select ARV regimen for PMTCT</option>
                                                 <option value="1" <?php if($select_record["arv_prophylaxis"]=="1") { echo 'selected="selected"';} ?> >sdNVP only</option>
                                                 <option value="2" <?php if($select_record["arv_prophylaxis"]=="2") { echo 'selected="selected"';} ?>>NVP for 7 days</option>
@@ -262,16 +262,16 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Specify Other</label>
-                                            <input id="other" disabled="disabled" class="form-control" value="<?php if($action == "edit"){echo $select_record["arv_pro_other"];} ?>" 
+                                            <input required="TRUE" id="other" disabled="disabled" class="form-control" value="<?php if($action == "edit"){echo $select_record["arv_pro_other"];} ?>" 
                                                    placeholder="Enter other ARV Prophylaxis" name="arv_pro_other"  >
                                         </div>
                                          <div class="form-group">
                                             <label>Date of enrollment in HEI follow-up</label>
-                                            <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["enrol_date"];} ?>" name="enrol_date"  >
+                                            <input required="TRUE" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["enrol_date"];} ?>" name="enrol_date"  >
                                         </div>
                                         <div class="form-group">
                                             <label>Age at enrollment(weeks)</label>
-                                            <input type="number" min="0" class="form-control" value="<?php if($action == "edit"){echo $select_record["enrol_age"];} ?>" 
+                                            <input required="TRUE"type="number" min="0" class="form-control" value="<?php if($action == "edit"){echo $select_record["enrol_age"];} ?>" 
                                                    placeholder="Enter age of the infant at enrollment" name="enrol_age"  >
                                         </div>
                                         

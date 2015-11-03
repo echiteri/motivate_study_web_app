@@ -48,28 +48,21 @@ $_SESSION['timeout'] = time();
                            { mData: 'StudyID' } ,
                            { mData: 'AbsDate' },
                            { mData: 'Fac_ID' },
-                           { mData: 'ANC_ID' },
-                           { mData: 'PSC_ID' } ,
-                           { mData: 'Visits' },
+                           { mData: 'ANC_Number' },
                            { mData: 'ANC_Date' },
                            { mData: 'DOB' },
-                           { mData: 'Place' } ,
                            { mData: 'Parity' },
                            { mData: 'Gravida' },
-                           { mData: 'Gest_Period' },
                            { mData: 'LMP' } ,
                            { mData: 'EDD' },
-                           { mData: 'Married' },
+                           { mData: 'Marital_Status' },
                            { mData: 'HIV_status' },
-                           { mData: 'Init_HIV' } ,
-                           { mData: 'Retest' },
-                           { mData: 'Haart' },
-                           { mData: 'Regimen' },
-                           { mData: 'Couns' } ,
-                           { mData: 'Partner' },
-                           { mData: 'NextVisit' },
+                           { mData: 'HAART_Regimen' },
+                           { mData: 'Couple_counseling' } ,
+                           { mData: 'Partner_HIV_status' },
+                           { mData: 'Next_Visit_Date' },
                            {
-                           "aTargets": [23],    
+                           "aTargets": [16],    
                            "mData": "StudyID",  
                            "mRender": function (data, type, full) {
                              return '<a href=women_summary.php?&id=' + data +'>More</a> | <a href=demographics_identifier.php?action=edit&id=' + data +'>Edit</a> | <a href=demographics_identifier.php?action=delete&id=' + data +'>Delete</a>';
@@ -191,26 +184,19 @@ $_SESSION['timeout'] = time();
                                                     <th>StudyID</th>
                                                     <th>AbsDate</th>
                                                     <th>Fac_ID</th>
-                                                    <th>ANC_ID</th>
-                                                    <th>PSC_ID</th>
-                                                    <th>Visits</th>
+                                                    <th>ANC_Number</th>
                                                     <th>ANC_Date</th>
                                                     <th>DOB</th>
-                                                    <th>Place</th>
                                                     <th>Parity</th>
                                                     <th>Gravida</th>
-                                                    <th>Gest_Period</th>
                                                     <th>LMP</th>
                                                     <th>EDD</th>
-                                                    <th>Married</th>
+                                                    <th>Marital_Status</th>
                                                     <th>HIV_status</th>
-                                                    <th>Init_HIV</th>
-                                                    <th>Retest</th>
-                                                    <th>Haart</th>
-                                                    <th>Regimen</th>
-                                                    <th>Couns</th>
-                                                    <th>Partner</th>
-                                                    <th>NextVisit</th>
+                                                    <th>HAART_Regimen</th>
+                                                    <th>Couple_counseling</th>
+                                                    <th>Partner_HIV_status</th>
+                                                    <th>Next_Visit_Date</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>

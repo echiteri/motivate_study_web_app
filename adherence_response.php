@@ -4,16 +4,12 @@ $db = new db_transactions();
 $sql = "SELECT 
 adherence_id AS AdherenceID, 
 a_study_id AS StudyID,
-haart_start_date AS Haart_Started,
-haart_regimen AS Haart_Regimen, 
-art_effect AS ART_Effects,
-self_art_adherence AS Self_ART_report,
-self_ctx_adherence AS Self_CTX_report, 
+haart_start_date AS HAART_Start_Date,
 cd4_count AS CD4_Count,
 cd4_date AS CD4_Date,
 viral_load AS Viral_Load,
 viral_date AS Viral_Load_Date,
-who_stage AS WHO_Stage                                                    
+next_visit_date AS Next_Visit_Date                                                    
 FROM adherence";
 $data = $db->getAssoArray($sql);
 $results = array(

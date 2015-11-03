@@ -268,7 +268,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Visit date</label>
-                                            <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["visit_date"];} ?>" name="visit_date">
+                                            <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["visit_date"];} ?>" name="visit_date" required="TRUE">
                                         </div>
                                         <div class="form-group">
                                             <label>Weight (Kgs)</label>
@@ -298,7 +298,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                          <div class="form-group">
                                             <label>TB Status</label>
-                                            <select class="form-control" name="tb_status">
+                                            <select required="TRUE" class="form-control" name="tb_status">
                                                 <option value="" selected="">Select participants status of a TB infection </option>
                                                 <option value="No Signs" <?php if($select_record["tb_status"]=="No Signs") { echo 'selected="selected"';} ?>>No signs or symptoms of TB</option>
                                                 <option value="Suspect" <?php if($select_record["tb_status"]=="Suspect") { echo 'selected="selected"';} ?>>TB referral or sputum sent</option>
@@ -308,7 +308,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Pregnancy status</label>
-                                            <select onchange="togglePregStatus()"  id="preg_status" class="form-control" id="preg" name="preg_status">
+                                            <select required="TRUE" onchange="togglePregStatus()"  id="preg_status" class="form-control" id="preg" name="preg_status">
                                                 <option value="" selected="">Select Pregnancy status of the client</option>
                                                 <option value="PRN" <?php if($select_record["preg_status"]=="PRN") { echo 'selected="selected"';} ?>>Pregnant</option>
                                                 <option value="NPRN" <?php if($select_record["preg_status"]=="NPRN") { echo 'selected="selected"';} ?>>Not Pregnant</option>
@@ -316,11 +316,11 @@ $_SESSION['timeout'] = time();
                                         </div>
                                          <div class="form-group">
                                             <label>EDD</label>
-                                            <input type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["edd"];} ?>" id="edd_date"  name="edd" >
+                                            <input required="TRUE" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["edd"];} ?>" id="edd_date"  name="edd" >
                                         </div>
                                          <div class="form-group">
                                             <label>FP status</label>
-                                            <select id="status" onchange="toggleFpStatus()" class="form-control" name="fp_status">
+                                            <select required="TRUE" id="status" onchange="toggleFpStatus()" class="form-control" name="fp_status">
                                                 <option value="" selected="">Select whether the participant is using  Family planning methods</option>
                                                 <option value="FP" <?php if($select_record["fp_status"]=="FP") { echo 'selected="selected"';} ?>>Currently on FP</option>
                                                 <option value="NO FP" <?php if($select_record["fp_status"]=="NO FP") { echo 'selected="selected"';} ?>>Not on Family planning</option>
@@ -403,26 +403,26 @@ $_SESSION['timeout'] = time();
                                             <label>Disclosure</label>
                                             <p class="help-block">Select whether the participant has disclosed HIV status  or not</p>
                                             <label class="radio-inline">
-                                                <input type="radio" name="disclosure" id="optionsRadiosInline3" value="Y" <?php if($select_record["disclosure"]=="Y") {echo 'checked="true"';} ?>>Yes
+                                                <input required="TRUE" type="radio" name="disclosure" id="optionsRadiosInline3" value="Y" <?php if($select_record["disclosure"]=="Y") {echo 'checked="true"';} ?>>Yes
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="disclosure" id="optionsRadiosInline4" value="N" <?php if($select_record["disclosure"]=="N") {echo 'checked="true"';} ?>>No
+                                                <input required="TRUE" type="radio" name="disclosure" id="optionsRadiosInline4" value="N" <?php if($select_record["disclosure"]=="N") {echo 'checked="true"';} ?>>No
                                             </label>
                                         </div>
                                         <div class="form-group">
                                             <label>Partner tested</label>
                                             <p class="help-block">Select whether the participant's partner was tested for HIV</p>
                                             <label class="radio-inline">
-                                                <input type="radio" name="patner_tested"  value="Y" <?php if($select_record["patner_tested"]=="Y") {echo 'checked="true"';} ?> >Yes
+                                                <input required="TRUE" type="radio" name="patner_tested"  value="Y" <?php if($select_record["patner_tested"]=="Y") {echo 'checked="true"';} ?> >Yes
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="patner_tested"  value="N" <?php if($select_record["patner_tested"]=="N") {echo 'checked="true"';} ?>>No
+                                                <input required="TRUE" type="radio" name="patner_tested"  value="N" <?php if($select_record["patner_tested"]=="N") {echo 'checked="true"';} ?>>No
                                             </label>
                                             
                                         </div>
                                         <div class="form-group">
                                             <label>Next visit date</label>
-                                            <input type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_visit_date"];} ?>" name="next_visit_date">
+                                            <input required="TRUE" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_visit_date"];} ?>" name="next_visit_date">
                                         </div>
                                          
                                          <?php if($action == "add") { ?>

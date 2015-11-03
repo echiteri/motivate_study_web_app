@@ -117,7 +117,6 @@ class db_transactions {
                 . ",'" .$arr_val[15]."','" .$arr_val[16]."','" .$arr_val[17]."','" .$arr_val[18]."','" .$arr_val[19]."'"
                 . ",'" .$arr_val[20]."','" .$arr_val[21]."','" .$arr_val[22]."','". $_SESSION["username"]."')";
             
-        //echo $sql;
         $stmt = $this->dbCon()->prepare($sql);
         $stmt->execute();
         $dem = $stmt->rowCount();
@@ -206,10 +205,12 @@ class db_transactions {
         try{
              $sql = "INSERT INTO infant_diagnosis(i_hei_id, visit_date, "
                 . "weight, height, tb_contact, tb_ass_outcome, inf_milestones, imm_history, "
-                . "next_appointment, user_initial) "
+                . "feeding_6wks, feeding_10wks, feeding_14wks, feeding_9mths, feeding_12mths, "
+                . "feeding_15mths, feeding_18mths, next_appointment, user_initial) "
                 . "VALUES ('".$arr_val[0]."','".$arr_val[1]. "','" .$arr_val[2]."','" .$arr_val[3]."','" .$arr_val[4]."'"
-                . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."','" .$arr_val[8]."','". $_SESSION["username"]."')";
-        
+                . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."','" .$arr_val[8]."'"
+                . ",'" .$arr_val[9]."','" .$arr_val[10]."','" .$arr_val[11]."','" .$arr_val[12]."'"
+                . ",'" .$arr_val[13]."','" .$arr_val[14]."','" .$arr_val[15]."','". $_SESSION["username"]."')";
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
             $inf = $stmt->rowCount();
@@ -239,15 +240,13 @@ class db_transactions {
          
          try{
              if($sec_id == "EXIT"){
-                 $sql = "UPDATE infant_diagnosis SET ".$column_part."_6wks = '".$arr_val[0]."' ,"
-                 .$column_part."_10wks = '".$arr_val[1]."' ,".$column_part."_14wks = '".$arr_val[2]."', "
-                 .$column_part."_9mths = '".$arr_val[3]."' ,".$column_part."_12mths = '".$arr_val[4]."', "
-                 .$column_part."_15mths = '".$arr_val[5]."' ,".$column_part."_18mths = '".$arr_val[6]."', user_initial = '". $_SESSION["username"]."'"
+                 $sql = "UPDATE infant_diagnosis SET "
+                 ."hei_outcome = '".$arr_val[0]."' ,exit_date = '".$arr_val[1]."', user_initial = '". $_SESSION["username"]."'"
                  ."WHERE diagnosis_id = '".$record_id."'";
              } else if($sec_id == "ANT_BDY_18") {
                  $sql = "UPDATE infant_diagnosis SET ".$column_part."_sample_collection = '".$arr_val[0]."' ,"
                  .$column_part."_results_collected = '".$arr_val[1]."' ,".$column_part."_results = '".$arr_val[2]."' ,"
-                 ."hei_outcome = '".$arr_val[3]."' ,exit_date = '".$arr_val[4]."', user_initial = '". $_SESSION["username"]."'"
+                 ." user_initial = '". $_SESSION["username"]."'"
                  ."WHERE diagnosis_id = '".$record_id."'";
              } else {
                 $sql = "UPDATE infant_diagnosis SET ".$column_part."_sample_collection = '".$arr_val[0]."' ,"
@@ -356,7 +355,10 @@ class db_transactions {
         try{
             $sql = "UPDATE infant_diagnosis SET i_hei_id='".$arr_val[0]."', visit_date='".$arr_val[1]."',weight='".$arr_val[2]."',height='".$arr_val[3]."',"
                 . " tb_contact='".$arr_val[4]."',tb_ass_outcome='".$arr_val[5]."',inf_milestones='".$arr_val[6]."',imm_history='".$arr_val[7]."',"
-                . " next_appointment='".$arr_val[8]."', user_initial = '". $_SESSION["username"]."'"
+                 ."feeding_6wks = '".$arr_val[8]."' , feeding_10wks = '".$arr_val[9]."' ,"."feeding_14wks = '".$arr_val[10]."', "
+                 ."feeding_9mths = '".$arr_val[11]."' ,"."feeding_12mths = '".$arr_val[12]."', "
+                 ."feeding_15mths = '".$arr_val[13]."' ,"."feeding_18mths = '".$arr_val[14]."',"
+                 ." next_appointment='".$arr_val[15]."', user_initial = '". $_SESSION["username"]."'"
                 . " WHERE diagnosis_id = '".$record_id."'";
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();

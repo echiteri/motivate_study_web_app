@@ -45,17 +45,12 @@ $_SESSION['timeout'] = time();
                     "fixedHeader": true,
                     "sAjaxSource": "registration_response.php",
                      aoColumns: [
-                           { mData: 'RegID' } ,
+                           { mData: 'Mother_StudyID' },
                            { mData: 'HEI_ID' },
-                           { mData: 'StudyID' },
                            { mData: 'DOB' },
-                           { mData: 'BTH_Weight' } ,
-                           { mData: 'Sex' },
-                           { mData: 'BTH_Place' },
                            { mData: 'ARV_Prophylaxis' },
-                           { mData: 'ARV_Other' } ,
-                           { mData: 'Enrolled' },
-                           { mData: 'Enrol_Age'},
+                           { mData: 'Enrolled_Date' },
+                           { mData: 'Age_Enrolled'},
                            {
                            "aTargets": [10],    
                            "mData": "HEI_ID",  
@@ -185,17 +180,12 @@ $_SESSION['timeout'] = time();
                                 <table id="registration" class="table table-striped table-bordered table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>RegID</th>
+                                                    <th>Mother_StudyID</th>
                                                     <th>HEI_ID</th>
-                                                    <th>StudyID</th>
                                                     <th>DOB</th>
-                                                    <th>BTH_Weight</th>
-                                                    <th>Sex</th>
-                                                    <th>BTH_Place</th>
                                                     <th>ARV_Prophylaxis</th>
-                                                    <th>ARV_Other</th>
-                                                    <th>Enrolled</th>
-                                                    <th>Enrol_Age</th>
+                                                    <th>Enrolled_Date</th>
+                                                    <th>Age_Enrolled</th>
                                                      <th>Action</th>
                                                 </tr>
                                             </thead>

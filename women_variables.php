@@ -41,21 +41,15 @@ $_SESSION['timeout'] = time();
                     "fixedHeader": true,
                     "sAjaxSource": "variable_response.php",
                      aoColumns: [
-                           { mData: 'VariableID' } ,
                            { mData: 'StudyID' },
-                           { mData: 'Weight' },
-                           { mData: 'Height' },
-                           { mData: 'Hemoglobin' } ,
-                           { mData: 'Hemoglobin_Date' },
                            { mData: 'TB_Status' },
                            { mData: 'Preg_Status' },
                            { mData: 'EDD' } ,
                            { mData: 'FP_status' },
-                           { mData: 'FP_Method' },
                            { mData: 'HIV_Disclosure' },
-                           { mData: 'Partner_Tested' } ,
+                           { mData: 'Next_visit_date' } ,
                            {
-                           "aTargets": [13],    
+                           "aTargets": [7],    
                            "mData": "VariableID",  
                            "mRender": function (data, type, full) {
                              return '<a href=variables.php?action=edit&id=' + data +'>Edit</a> | <a href=variables.php?action=delete&id=' + data +'>Delete</a>';
@@ -180,19 +174,13 @@ $_SESSION['timeout'] = time();
                                         <table id="variables" class="table table-striped table-bordered table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>VariableID</th>
                                                     <th>StudyID</th>
-                                                    <th>Weight</th>
-                                                    <th>Height</th>
-                                                    <th>Hemoglobin</th>
-                                                    <th>Hemoglobin_Date</th>
                                                     <th>TB_Status</th>
                                                     <th>Preg_Status</th>
                                                     <th>EDD</th>
                                                     <th>FP_status</th>
-                                                    <th>FP_Method</th>
                                                     <th>HIV_Disclosure</th>
-                                                    <th>Partner_Tested</th>
+                                                    <th>Next_visit_date</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>

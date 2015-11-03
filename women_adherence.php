@@ -46,20 +46,15 @@ $_SESSION['timeout'] = time();
                     "fixedHeader": true,
                     "sAjaxSource": "adherence_response.php",
                      aoColumns: [
-                           { mData: 'AdherenceID' } ,
                            { mData: 'StudyID' },
-                           { mData: 'Haart_Started' },
-                           { mData: 'Haart_Regimen' },
-                           { mData: 'ART_Effects' },
-                           { mData: 'Self_ART_report' } ,
-                           { mData: 'Self_CTX_report' },
+                           { mData: 'HAART_Start_Date' },
                            { mData: 'CD4_Count' },
                            { mData: 'CD4_Date' },
                            { mData: 'Viral_Load' } ,
                            { mData: 'Viral_Load_Date' },
-                           { mData: 'WHO_Stage' },
+                           { mData: 'Next_Visit_Date' },
                            {
-                           "aTargets": [12],    
+                           "aTargets": [7],    
                            "mData": "AdherenceID",  
                            "mRender": function (data, type, full) {
                              return '<a href=adherence.php?action=edit&id=' + data +'>Edit</a> | <a href=adherence.php?action=delete&id=' + data +'>Delete</a>';
@@ -186,18 +181,13 @@ $_SESSION['timeout'] = time();
                                         <table id="adherence" class="table table-striped table-bordered table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>AdherenceID</th>
                                                     <th>StudyID</th>
-                                                    <th>Haart_Started</th>
-                                                    <th>Haart_Regimen</th>
-                                                    <th>ART_Effects</th>
-                                                    <th>Self_ART_report</th>
-                                                    <th>Self_CTX_report</th>
+                                                    <th>HAART_Start_Date</th>
                                                     <th>CD4_Count</th>
                                                     <th>CD4_Date</th>
                                                     <th>Viral_Load</th>
                                                     <th>Viral_Load_Date</th>
-                                                    <th>WHO_Stage</th>
+                                                    <th>Next_Visit_Date</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>

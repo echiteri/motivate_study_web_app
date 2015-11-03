@@ -175,7 +175,7 @@ $_SESSION['timeout'] = time();
                                 $tbl_id = "adherence_id";
                                 $db = new db_transactions();
                                 $art_effect = getArtSideEffect();
-                                echo $art_effect;
+                                //echo $art_effect;
                                 
                                 if($mode == "adherence")
                                     {
@@ -235,15 +235,15 @@ $_SESSION['timeout'] = time();
                                         </div>
                                          <div class="form-group">
                                             <label>Visit date</label>
-                                            <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["visit_date"];} ?>" name="visit_date">
+                                            <input required="TRUE" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["visit_date"];} ?>" name="visit_date">
                                         </div>
                                         <div class="form-group">
                                             <label>Date of starting HAART</label>
-                                            <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["haart_start_date"];} ?>"  name="haart_start_date" >
+                                            <input required="TRUE" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["haart_start_date"];} ?>"  name="haart_start_date" >
                                         </div>
                                          <div class="form-group">
                                             <label>HAART regimen</label>
-                                            <select class="form-control" name="haart_regimen">
+                                            <select required="TRUE" class="form-control" name="haart_regimen">
                                                 <option value="" selected="selected">Select the regimen/code  of triple ARV therapy </option>
                                                 <option value="AF1A" <?php if($select_record["haart_regimen"]=="AF1A") { echo 'selected="selected"';} ?> >AZT + 3TC + NVP</option>
                                                 <option value="AF1B" <?php if($select_record["haart_regimen"]=="AF1B") { echo 'selected="selected"';} ?> >AZT + 3TC + EFV</option>
@@ -326,7 +326,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                             <div class="form-group">
                                             <label>Self reported ART adherence.</label>
-                                            <select class="form-control" name="self_art_adherence">
+                                            <select required="TRUE" class="form-control" name="self_art_adherence">
                                                 
                                                 <option value="" selected="">Select participant's self report of taking ART exactly as prescribed</option>
                                                 <option value="G" <?php if($select_record["self_ctx_adherence"]=="G") { echo 'selected="selected"';} ?> >Good (>95%)</option>
@@ -337,7 +337,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Self reported CTX adherence</label>
-                                            <select class="form-control" name="self_ctx_adherence">
+                                            <select required="TRUE" class="form-control" name="self_ctx_adherence">
                                                 <option value="" selected="">Select participant's self report of taking septrin(CTX) exactly as prescribed</option>
                                                 <option value="G" <?php if($select_record["self_ctx_adherence"]=="G") { echo 'selected="selected"';} ?> >Good (>95%)</option>
                                                 <option value="F" <?php if($select_record["self_ctx_adherence"]=="F") { echo 'selected="selected"';} ?> >Fair (85% - 94%)</option>
@@ -383,7 +383,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                            <div class="form-group">
                                             <label>WHO Stage</label>
-                                            <select class="form-control" name="who_stage">
+                                            <select required="TRUE" class="form-control" name="who_stage">
                                                 <option value="" selected="">Select The clinical staging and case definition of HIV</option>
                                                 <option value="WHO stage I" <?php if($select_record["who_stage"]=="WHO stage I") { echo 'selected="selected"';} ?> >WHO stage I</option>
                                                 <option value="WHO stage II" <?php if($select_record["who_stage"]=="WHO stage II") { echo 'selected="selected"';} ?>>WHO stage II</option>
@@ -393,7 +393,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Next Visit date</label>
-                                            <input  type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_visit_date"];} ?>" name="next_visit_date" >
+                                            <input required="TRUE" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["next_visit_date"];} ?>" name="next_visit_date" >
                                         </div>
                                          
                                         <?php if($action == "add") { ?>
@@ -452,6 +452,8 @@ function getArtSideEffect()
 {    
     $art_effects = "";
     if (isset($_POST["h"]).";")
+    {  $art_effects .= trim($_POST["n"]).";";  }
+    if (isset($_POST["n"]).";")
     {  $art_effects .= trim($_POST["h"]).";";  }
     if (isset($_POST["a"]))
     {  $art_effects .= trim($_POST["a"]).";";  }
