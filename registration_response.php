@@ -7,7 +7,7 @@ $sql = "SELECT "
         . "birth_date AS DOB, "
         . "arv_prophylaxis AS ARV_Prophylaxis, "
         . "enrol_date AS Enrolled_Date, "
-        . "enrol_age AS Age_Enrolled "
+        . "enrol_age AS Age_Enrolled_In_Weeks "
         . "FROM infant_registration";
 $data = $db->getAssoArray($sql);
 $results = array(

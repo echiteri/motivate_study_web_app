@@ -50,7 +50,7 @@ $_SESSION['timeout'] = time();
                            { mData: 'DOB' },
                            { mData: 'ARV_Prophylaxis' },
                            { mData: 'Enrolled_Date' },
-                           { mData: 'Age_Enrolled'},
+                           { mData: 'Age_Enrolled_In_Weeks'},
                            {
                            "aTargets": [10],    
                            "mData": "HEI_ID",  
@@ -177,6 +177,18 @@ $_SESSION['timeout'] = time();
                     <div class="panel panel-default">
                             <div class="table-responsive">
                                 <a href="registration.php?action=add"  class="fa fa-pencil"> Add new</a>
+                                <!--
+                                         <button type="button" onclick="window.location.href='import_data.php?form=infant_registration&action=import'" class="btn btn-outline btn-primary btn-xs">Data Import from CSV</button>
+                                       <form id="infant_registration" action="import_data.php?form=infant_registration" method="post">
+                                            <button type="submit" name="btn_export">Data Export</button> 
+                                            <button type="submit" name="btn_import">Data Import from CSV</button>
+                                        </form>-->
+                                        <form action="import_csv.php?form=infant_registration&action=import" method="post" enctype="multipart/form-data">
+                                            Select CSV file for Infant Registrations:
+                                            <input name="csv" type="file" />
+                                            <input type="submit" value="Import selected CSV file" class="btn btn-outline btn-primary btn-xs" />
+                                          </form>
+                                        <p> ---- </p>
                                 <table id="registration" class="table table-striped table-bordered table-hover">
                                             <thead>
                                                 <tr>
@@ -185,7 +197,7 @@ $_SESSION['timeout'] = time();
                                                     <th>DOB</th>
                                                     <th>ARV_Prophylaxis</th>
                                                     <th>Enrolled_Date</th>
-                                                    <th>Age_Enrolled</th>
+                                                    <th>Age_Enrolled_In_Weeks</th>
                                                      <th>Action</th>
                                                 </tr>
                                             </thead>

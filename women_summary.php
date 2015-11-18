@@ -162,7 +162,7 @@ $db = new db_transactions();
                             <h3>Anc ID: <small><?php echo $select_record["anc_id"]; ?></small></h3>
                             <h3>PSC ID: <small><?php echo $select_record["psc_id"]; ?></small></h3>
                             <h3>Enrollment date: <small><?php echo $select_record["abs_date"]; ?></small></h3> <!-- abs_date is the date the participant was enrolled. Though misleading, it is the date entered by the data clerk -->
-                            <h3>Abstraction date: <small><?php echo $select_record["created_date"]; ?></small></h3>
+                            <h3>Abstraction date: <small><?php echo date("Y-m-d", strtotime($select_record["created_date"]));?></small></h3>
                             <h3>Expected Delivery Date: <small><?php echo $select_record["edd"]; ?></small></h3>
                         </div>
                         <!-- /.panel-body -->

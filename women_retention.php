@@ -1,4 +1,9 @@
 <?php
+//require_once 'google/appengine/api/cloud_storage/CloudStorageTools.php';
+//use google\appengine\api\cloud_storage\CloudStorageTools;
+
+
+
 require_once("c_transactions.php");
 $inactive = 600;
 if(!isset($_SESSION['timeout']) ) {
@@ -10,6 +15,8 @@ else{
     header("Location: logout.php"); 
   }
 }
+//$options = [ 'motivatestudy' => 'motivatestudy-967.appspot.com' ];
+//$upload_url = CloudStorageTools::createUploadUrl('/import_data.php', $options);
 
 $_SESSION['timeout'] = time();
 ?>
@@ -155,6 +162,18 @@ $_SESSION['timeout'] = time();
                         <div class="panel-body">
                                 <div class="table-responsive">
                                         <a href="retention.php?action=add"  class="fa fa-pencil"> Add new</a>
+                                         <!--
+                                         <button type="button" onclick="window.location.href='import_data.php?form=retention&action=import'" class="btn btn-outline btn-primary btn-xs">Data Import from CSV</button>
+                                       <form id="demographics" action="import_data.php?form=retention" method="post">
+                                            <button type="submit" name="btn_export">Data Export</button> 
+                                            <button type="submit" name="btn_import">Data Import from CSV</button>
+                                        </form>-->
+                                        <form action="import_csv.php?form=retention&action=import" method="post" enctype="multipart/form-data">
+                                            Select CSV file for Women retention:
+                                            <input name="csv" type="file" />
+                                            <input type="submit" value="Import selected CSV file" class="btn btn-outline btn-primary btn-xs" />
+                                          </form>
+                                        <p> ---- </p>
                                         <table id="retention" class="table table-striped table-bordered table-hover" >
                                             <thead>
                                                 <tr>

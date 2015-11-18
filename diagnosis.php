@@ -351,7 +351,7 @@ $_SESSION['timeout'] = time();
                                      <div class="col-lg-6">
                                         <input type="hidden" name="mode" value="diagnosis" />
                                          <div class="form-group">
-                                            <label>HEI Study ID</label>
+                                            <label>HEI ID</label>
                                             <input class="form-control" value="<?php if($_REQUEST["action"] == "edit"){echo $select_record["i_hei_id"];} else if($_REQUEST["action"] == "add"){ echo trim($_REQUEST["hei_id"]);}?>" 
                                                    placeholder="Enter identification number of the infant" name="hei_id"  required="TRUE" >
                                         </div>

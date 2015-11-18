@@ -152,7 +152,7 @@ $db = new db_transactions();
                             <h3>Birth Weight: <small><?php echo $select_record["birth_weight"]; ?> Kg</small></h3>
                             <h3>Sex: <small><?php echo $select_record["sex"]; ?></small></h3>
                             <h3>Delivery Place: <small><?php echo $select_record["delivery_place"]; ?></small></h3>
-                            <h3>Abstraction Date: <small><?php echo $select_record["created_date"]; ?></small></h3>
+                            <h3>Abstraction Date: <small><?php echo  date("Y-m-d", strtotime($select_record["created_date"])); ?></small></h3>
                         </div>
                         <!-- /.panel-body -->
                     </div>

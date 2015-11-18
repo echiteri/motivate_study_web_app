@@ -170,7 +170,19 @@ $_SESSION['timeout'] = time();
                         </div>
                         <div class="panel-body">
                                     <div class="table-responsive">
-                                        <a href="variables.php?action=add"  class="fa fa-pencil"> Add new</a>
+                                        <a href="variables.php?action=add"  class="fa fa-pencil"> Add new</a> 
+                                        <!--
+                                         <button type="button" onclick="window.location.href='import_data.php?form=variables&action=import'" class="btn btn-outline btn-primary btn-xs">Data Import from CSV</button>
+                                       <form id="demographics" action="import_data.php?form=variables" method="post">
+                                            <button type="submit" name="btn_export">Data Export</button> 
+                                            <button type="submit" name="btn_import">Data Import from CSV</button>
+                                        </form>-->
+                                        <form action="import_csv.php?form=variables&action=import" method="post" enctype="multipart/form-data">
+                                            Select CSV file for Women Variables:
+                                            <input name="csv" type="file" />
+                                            <input type="submit" value="Import selected CSV file" class="btn btn-outline btn-primary btn-xs" />
+                                          </form>
+                                        <p> ---- </p>
                                         <table id="variables" class="table table-striped table-bordered table-hover">
                                             <thead>
                                                 <tr>

@@ -16,6 +16,14 @@ use google\appengine\api\users\UserService;
 require_once("c_role.php");
 
 class db_transactions {
+    //constants
+    const RETENTION = "INSERT INTO retention (r_study_id, hiv_visit, next_visit, user_initial) VALUES('";    
+    const ADHERENCE = "INSERT INTO adherence(a_study_id, visit_date, haart_start_date, haart_regimen, art_effect, self_art_adherence, self_ctx_adherence, cd4_taken, cd4_count, cd4_date, vl_taken, viral_load, viral_date, who_stage, user_initial, next_visit_date) VALUES ('";
+    const VARIABLE = "INSERT INTO variables(v_study_id, visit_date, weight, height, hb_taken, hemoglobin, hemoglobin_date, tb_status, preg_status, edd, fp_status, fp_method, disclosure, patner_tested, user_initial, next_visit_date) VALUES ('";
+    const DEMOGRAPHICS = "INSERT INTO demographics (study_id, abs_date, facility_id, anc_id, psc_id, visit_count, anc_visit_date, birth_date, residence, parity, gravida, gestational_period, lmp, edd, marital_status, hiv_status, initial_hiv_status, hiv_retest, woman_haart, haart_regimen, counselling, hiv_status_partner, return_date, user_initial)) VALUES ('";
+    const INFANT_REGISTRATION = "INSERT INTO infant_registration(hei_id, d_study_id, birth_date, birth_weight, sex, delivery_place, arv_prophylaxis, arv_pro_other, enrol_date, enrol_age, user_initial) VALUES ('";
+    const DIAGNOSIS = "INSERT INTO infant_diagnosis(i_hei_id, visit_date, eight, height, tb_contact, tb_ass_outcome, inf_milestones, imm_history, feeding_6wks, feeding_10wks, feeding_14wks, feeding_9mths, feeding_12mths, feeding_15mths, feeding_18mths, next_appointment, user_initial) VALUES ('";
+    
     
     public function dbCon()
     {
@@ -44,6 +52,30 @@ class db_transactions {
           }
         }
         return $DB;
+    }
+    public function getRetention()
+    {
+        return db_transactions::RETENTION;
+    }
+    public function getAdherence()
+    {
+        return db_transactions::ADHERENCE;
+    }
+    public function getVariale()
+    {
+        return db_transactions::VARIABLE;
+    }
+    public function getDemographics()
+    {
+        return db_transactions::DEMOGRAPHICS;
+    }
+    public function getInfantRegistration()
+    {
+        return db_transactions::INFANT_REGISTRATION;
+    }
+    public function getDiagnosis()
+    {
+        return db_transactions::DIAGNOSIS;
     }
     
     public function setMenuSession()
@@ -528,5 +560,37 @@ class db_transactions {
             echo $ex->getMessage();
         }  
     }
+    
+   public function importFromCSV ($csvfile, $sql)
+   {
+        $ren = 0;
+        $i=0; //so we can ignore the first row
+        //$theData = fgets($csvfile);
+        //$filename = 'Database.csv';
+        //$fp = fopen($filename, "r");
+        
+        echo nl2br("The following IDs were imported:");
+        while (($row = fgetcsv($csvfile, "0", ",")) != FALSE)
+        {
+            //echo nl2br("There are rows!!!");
+            if($i > 0)
+                { 
+                    try{
+                        $sql_string =  $sql."VALUES ('". implode("','", $row) . "')";
+                        //echo nl2br($sql_string);
+                        $stmt = $this->dbCon()->prepare($sql_string);
+                        $stmt->execute();
+                        $r = $stmt->rowCount();
+                        if ($r>0){ echo nl2br("\n".$row[0]);} // only display ids that have been inserted
+                        $ren += $r;
+                        } catch (Exception $ex) {
+                        echo "There is an SQL Error. Contact System administrator";
+                        echo $ex->getTrace();
+                    } 
+                }
+                $i++;
+        }
+        return $ren;
+   }
 }
  

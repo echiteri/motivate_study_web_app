@@ -115,7 +115,7 @@ $_SESSION['timeout'] = time();
     </script>
 </head>
 
-<body>
+<body onload="toggleFpStatus();">
 
     <div id="wrapper">
 

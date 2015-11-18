@@ -98,6 +98,18 @@ handlers:
 - url: /women_summary.php
   script: women_summary.php
   
+- url: /import_data.php
+  script: import_data.php
+  
+- url: /import_csv.php
+  script: import_csv.php
+
+- url: /handle_upload.php
+  script: handle_upload.php
+ 
+- url: /direct_upload.php
+  script: direct_upload.php
+  
 - url: /infant_summary.php
   script: infant_summary.php
 

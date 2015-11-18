@@ -178,6 +178,18 @@ $_SESSION['timeout'] = time();
                         <div class="panel-body">
                                     <div class="table-responsive">
                                         <a href="adherence.php?action=add"  class="fa fa-pencil"> Add new</a>
+                                        <!--
+                                         <button type="button" onclick="window.location.href='import_data.php?form=adherence&action=import'" class="btn btn-outline btn-primary btn-xs">Data Import from CSV</button>
+                                       <form id="adherence" action="import_data.php?form=adherence" method="post">
+                                            <button type="submit" name="btn_export">Data Export</button> 
+                                            <button type="submit" name="btn_import">Data Import from CSV</button>
+                                        </form>-->
+                                        <form action="import_csv.php?form=adherence&action=import" method="post" enctype="multipart/form-data">
+                                            Select CSV file for Women adherence:
+                                            <input name="csv" type="file" />
+                                            <input type="submit" value="Import selected CSV file" class="btn btn-outline btn-primary btn-xs" />
+                                          </form>
+                                        <p> ---- </p>
                                         <table id="adherence" class="table table-striped table-bordered table-hover">
                                             <thead>
                                                 <tr>
