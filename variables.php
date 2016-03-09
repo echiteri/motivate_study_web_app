@@ -107,6 +107,10 @@ $_SESSION['timeout'] = time();
             {
                 document.getElementById("hemoglobin_id").disabled = true;
                 document.getElementById("hemoglobin_date_id").disabled = true;
+            }else if (document.getElementById("optionsRadiosInline3").checked)
+            {
+                document.getElementById("hemoglobin_id").disabled = true;
+                document.getElementById("hemoglobin_date_id").disabled = true;
             }            
         }
     </script>
@@ -286,6 +290,9 @@ $_SESSION['timeout'] = time();
                                             </label>
                                             <label class="radio-inline">
                                                 <input required="TRUE" onclick="toggleHb()" type="radio" name="hb_taken" id="optionsRadiosInline2" value="N" <?php if($select_record["hb_taken"]=="N") { echo 'checked="true"';} ?> >No
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" onclick="toggleHb()" type="radio" name="hb_taken" id="optionsRadiosInline5" value="NA" <?php if($select_record["hb_taken"]=="NA") { echo 'checked="true"';} ?> >NA
                                             </label>
                                         </div>
                                         <div class="form-group">
