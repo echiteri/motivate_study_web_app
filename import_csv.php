@@ -31,6 +31,9 @@ $sql_infant_diagnosis = "INSERT INTO infant_diagnosis(i_hei_id, visit_date, weig
         . "sixth_results, hei_outcome, exit_date, feeding_6wks, feeding_10wks, "
         . "feeding_14wks, feeding_9mths, feeding_12mths, feeding_15mths, feeding_18mths, "
         . "user_initial) ";
+$sql_anc_followup = "INSERT INTO anc_followup (anc_study_id, abs_date, visit_count, "
+                ."anc_visit_date, gestational_period, haart_regimen, counselling, "
+                . "hiv_status_partner, return_date, user_initial)";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +89,7 @@ $sql_infant_diagnosis = "INSERT INTO infant_diagnosis(i_hei_id, visit_date, weig
             <!-- /.navbar-top-links -->
             <div id="page-wrapper">
                <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-7">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="text-danger">Data imported from CSV file</h3>
@@ -111,12 +114,10 @@ if($_FILES['csv']['error'] == 0){
            if ($_REQUEST['form'] == "variables") { $sqlinsert = $sql_variables;}
            if ($_REQUEST['form'] == "retention") { $sqlinsert = $sql_retention;}
            if ($_REQUEST['form'] == "infant_diagnosis") { $sqlinsert = $sql_infant_diagnosis;}
-           $result = $db->importFromCSV($handle, $sqlinsert);
-           //echo nl2br($result);
-           if ($result > 0)
-           {
-               echo nl2br("\n".$result." Total records for ".$_REQUEST['form']." imported successfully");
-           }
+           if ($_REQUEST['form'] == "anc_followup") {$sqlinsert = $sql_anc_followup;}
+           echo "<h4 class='panel-heading' >";
+           $db->importFromCSV($handle, $sqlinsert, $_REQUEST['form']);
+           echo "</h4>";
            fclose($handle);
         }else
         {

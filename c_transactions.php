@@ -23,8 +23,9 @@ class db_transactions {
     const DEMOGRAPHICS = "INSERT INTO demographics (study_id, abs_date, facility_id, anc_id, psc_id, visit_count, anc_visit_date, birth_date, residence, parity, gravida, gestational_period, lmp, edd, marital_status, hiv_status, initial_hiv_status, hiv_retest, woman_haart, haart_regimen, counselling, hiv_status_partner, return_date, user_initial)) VALUES ('";
     const INFANT_REGISTRATION = "INSERT INTO infant_registration(hei_id, d_study_id, birth_date, birth_weight, sex, delivery_place, arv_prophylaxis, arv_pro_other, enrol_date, enrol_age, user_initial) VALUES ('";
     const DIAGNOSIS = "INSERT INTO infant_diagnosis(i_hei_id, visit_date, eight, height, tb_contact, tb_ass_outcome, inf_milestones, imm_history, feeding_6wks, feeding_10wks, feeding_14wks, feeding_9mths, feeding_12mths, feeding_15mths, feeding_18mths, next_appointment, user_initial) VALUES ('";
-    
-    
+    private $_ids = "";
+
+
     public function dbCon()
     {
         // Create a connection.
@@ -78,6 +79,9 @@ class db_transactions {
         return db_transactions::DIAGNOSIS;
     }
     
+    public function getIds() { return $this->_ids; }
+
+
     public function setMenuSession()
     {
         $role = new Role();
@@ -149,6 +153,25 @@ class db_transactions {
                 . ",'" .$arr_val[15]."','" .$arr_val[16]."','" .$arr_val[17]."','" .$arr_val[18]."','" .$arr_val[19]."'"
                 . ",'" .$arr_val[20]."','" .$arr_val[21]."','" .$arr_val[22]."','". $_SESSION["username"]."')";
             
+        $stmt = $this->dbCon()->prepare($sql);
+        $stmt->execute();
+        $dem = $stmt->rowCount();
+        return $dem;
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+        return 0;
+    }
+    
+    //Create records functions
+    public function insertAncFollowup($arr_val)
+    {
+        try{
+            $sql = "INSERT INTO anc_followup(anc_study_id, abs_date, visit_count, "
+                ."anc_visit_date, gestational_period, haart_regimen, counselling, "
+                . "hiv_status_partner, return_date, user_initial) "
+                ."VALUES ('".$arr_val[0]."','".$arr_val[1]. "','" .$arr_val[2]."','" .$arr_val[3]."','" .$arr_val[4]."'"
+                . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."','" .$arr_val[8]."','". $_SESSION["username"]."')";
         $stmt = $this->dbCon()->prepare($sql);
         $stmt->execute();
         $dem = $stmt->rowCount();
@@ -315,6 +338,21 @@ class db_transactions {
         }
     }
     
+    public function editAncFollowup($arr_val, $record_id)
+    {
+        try{
+            $sql = "UPDATE anc_followup SET anc_study_id='".$arr_val[0]."', abs_date='".$arr_val[1]."',visit_count='".$arr_val[2]."',anc_visit_date='".$arr_val[3]."',gestational_period='".$arr_val[4]."',"
+                    . "haart_regimen='".$arr_val[5]."',counselling='".$arr_val[6]."', hiv_status_partner = '".$arr_val[7]."', return_date='".$arr_val[8]."',user_initial='".$_SESSION["username"]."' "
+                    . "WHERE anc_id = '".$record_id."'";
+            $stmt = $this->dbCon()->prepare($sql);
+            $stmt->execute();
+            $dem = $stmt->rowCount();
+            return $dem;
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+    
     public function editRentention($arr_val, $record_id)
     {
         try{
@@ -445,6 +483,20 @@ class db_transactions {
         }
     }
     
+    public function deleteAncFollowup($record_id)
+    {
+        try{
+            $sql = "DELETE FROM anc_followup WHERE anc_id = :ac_id";
+            $stmt = $this->dbCon()->prepare($sql);
+            $stmt->bindParam(':ac_id', $record_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $dem = $stmt->rowCount();
+            return $dem;
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+    
     public function deleteRentention($record_id)
     {
         try{
@@ -561,15 +613,15 @@ class db_transactions {
         }  
     }
     
-   public function importFromCSV ($csvfile, $sql)
+   public function importFromCSV ($csvfile, $sql, $table_name)
    {
         $ren = 0;
         $i=0; //so we can ignore the first row
         //$theData = fgets($csvfile);
         //$filename = 'Database.csv';
         //$fp = fopen($filename, "r");
-        
-        echo nl2br("The following IDs were imported:");
+        $result = "";
+        $ids = nl2br("The following IDs were imported:");
         while (($row = fgetcsv($csvfile, "0", ",")) != FALSE)
         {
             //echo nl2br("There are rows!!!");
@@ -581,7 +633,7 @@ class db_transactions {
                         $stmt = $this->dbCon()->prepare($sql_string);
                         $stmt->execute();
                         $r = $stmt->rowCount();
-                        if ($r>0){ echo nl2br("\n".$row[0]);} // only display ids that have been inserted
+                        if ($r>0){ $ids = $ids. nl2br("\n+++ ".$row[0]);} // only display ids that have been inserted
                         $ren += $r;
                         } catch (Exception $ex) {
                         echo "There is an SQL Error. Contact System administrator";
@@ -590,7 +642,15 @@ class db_transactions {
                 }
                 $i++;
         }
-        return $ren;
+        if ($ren > 0)
+        {
+            echo $ids;
+            echo nl2br("\n(".$ren.") Total records for ".$table_name." imported successfully");
+        }else
+        {
+            echo nl2br("\n No records was imported at all for ".$_REQUEST['form'].". \n\nCheck that:\n> the data is correctly entered\n> the ids on the variable forms are registered\n> there are no duplicates on registrations forms (demographics or infant registration).");
+        }
+        //return $ren;
    }
 }
  

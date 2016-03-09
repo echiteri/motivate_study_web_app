@@ -128,12 +128,12 @@ $_SESSION['timeout'] = time();
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-3">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
+                                    <i class="fa fa-group fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><?php echo $db->getTableCount('demographics'); ?></div>
@@ -150,16 +150,16 @@ $_SESSION['timeout'] = time();
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-3">
                     <div class="panel panel-green">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
+                                    <i class="fa fa-child fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><?php echo $db->getTableCount('infant_registration'); ?></div>
-                                    <div>Early Infants Registration</div>
+                                    <div>Infants Registered</div>
                                 </div>
                             </div>
                         </div>
@@ -172,16 +172,16 @@ $_SESSION['timeout'] = time();
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-3">
                     <div class="panel panel-yellow">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                    <i class="fa fa-stethoscope fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"><?php echo ($db->getTableCount('adherence')+$db->getTableCount('variables')); ?></div>
-                                    <div>Women Adherence(<?php echo $db->getTableCount('adherence') ?>) Variables(<?php echo $db->getTableCount('variables') ?>)</div>
+                                    <div class="huge"><?php echo ($db->getTableCount('adherence'));?></div>
+                                    <div>Women Adherence</div>
                                 </div>
                             </div>
                         </div>
@@ -194,20 +194,64 @@ $_SESSION['timeout'] = time();
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
+                <div class="col-lg-2 col-md-3">
+                    <div class="panel panel-yellow">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-support fa-5x"></i>
+                                    <i class="fa fa-stethoscope fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"><?php echo $db->getTableCount('retention'); ?></div>
-                                    <div>Women Retention</div>
+                                    <div class="huge"><?php echo ($db->getTableCount('variables')); ?></div>
+                                    <div>Women Variables</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="women_variables.php">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-stethoscope fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><?php echo ($db->getTableCount('retention')); ?></div>
+                                    <div>Women retention</div>
                                 </div>
                             </div>
                         </div>
                         <a href="women_retention.php">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-flask fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><?php echo $db->getTableCount('infant_diagnosis'); ?></div>
+                                    <div>Infant Diagnosis</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="infant_diagnosis.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

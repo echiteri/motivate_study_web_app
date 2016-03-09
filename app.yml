@@ -61,6 +61,15 @@ handlers:
   
 - url: /demographics_identifier.php
   script: demographics_identifier.php
+  
+- url: /women_anc.php
+  script: women_anc.php
+  
+- url: /anc_followup.php
+  script: anc_followup.php
+  
+- url: /anc_followup_response.php
+  script: anc_followup_response.php
 
 - url: /c_role.php
   script: c_role.php

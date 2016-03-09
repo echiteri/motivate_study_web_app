@@ -31,6 +31,9 @@ $women_retention_table_id = "r_study_id";
 //women adherence variables
 $women_adherence_table = "adherence";
 $women_adherence_table_id = "a_study_id";
+//women anc followup variables
+$women_anc_followup_table = "anc_followup";
+$women_anc_followup_table_id = "anc_study_id";
 //infant registration variables
 $infant_registration_table = "infant_registration";
 $infant_registration_table_id = "d_study_id";
@@ -296,6 +299,47 @@ $db = new db_transactions();
                         <!-- /.panel-body -->
                     </div>
                     <!-- women retention panel ends -->
+                    <!-- women anc folllowup panel begins -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="text-danger">Women ANC Followup<span class="pull-right"> <a href="anc_followup.php?action=add&study_id=<?php echo $demographic_study_id ; ?>"  class="fa fa-pencil"> Add new</a></span></h4>
+                            <?php 
+                            $number = 1;
+                            $select_variables = "anc_id, anc_visit_date, visit_count, haart_regimen, return_date, created_date";
+                            $select_record = $db->selectDefinedRecords($select_variables, $women_anc_followup_table, $women_anc_followup_table_id, $demographic_study_id);
+                            ?>
+                        </div>
+                        <div class="panel-body">
+                        <?php
+                        if (count($select_record) < 1)
+                            {
+                                echo "<p class='text-warning'>No visits for the participant</p>";
+                            }
+                            else
+                            {
+                            foreach ($select_record as $key => $rec)
+                                {
+                                echo '<p class="text-success"';
+                                echo $number;
+                                echo " <strong> Visit Date: ".$rec["anc_visit_date"]."</strong> "
+                                        . "Haart Regimen: <strong>".$rec["haart_regimen"]."</strong> "
+                                        . "Visit count: <strong>".$rec["visit_count"]."</strong> "
+                                        . "ANC Visit Date: <strong>".$rec["anc_visit_date"]."</strong> "
+                                        . "Next visit date: <strong>".$rec["return_date"]."</strong> "
+                                        . "Abstraction Date: <strong>".$rec["created_date"]."</strong> .";
+                                echo "<span class='pull-right'>";
+                                echo "<a href='anc_followup.php?action=edit&id=".$rec["anc_id"]."' class='fa fa-edit' alt='Edit current record'></a> |  "
+                                                        . "<a href='anc_followup.php?action=delete&id=".$rec["anc_id"]."' class='fa fa-times-circle' alt='Delete current record'></a>";
+                                echo "</span>";
+                                echo '</p>';
+                                $number++;
+                                }
+                            }
+                        ?>
+                       </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- women anc followup panel ends -->
                     <!-- infant registration panel begins -->
                     <div class="panel panel-default">
                         <div class="panel-heading"> <span style="text-align: left"></span>

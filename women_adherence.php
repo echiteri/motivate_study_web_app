@@ -52,6 +52,8 @@ $_SESSION['timeout'] = time();
                            { mData: 'CD4_Date' },
                            { mData: 'Viral_Load' } ,
                            { mData: 'Viral_Load_Date' },
+                           { mData: 'ART_Adherence' },
+                           { mData: 'CTX_Adherence' },
                            { mData: 'Next_Visit_Date' },
                            {
                            "aTargets": [7],    
@@ -199,6 +201,8 @@ $_SESSION['timeout'] = time();
                                                     <th>CD4_Date</th>
                                                     <th>Viral_Load</th>
                                                     <th>Viral_Load_Date</th>
+                                                    <th>ART_Adherence</th>
+                                                    <th>CTX_Adherence</th>
                                                     <th>Next_Visit_Date</th>
                                                     <th>Action</th>
                                                 </tr>

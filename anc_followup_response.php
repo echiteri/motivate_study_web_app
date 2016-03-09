@@ -2,17 +2,17 @@
 require_once("c_transactions.php");
 $db = new db_transactions();
 $sql = "SELECT 
-adherence_id AS AdherenceID, 
-a_study_id AS StudyID,
-haart_start_date AS HAART_Start_Date,
-cd4_count AS CD4_Count,
-cd4_date AS CD4_Date,
-viral_load AS Viral_Load,
-viral_date AS Viral_Load_Date,
-self_art_adherence AS ART_Adherence,
-self_ctx_adherence AS CTX_Adherence,
-next_visit_date AS Next_Visit_Date                                                    
-FROM adherence";
+anc_id AS ID,
+anc_study_id AS StudyID, 
+abs_date AS AbsDate,
+visit_count AS ANC_Visit_count,
+anc_visit_date AS ANC_Date,
+gestational_period AS Gestation_wks,
+haart_regimen AS HAART_Regimen,
+counselling AS Couple_counseling, 
+hiv_status_partner AS Partner_HIV_status,
+return_date AS Next_Visit_Date
+FROM anc_followup";
 $data = $db->getAssoArray($sql);
 $results = array(
             "sEcho" => 1,
