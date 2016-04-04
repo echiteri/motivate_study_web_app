@@ -31,7 +31,7 @@ $_SESSION['timeout'] = time();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ANC Followup form</title>
+    <title>ANC Visit form</title>
     <!-- DataTables CSS -->
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.7/css/jquery.dataTables.css">
         <!-- jQuery -->
@@ -157,7 +157,7 @@ $_SESSION['timeout'] = time();
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">ANC followup form</h1>
+                    <h1 class="page-header">ANC visit form</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
