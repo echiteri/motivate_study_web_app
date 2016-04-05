@@ -200,15 +200,16 @@ class db_transactions {
     
     public function insertAdherence($arr_val)
     {
+        //print_r($arr_val);
         try
         {
             $sql = "INSERT INTO adherence(a_study_id, visit_date, haart_start_date, haart_regimen, art_effect, "
                     . "self_art_adherence, self_ctx_adherence, cd4_taken, cd4_count, cd4_date, vl_taken, viral_load, "
                     . "viral_date, who_stage, user_initial, next_visit_date) "
                     . "VALUES ('".$arr_val[0]."','".$arr_val[1]. "','" .$arr_val[2]."','" .$arr_val[3]."','" .$arr_val[4]."'"
-                    . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."','" .$arr_val[8]."','" .$arr_val[9]."'"
-                    . ",'" .$arr_val[10]."','" .$arr_val[11]."','" .$arr_val[12]."','" .$arr_val[13]."','". $_SESSION["username"]."','". $arr_val[12]."')";
-
+                    . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."'," .$arr_val[8].",'" .$arr_val[9]."'"
+                    . ",'" .$arr_val[10]."'," .$arr_val[11].",'" .$arr_val[12]."','" .$arr_val[13]."','". $_SESSION["username"]."','". $arr_val[14]."')";
+            //echo $sql;
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
             $adh = $stmt->rowCount();
@@ -225,8 +226,8 @@ class db_transactions {
                     . "tb_status, preg_status, edd, fp_status, fp_method, "
                     . "disclosure, patner_tested, user_initial, next_visit_date) "
                     . "VALUES ('".$arr_val[0]."','".$arr_val[1]. "','" .$arr_val[2]."','" .$arr_val[3]."','" .$arr_val[4]."'"
-                    . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."','" .$arr_val[8]."','" .$arr_val[9]."'"
-                    . ",'" .$arr_val[10]."','" .$arr_val[11]."','" .$arr_val[12]."','" .$arr_val[13]."','". $_SESSION["username"]."','" .$arr_val[13]."')";
+                    . "," .$arr_val[5].",'" .$arr_val[6]."','" .$arr_val[7]."','" .$arr_val[8]."','" .$arr_val[9]."'"
+                    . ",'" .$arr_val[10]."','" .$arr_val[11]."','" .$arr_val[12]."','" .$arr_val[13]."','". $_SESSION["username"]."','" .$arr_val[14]."')";
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
             $adh = $stmt->rowCount();
@@ -374,7 +375,7 @@ class db_transactions {
             $sql = "UPDATE adherence "
                 . "SET a_study_id='".$arr_val[0]."', visit_date='".$arr_val[1]."' ,haart_start_date='".$arr_val[2]."',haart_regimen='".$arr_val[3]."',art_effect='".$arr_val[4]."',"
                 . "self_art_adherence='".$arr_val[5]."',self_ctx_adherence='".$arr_val[6]."',cd4_taken='".$arr_val[7]."',"
-                . "cd4_count='".$arr_val[8]."',cd4_date='".$arr_val[9]."',vl_taken='".$arr_val[10]."',viral_load='".$arr_val[11]."',"
+                . "cd4_count=".$arr_val[8].",cd4_date='".$arr_val[9]."',vl_taken='".$arr_val[10]."',viral_load= ".$arr_val[11].","
                 . "viral_date='".$arr_val[12]."',who_stage='".$arr_val[13]."', user_initial = '". $_SESSION["username"]."', next_visit_date = '". $arr_val[14]."'"
                 . "WHERE adherence_id = '".$record_id."'";
             $stmt = $this->dbCon()->prepare($sql);
@@ -390,7 +391,7 @@ class db_transactions {
     {
           try{
             $sql = "UPDATE variables "
-                . "SET v_study_id='".$arr_val[0]."',visit_date='".$arr_val[1]."',weight='".$arr_val[2]."',height='".$arr_val[3]."',hb_taken='".$arr_val[4]."',hemoglobin='".$arr_val[5]."',"
+                . "SET v_study_id='".$arr_val[0]."',visit_date='".$arr_val[1]."',weight='".$arr_val[2]."',height='".$arr_val[3]."',hb_taken='".$arr_val[4]."',hemoglobin=".$arr_val[5].","
                 . "hemoglobin_date='".$arr_val[6]."',tb_status='".$arr_val[7]."',preg_status='".$arr_val[8]."',edd='".$arr_val[9]."',fp_status='".$arr_val[10]."',"
                 . "fp_method='".$arr_val[11]."', disclosure='".$arr_val[12]."',patner_tested='".$arr_val[13]."', user_initial = '". $_SESSION["username"]."',next_visit_date='".$arr_val[14]."'"
                 . "WHERE variables_id = '".$record_id."'";

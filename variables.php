@@ -107,7 +107,7 @@ $_SESSION['timeout'] = time();
             {
                 document.getElementById("hemoglobin_id").disabled = true;
                 document.getElementById("hemoglobin_date_id").disabled = true;
-            }else if (document.getElementById("optionsRadiosInline3").checked)
+            }else if (document.getElementById("optionsRadiosInline5").checked)
             {
                 document.getElementById("hemoglobin_id").disabled = true;
                 document.getElementById("hemoglobin_date_id").disabled = true;
@@ -221,7 +221,9 @@ $_SESSION['timeout'] = time();
                                     $weight= $_POST['weight'];
                                     $height = $_POST['height'];
                                     $hb_taken = $_POST['hb_taken'];
-                                    $hemoglobin = $_POST['hemoglobin'];
+                                    if ($hb_taken == "NA" || $hb_taken == "N")
+                                    { $hemoglobin = 'NULL'; }
+                                    else { $hemoglobin = $_POST['hemoglobin']; }
                                     $hemoglobin_date= $_POST['hemoglobin_date'];
                                     $tb_status = $_POST['tb_status'];
                                     $preg_status = $_POST['preg_status'];
@@ -297,11 +299,11 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Hemoglobin</label>
-                                            <input required="TRUE" id="hemoglobin_id" type="number" step="any" min="0" class="form-control" value="<?php if($action == "edit"){echo $select_record["hemoglobin"];} ?>" placeholder="Enter measurement of level of hemoglobin in the participant's blood" name="hemoglobin" required="TRUE" >
+                                            <input required="TRUE" <?php if($select_record["hb_taken"]=="NA" || $select_record["hb_taken"]=="N") { echo 'disabled="true"';} ?> id="hemoglobin_id" type="number" step="any" min="0" class="form-control" value="<?php if($action == "edit"){echo $select_record["hemoglobin"];} ?>" placeholder="Enter measurement of level of hemoglobin in the participant's blood" name="hemoglobin" required="TRUE" >
                                         </div>
                                         <div class="form-group">
                                             <label>Hemoglobin date</label>
-                                            <input required="TRUE" id="hemoglobin_date_id" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["hemoglobin_date"];} ?>" name="hemoglobin_date" required="TRUE" >
+                                            <input required="TRUE" <?php if($select_record["hb_taken"]=="NA" || $select_record["hb_taken"]=="N") { echo 'disabled="true"';} ?> id="hemoglobin_date_id" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["hemoglobin_date"];} ?>" name="hemoglobin_date" required="TRUE" >
                                         </div>
                                          <div class="form-group">
                                             <label>TB Status</label>
