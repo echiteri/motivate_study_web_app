@@ -341,10 +341,10 @@ $_SESSION['timeout'] = time();
                                             <select required="TRUE" class="form-control" name="self_art_adherence">
                                                 
                                                 <option value="" selected="">Select participant's self report of taking ART exactly as prescribed</option>
-                                                <option value="G" <?php if($select_record["self_ctx_adherence"]=="G") { echo 'selected="selected"';} ?> >Good (>95%)</option>
-                                                <option value="F" <?php if($select_record["self_ctx_adherence"]=="F") { echo 'selected="selected"';} ?> >Fair (85% - 94%)</option>
-                                                <option value="P" <?php if($select_record["self_ctx_adherence"]=="P") { echo 'selected="selected"';} ?> >Poor (<85%)</option> 
-                                                <option value="NI" <?php if($select_record["self_ctx_adherence"]=="NI") { echo 'selected="selected"';} ?> >Newly Initiated</option>
+                                                <option value="G" <?php if($select_record["self_art_adherence"]=="G") { echo 'selected="selected"';} ?> >Good (>95%)</option>
+                                                <option value="F" <?php if($select_record["self_art_adherence"]=="F") { echo 'selected="selected"';} ?> >Fair (85% - 94%)</option>
+                                                <option value="P" <?php if($select_record["self_art_adherence"]=="P") { echo 'selected="selected"';} ?> >Poor (<85%)</option> 
+                                                <option value="NI" <?php if($select_record["self_art_adherence"]=="NI") { echo 'selected="selected"';} ?> >Newly Initiated</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
