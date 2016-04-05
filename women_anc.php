@@ -172,7 +172,7 @@ $_SESSION['timeout'] = time();
                             <div class="table-responsive">
                                 <a href="anc_followup.php?action=add"  class="fa fa-pencil"> Add new</a>
                                         <form action="import_csv.php?form=anc_followup&action=import" method="post" enctype="multipart/form-data">
-                                            Select CSV file for Women ANC Followup:
+                                            Select CSV file for Women ANC Visit:
                                             <input name="csv" type="file" />
                                             <input type="submit" value="Import selected CSV file" class="btn btn-outline btn-primary btn-xs" />
                                           </form>
