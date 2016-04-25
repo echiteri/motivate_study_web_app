@@ -274,6 +274,17 @@ $_SESSION['timeout'] = time();
                                             <input required="TRUE"type="number" min="0" class="form-control" value="<?php if($action == "edit"){echo $select_record["enrol_age"];} ?>" 
                                                    placeholder="Enter age of the infant at enrollment" name="enrol_age"  >
                                         </div>
+                                        <div class="form-group">
+                                            <label>Participant Outcome</label>
+                                            <select required="TRUE" id="participant_outcome" class="form-control" name="participant_outcome">
+                                                <option value=""  selected="">Select  HIV test results of the participant's partner</option>
+                                                <option value="TO" <?php if($select_record["participant_outcome"]=="TO") { echo 'selected="selected"';} ?> >Tranfer out</option>
+                                                <option value="MD" <?php if($select_record["participant_outcome"]=="MD") { echo 'selected="selected"';} ?> >Maternal death</option>
+                                                <option value="LF" <?php if($select_record["participant_outcome"]=="LF") { echo 'selected="selected"';} ?> >Lost to follow</option>
+                                                <option value="D" <?php if($select_record["participant_outcome"]=="D"){ { echo 'selected="selected"';}} ?> >Discontinuation</option>
+                                                <option value="W" <?php if($select_record["participant_outcome"]=="W"){ { echo 'selected="selected"';}} ?> >Withdrawal</option>
+                                            </select>
+                                        </div>
                                         
                                          <?php if($action == "add") { ?>
                                             <button type="submit" name="btn" value="submit" class="btn btn-success">Submit</button>

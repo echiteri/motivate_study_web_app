@@ -412,6 +412,21 @@ $_SESSION['timeout'] = time();
                                                 <option value="U" <?php if($select_record["hiv_status_partner"]=="U"){ { echo 'selected="selected"';}} ?> >Unknown</option>
                                             </select>
                                         </div>
+                                        <div class="form-group">
+                                            <label>Participant Outcome</label>
+                                            <select required="TRUE" id="participant_outcome" class="form-control" name="participant_outcome">
+                                                <option value=""  selected="">Select  HIV test results of the participant's partner</option>
+                                                <option value="TO" <?php if($select_record["participant_outcome"]=="TO") { echo 'selected="selected"';} ?> >Tranfer out</option>
+                                                <option value="MD" <?php if($select_record["participant_outcome"]=="MD") { echo 'selected="selected"';} ?> >Maternal death</option>
+                                                <option value="LF" <?php if($select_record["participant_outcome"]=="LF") { echo 'selected="selected"';} ?> >Lost to follow</option>
+                                                <option value="D" <?php if($select_record["participant_outcome"]=="D"){ { echo 'selected="selected"';}} ?> >Discontinuation</option>
+                                                <option value="W" <?php if($select_record["participant_outcome"]=="W"){ { echo 'selected="selected"';}} ?> >Withdrawal</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Outcome date</label>
+                                            <input required="TRUE" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["outdate"];} ?>" name="outdate"  >
+                                        </div>
                                          <div class="form-group">
                                             <label>Date of return visit</label>
                                             <input required="TRUE" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["return_date"];} ?>" name="return_date"  >
