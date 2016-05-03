@@ -165,11 +165,13 @@ $_SESSION['timeout'] = time();
                                     $arv_pro_other= $_POST['arv_pro_other'];
                                     $enrol_date = $_POST['enrol_date'];
                                     $enrol_age = $_POST['enrol_age'];
+                                    $participant_outcome = $_POST['participant_outcome'];
+                                    $outdate = $_POST['outdate'];
                                     $btn = $_POST['btn'];
                                     $registration = array(
                                              $hei_id, $d_study_id, $birth_date, $birth_weight, $sex, 
                                             $delivery_place, $arv_prophylaxis,  $arv_pro_other,
-                                            $enrol_date, $enrol_age);
+                                            $enrol_date, $enrol_age,$participant_outcome,$outdate);
                                               if ($btn == "submit")
                                         {
                                              if($db->insertInfantRegistration($registration)>0)
@@ -284,6 +286,10 @@ $_SESSION['timeout'] = time();
                                                 <option value="D" <?php if($select_record["participant_outcome"]=="D"){ { echo 'selected="selected"';}} ?> >Discontinuation</option>
                                                 <option value="W" <?php if($select_record["participant_outcome"]=="W"){ { echo 'selected="selected"';}} ?> >Withdrawal</option>
                                             </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Outcome date</label>
+                                            <input required="TRUE" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["outdate"];} ?>" name="outdate"  >
                                         </div>
                                         
                                          <?php if($action == "add") { ?>

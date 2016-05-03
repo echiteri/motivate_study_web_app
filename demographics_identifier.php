@@ -225,6 +225,8 @@ $_SESSION['timeout'] = time();
                                     $haart_regimen = $_POST['haart_regimen'];
                                     $counselling = $_POST['counselling'];
                                     $hiv_status_partner = $_POST['hiv_status_partner'];
+                                    $participant_outcome = $_POST['participant_outcome'];
+                                    $outdate = $_POST['outdate'];
                                     $return_date = $_POST['return_date'];
                                     $btn = $_POST['btn'];
                                     
@@ -232,7 +234,7 @@ $_SESSION['timeout'] = time();
                                                             $anc_id, $psc_id, $visit_count, $anc_visit_date, $birth_date, 
                                                             $residence, $parity, $gravida, $gestational_period, $lmp,  $edd, $marital_status, $hiv_status, 
                                                             $initial_hiv_status, $hiv_retest, $woman_haart, $haart_regimen, $counselling, 
-                                                            $hiv_status_partner, $return_date);
+                                                            $hiv_status_partner,$participant_outcome,$outdate, $return_date);
                                         if ($btn == "submit")
                                         {
                                              if($db->insertDemographics($demographics)>0)

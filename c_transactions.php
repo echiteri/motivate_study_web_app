@@ -24,6 +24,12 @@ class db_transactions {
     const INFANT_REGISTRATION = "INSERT INTO infant_registration(hei_id, d_study_id, birth_date, birth_weight, sex, delivery_place, arv_prophylaxis, arv_pro_other, enrol_date, enrol_age, user_initial) VALUES ('";
     const DIAGNOSIS = "INSERT INTO infant_diagnosis(i_hei_id, visit_date, eight, height, tb_contact, tb_ass_outcome, inf_milestones, imm_history, feeding_6wks, feeding_10wks, feeding_14wks, feeding_9mths, feeding_12mths, feeding_15mths, feeding_18mths, next_appointment, user_initial) VALUES ('";
     private $_ids = "";
+    /*
+     * ALTER TABLE demographics ADD COLUMN participant_outcome VARCHAR(3) NULL AFTER hiv_status_partner;
+     * ALTER TABLE demographics ADD COLUMN outdate DATE NULL AFTER participant_outcome;
+     * ALTER TABLE infant_registration ADD COLUMN participant_outcome VARCHAR(3) NULL AFTER enrol_age;
+     * ALTER TABLE infant_registration ADD COLUMN outdate DATE NULL AFTER participant_outcome;
+     */
 
 
     public function dbCon()
@@ -146,13 +152,13 @@ class db_transactions {
             $sql = "INSERT INTO demographics(study_id, abs_date, facility_id, anc_id, psc_id, visit_count, "
                 ."anc_visit_date, birth_date, residence, parity, gravida, gestational_period, lmp, edd, "
                 ."marital_status, hiv_status, initial_hiv_status, hiv_retest, woman_haart, haart_regimen, "
-                ."counselling, hiv_status_partner, return_date, user_initial) "
+                ."counselling, hiv_status_partner, participant_outcome, outdate, return_date, user_initial) "
                 ."VALUES ('".$arr_val[0]."','".$arr_val[1]. "','" .$arr_val[2]."','" .$arr_val[3]."','" .$arr_val[4]."'"
                 . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."','" .$arr_val[8]."','" .$arr_val[9]."'"
                 . ",'" .$arr_val[10]."','" .$arr_val[11]."','" .$arr_val[12]."','" .$arr_val[13]."','" .$arr_val[14]."'"
                 . ",'" .$arr_val[15]."','" .$arr_val[16]."','" .$arr_val[17]."','" .$arr_val[18]."','" .$arr_val[19]."'"
-                . ",'" .$arr_val[20]."','" .$arr_val[21]."','" .$arr_val[22]."','". $_SESSION["username"]."')";
-            
+                . ",'" .$arr_val[20]."','" .$arr_val[21]."','" .$arr_val[22]."','" .$arr_val[23]."','" .$arr_val[24]."','". $_SESSION["username"]."')";
+        echo $sql;    
         $stmt = $this->dbCon()->prepare($sql);
         $stmt->execute();
         $dem = $stmt->rowCount();
@@ -241,10 +247,10 @@ class db_transactions {
     {
         try{
              $sql = "INSERT INTO infant_registration(hei_id, d_study_id, birth_date, birth_weight, sex, "
-                . "delivery_place, arv_prophylaxis, arv_pro_other, enrol_date, enrol_age, user_initial) "
+                . "delivery_place, arv_prophylaxis, arv_pro_other, enrol_date, enrol_age,participant_outcome, outdate, user_initial) "
                 . "VALUES ('".$arr_val[0]."','".$arr_val[1]. "','" .$arr_val[2]."','" .$arr_val[3]."','" .$arr_val[4]."'"
                 . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."','" .$arr_val[8]."','" .$arr_val[9]."'"
-                . ", '". $_SESSION["username"]."')";
+                . ",'" .$arr_val[10]."','" .$arr_val[11]."', '". $_SESSION["username"]."')";
         
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
@@ -328,7 +334,7 @@ class db_transactions {
                     . "visit_count='".$arr_val[5]."',anc_visit_date='".$arr_val[6]."',birth_date='".$arr_val[7]."',residence='".$arr_val[8]."',parity='".$arr_val[9]."',"
                     . "gravida='".$arr_val[10]."',gestational_period='".$arr_val[11]."',lmp='".$arr_val[12]."',edd='".$arr_val[13]."',marital_status='".$arr_val[14]."',"
                     . "hiv_status='".$arr_val[15]."',initial_hiv_status='".$arr_val[16]."',hiv_retest='".$arr_val[17]."',woman_haart='".$arr_val[18]."',haart_regimen='".$arr_val[19]."',"
-                    . "counselling='".$arr_val[20]."',hiv_status_partner='".$arr_val[21]."',return_date='".$arr_val[22]."', user_initial = '". $_SESSION["username"]."'"
+                    . "counselling='".$arr_val[20]."',hiv_status_partner='".$arr_val[21]."',participant_outcome='".$arr_val[22]."',outdate='".$arr_val[23]."',return_date='".$arr_val[24]."', user_initial = '". $_SESSION["username"]."'"
                     . "WHERE study_id = '".$record_id."'";
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
@@ -410,7 +416,7 @@ class db_transactions {
         try{
             $sql = "UPDATE infant_registration SET d_study_id='".$arr_val[1]."', birth_date='".$arr_val[2]."',"
                 . "birth_weight='".$arr_val[3]."',sex='".$arr_val[4]."',delivery_place='".$arr_val[5]."',arv_prophylaxis='".$arr_val[6]."',arv_pro_other='".$arr_val[7]."',"
-                . "enrol_date='".$arr_val[8]."',enrol_age='".$arr_val[9]."', user_initial = '". $_SESSION["username"]."'"
+                . "enrol_date='".$arr_val[8]."',enrol_age='".$arr_val[9]."',participant_outcome='".$arr_val[10]."',outdate='".$arr_val[11]."', user_initial = '". $_SESSION["username"]."'"
                 . "WHERE hei_id = '".$record_id."'";
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
