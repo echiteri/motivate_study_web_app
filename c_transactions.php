@@ -158,7 +158,7 @@ class db_transactions {
                 . ",'" .$arr_val[10]."','" .$arr_val[11]."','" .$arr_val[12]."','" .$arr_val[13]."','" .$arr_val[14]."'"
                 . ",'" .$arr_val[15]."','" .$arr_val[16]."','" .$arr_val[17]."','" .$arr_val[18]."','" .$arr_val[19]."'"
                 . ",'" .$arr_val[20]."','" .$arr_val[21]."','" .$arr_val[22]."','" .$arr_val[23]."','" .$arr_val[24]."','". $_SESSION["username"]."')";
-        echo $sql;    
+        //echo $sql;    
         $stmt = $this->dbCon()->prepare($sql);
         $stmt->execute();
         $dem = $stmt->rowCount();
@@ -437,6 +437,7 @@ class db_transactions {
                  ."feeding_15mths = '".$arr_val[13]."' ,"."feeding_18mths = '".$arr_val[14]."',"
                  ." next_appointment='".$arr_val[15]."', user_initial = '". $_SESSION["username"]."'"
                 . " WHERE diagnosis_id = '".$record_id."'";
+        //echo $sql;
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
             $inf = $stmt->rowCount();

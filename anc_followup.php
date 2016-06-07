@@ -86,6 +86,18 @@ $_SESSION['timeout'] = time();
                 document.getElementById("hiv_retest").disabled = false;
             }
         }
+        
+        function toggleHaartChange(){
+             if (document.getElementById("optionsRadiosInline5").checked)
+            {
+                document.getElementById("haart_regimen").disabled = false;
+                document.getElementById("haart_change_date").disabled = false;
+            }else if (document.getElementById("optionsRadiosInline6").checked)
+            {
+                document.getElementById("haart_regimen").disabled = true;
+                document.getElementById("haart_change_date").disabled = true;
+            }                      
+        }
       
     </script>
     <!-- Bootstrap Core CSS -->
@@ -266,19 +278,37 @@ $_SESSION['timeout'] = time();
                                             <input  required="TRUE" type="number" min="0" max="42" class="form-control" value="<?php if($action == "edit"){echo $select_record["gestational_period"];} ?>" placeholder="Enter the duration of pregnancy in weeks" name="gestational_period"  >
                                         </div>
                                         <div class="form-group">
+                                            <label>Has HAART regimen changed?</label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" onclick="toggleHaartChange()" type="radio" name="haart_change" id="optionsRadiosInline5" value="Y" <?php if($select_record["haart_change"]=="Y") { echo 'checked="true"';} ?> >Yes
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" onclick="toggleHaartChange()" type="radio" name="haart_change" id="optionsRadiosInline6" value="N" <?php if($select_record["haart_change"]=="N") { echo 'checked="true"';} ?> >No
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Date of changing HAART</label>
+                                            <input required="TRUE" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["haart_change_date"];} ?>"  name="haart_change_date" >
+                                        </div>
+                                        <div class="form-group">
                                             <label>HAART regimen</label>
                                             <select required="TRUE" id="haart_regimen" class="form-control" name="haart_regimen">
                                                 <option value=""  selected="">Select the type of triple ARV therapy</option>
-                                               <option value="AF1A" <?php if($select_record["haart_regimen"]=="AF1A") { echo 'selected="selected"';} ?> >AZT + 3TC + NVP</option>
-                                                <option value="AF1B" <?php if($select_record["haart_regimen"]=="AF1B") { echo 'selected="selected"';} ?> >AZT + 3TC + EFV</option>
-                                                <option value="AF2A" <?php if($select_record["haart_regimen"]=="AF2A") { echo 'selected="selected"';} ?> >TDF + 3TC + NVP</option>
-                                                <option value="AF2B" <?php if($select_record["haart_regimen"]=="AF2B") { echo 'selected="selected"';} ?> >TDF + 3TC + EFV</option>
-                                                <option value="AS1A" <?php if($select_record["haart_regimen"]=="AS1A") { echo 'selected="selected"';} ?> >AZT + 3TC + LPV/r</option>
-                                                <option value="AS1C" <?php if($select_record["haart_regimen"]=="AS1C") { echo 'selected="selected"';} ?> >AZT + 3TC + ABC</option>
-                                                <option value="AS2A" <?php if($select_record["haart_regimen"]=="AS2A") { echo 'selected="selected"';} ?> >TDF + 3TC + LPV/r</option>
-                                                <option value="AS2B" <?php if($select_record["haart_regimen"]=="AS2B") { echo 'selected="selected"';} ?> >TDF + 3TC + ABC</option>
-                                                <option value="AS2D" <?php if($select_record["haart_regimen"]=="AS2D") { echo 'selected="selected"';} ?> >TDF + ABC + LPV/r</option>
-                                                <option value="AS2E" <?php if($select_record["haart_regimen"]=="AS2E") { echo 'selected="selected"';} ?> >TDF + AZT + LPV/r</option>
+                                               <option value="" selected="selected">Select the regimen/code  of triple ARV therapy </option>
+                                                <option value="AF1A" <?php if($select_record["haart_regimen"]=="AF1A") { echo 'selected="selected"';} ?> >AZT + 3TC + NVP = AF1A</option>
+                                                <option value="AF1B" <?php if($select_record["haart_regimen"]=="AF1B") { echo 'selected="selected"';} ?> >AZT + 3TC + EFV = AF1B</option>
+                                                <option value="AF2A" <?php if($select_record["haart_regimen"]=="AF2A") { echo 'selected="selected"';} ?> >TDF + 3TC + NVP = AF2A</option>
+                                                <option value="AF2B" <?php if($select_record["haart_regimen"]=="AF2B") { echo 'selected="selected"';} ?> >TDF + 3TC + EFV = AF2B</option>
+                                                <option value="AF2C" <?php if($select_record["haart_regimen"]=="AF2C") { echo 'selected="selected"';} ?> >TDF + 3TC + ATV/r = AF2C</option>
+                                                <option value="AS1A" <?php if($select_record["haart_regimen"]=="AS1A") { echo 'selected="selected"';} ?> >AZT + 3TC + LPV/r = AS1A</option>
+                                                <option value="AS1C" <?php if($select_record["haart_regimen"]=="AS1C") { echo 'selected="selected"';} ?> >AZT + 3TC + ABC = AS1C</option>
+                                                <option value="AS2A" <?php if($select_record["haart_regimen"]=="AS2A") { echo 'selected="selected"';} ?> >TDF + 3TC + LPV/r = AS2A</option>
+                                                <option value="AS2B" <?php if($select_record["haart_regimen"]=="AS2B") { echo 'selected="selected"';} ?> >TDF + 3TC + ABC = AS2B</option>
+                                                <option value="AS2D" <?php if($select_record["haart_regimen"]=="AS2D") { echo 'selected="selected"';} ?> >TDF + ABC + LPV/r = AS2D</option>
+                                                <option value="AS2E" <?php if($select_record["haart_regimen"]=="AS2E") { echo 'selected="selected"';} ?> >TDF + AZT + LPV/r = AS2E</option>
+                                                <option value="AS1B" <?php if($select_record["haart_regimen"]=="AS1B") { echo 'selected="selected"';} ?> >AZT + 3TC + ATV/r = AS1B</option>
+                                                <option value="AS2C" <?php if($select_record["haart_regimen"]=="AS2C") { echo 'selected="selected"';} ?> >TDF + 3TC + ATV/r = AS2C</option>
+                                                <option value="AS5B" <?php if($select_record["haart_regimen"]=="AS5B") { echo 'selected="selected"';} ?> >ABC + 3TC + ATV/r = AS5B</option>
                                             </select>
                                         </div>
                                          <div class="form-group">

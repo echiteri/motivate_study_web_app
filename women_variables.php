@@ -166,7 +166,7 @@ $_SESSION['timeout'] = time();
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Search woman variable details
+                            woman variable details
                         </div>
                         <div class="panel-body">
                                     <div class="table-responsive">

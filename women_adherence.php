@@ -47,7 +47,7 @@ $_SESSION['timeout'] = time();
                     "sAjaxSource": "adherence_response.php",
                      aoColumns: [
                            { mData: 'StudyID' },
-                           { mData: 'HAART_Start_Date' },
+                           { mData: 'HAART_Change_Date' },
                            { mData: 'CD4_Count' },
                            { mData: 'CD4_Date' },
                            { mData: 'Viral_Load' } ,
@@ -175,7 +175,7 @@ $_SESSION['timeout'] = time();
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Search Women Adherence 
+                            Women Adherence 
                         </div>
                         <div class="panel-body">
                                     <div class="table-responsive">
@@ -196,7 +196,7 @@ $_SESSION['timeout'] = time();
                                             <thead>
                                                 <tr>
                                                     <th>StudyID</th>
-                                                    <th>HAART_Start_Date</th>
+                                                    <th>HAART_Change_Date</th>
                                                     <th>CD4_Count</th>
                                                     <th>CD4_Date</th>
                                                     <th>Viral_Load</th>

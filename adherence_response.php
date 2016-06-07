@@ -4,7 +4,7 @@ $db = new db_transactions();
 $sql = "SELECT 
 adherence_id AS AdherenceID, 
 a_study_id AS StudyID,
-haart_start_date AS HAART_Start_Date,
+haart_change_date AS HAART_Change_Date,
 cd4_count AS CD4_Count,
 cd4_date AS CD4_Date,
 viral_load AS Viral_Load,

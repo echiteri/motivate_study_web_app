@@ -236,10 +236,10 @@ $_SESSION['timeout'] = time();
                                             <label>Sex of infant</label>
                                             <p class="help-block">Select sexual/gender identity of infant</p>
                                             <label class="radio-inline">
-                                                <input required="TRUE" type="radio" name="sex" id="optionsRadiosInline1" value="M" checked>Male
+                                                <input required="TRUE" type="radio" name="sex" id="optionsRadiosInline1" value="M" <?php if($select_record["sex"]=="M") { echo 'checked="TRUE"';} ?> >Male
                                             </label>
                                             <label class="radio-inline">
-                                                <input required="TRUE" type="radio" name="sex" id="optionsRadiosInline2" value="F">Female
+                                                <input required="TRUE" type="radio" name="sex" id="optionsRadiosInline2" value="F" <?php if($select_record["sex"]=="F") { echo 'checked="TRUE"';} ?>>Female
                                             </label>
                                         </div>
                                         <div class="form-group">
@@ -278,18 +278,19 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Participant Outcome</label>
-                                            <select required="TRUE" id="participant_outcome" class="form-control" name="participant_outcome">
-                                                <option value=""  selected="">Select  HIV test results of the participant's partner</option>
-                                                <option value="TO" <?php if($select_record["participant_outcome"]=="TO") { echo 'selected="selected"';} ?> >Tranfer out</option>
-                                                <option value="MD" <?php if($select_record["participant_outcome"]=="MD") { echo 'selected="selected"';} ?> >Maternal death</option>
-                                                <option value="LF" <?php if($select_record["participant_outcome"]=="LF") { echo 'selected="selected"';} ?> >Lost to follow</option>
-                                                <option value="D" <?php if($select_record["participant_outcome"]=="D"){ { echo 'selected="selected"';}} ?> >Discontinuation</option>
-                                                <option value="W" <?php if($select_record["participant_outcome"]=="W"){ { echo 'selected="selected"';}} ?> >Withdrawal</option>
+                                            <select id="participant_outcome" class="form-control" name="participant_outcome">
+                                                <option value=""  selected="">Select the outcome of the infant</option>
+                                                <!--<option value="TO" <?php //if($select_record["participant_outcome"]=="TO") { echo 'selected="selected"';} ?> >Transfer out</option>-->
+                                                <option value="ID" <?php if($select_record["participant_outcome"]=="ID") { echo 'selected="selected"';} ?> >Infant death</option>
+                                                <option value="SB" <?php if($select_record["participant_outcome"]=="SB") { echo 'selected="selected"';} ?> >Still Birth</option>
+                                                <!---<option value="LF" <?php //if($select_record["participant_outcome"]=="LF") { echo 'selected="selected"';} ?> >Lost to follow</option>
+                                                <option value="D" <?php //if($select_record["participant_outcome"]=="D"){ { echo 'selected="selected"';}} ?> >Discontinuation</option>
+                                                <option value="W" <?php// if($select_record["participant_outcome"]=="W"){ { echo 'selected="selected"';}} ?> >Withdrawal</option>-->
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label>Outcome date</label>
-                                            <input required="TRUE" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["outdate"];} ?>" name="outdate"  >
+                                            <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["outdate"];} ?>" name="outdate"  >
                                         </div>
                                         
                                          <?php if($action == "add") { ?>

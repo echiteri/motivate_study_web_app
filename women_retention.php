@@ -157,7 +157,7 @@ $_SESSION['timeout'] = time();
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Search Women Retention visit 
+                            Women Retention visit 
                         </div>
                         <div class="panel-body">
                                 <div class="table-responsive">
