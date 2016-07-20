@@ -279,13 +279,14 @@ $_SESSION['timeout'] = time();
                                         <div class="form-group">
                                             <label>Participant Outcome</label>
                                             <select id="participant_outcome" class="form-control" name="participant_outcome">
-                                                <option value=""  selected="">Select the outcome of the infant</option>
-                                                <!--<option value="TO" <?php //if($select_record["participant_outcome"]=="TO") { echo 'selected="selected"';} ?> >Transfer out</option>-->
+                                                <option value=""  selected="">Select  the outcome of the study participant</option>
+                                                <option value="TO" <?php if($select_record["participant_outcome"]=="TO") { echo 'selected="selected"';} ?> >Transfer out</option>
+                                                <option value="MD" <?php if($select_record["participant_outcome"]=="MD") { echo 'selected="selected"';} ?> >Maternal death</option>
+                                                <option value="LF" <?php if($select_record["participant_outcome"]=="LF") { echo 'selected="selected"';} ?> >Lost to follow</option>
+                                                <option value="D" <?php if($select_record["participant_outcome"]=="D"){ { echo 'selected="selected"';}} ?> >Discontinuation</option>
+                                                <option value="W" <?php if($select_record["participant_outcome"]=="W"){ { echo 'selected="selected"';}} ?> >Withdrawal</option>
                                                 <option value="ID" <?php if($select_record["participant_outcome"]=="ID") { echo 'selected="selected"';} ?> >Infant death</option>
                                                 <option value="SB" <?php if($select_record["participant_outcome"]=="SB") { echo 'selected="selected"';} ?> >Still Birth</option>
-                                                <!---<option value="LF" <?php //if($select_record["participant_outcome"]=="LF") { echo 'selected="selected"';} ?> >Lost to follow</option>
-                                                <option value="D" <?php //if($select_record["participant_outcome"]=="D"){ { echo 'selected="selected"';}} ?> >Discontinuation</option>
-                                                <option value="W" <?php// if($select_record["participant_outcome"]=="W"){ { echo 'selected="selected"';}} ?> >Withdrawal</option>-->
                                             </select>
                                         </div>
                                         <div class="form-group">

@@ -67,10 +67,15 @@ $_SESSION['timeout'] = time();
             {
                 document.getElementById("cd4_count_id").disabled = true;
                 document.getElementById("cd4_date_id").disabled = true;
-            }                        
+            }else if (document.getElementById("optionsRadiosInline9").checked)
+            {
+                document.getElementById("cd4_count_id").disabled = true;
+                document.getElementById("cd4_date_id").disabled = true;
+            }                         
         }
    function toggleHaartChange(){
-             if (document.getElementById("optionsRadiosInline7").checked)
+            
+        if (document.getElementById("optionsRadiosInline7").checked)
             {
                 document.getElementById("haart_regimen").disabled = false;
                 document.getElementById("haart_change_date").disabled = false;
@@ -90,6 +95,10 @@ $_SESSION['timeout'] = time();
                 document.getElementById("viral_load_id").disabled = true;
                 document.getElementById("viral_date_id").disabled = true;
             }else if (document.getElementById("optionsRadiosInline5").checked)
+            {
+                document.getElementById("viral_load_id").disabled = true;
+                document.getElementById("viral_date_id").disabled = true;
+            }else if (document.getElementById("optionsRadiosInline10").checked)
             {
                 document.getElementById("viral_load_id").disabled = true;
                 document.getElementById("viral_date_id").disabled = true;
@@ -200,18 +209,19 @@ $_SESSION['timeout'] = time();
                                     {
                                     $a_study_id = $_POST['a_study_id'];
                                     $visit = $_POST['visit_date'];
+                                    $haart_change = $_POST['haart_change'];
                                     $haart_change_date= $_POST['haart_change_date'];
                                     $haart_regimen = $_POST['haart_regimen'];
                                     //$art_effect = $_POST['art_effect'];
                                     $self_art_adherence = $_POST['self_art_adherence'];
                                     $self_ctx_adherence = $_POST['self_ctx_adherence'];
                                     $cd4_taken = $_POST['cd4_taken'];
-                                    if ($cd4_taken == "NA" || $cd4_taken == "N")
+                                    if ($cd4_taken == "NA" || $cd4_taken == "N" || $cd4_taken == "NV")
                                     { $cd4_count = 'NULL'; }
                                     else { $cd4_count = $_POST['cd4_count']; }
                                     $cd4_date = $_POST['cd4_date'];
                                     $vl_taken = $_POST['vl_taken'];
-                                    if($vl_taken == "NA" || $vl_taken == "N")
+                                    if($vl_taken == "NA" || $vl_taken == "N" || $vl_taken == "NV")
                                     { $viral_load = 'NULL';}
                                     else {$viral_load = $_POST['viral_load'];}
                                     $viral_date = $_POST['viral_date'];
@@ -219,7 +229,7 @@ $_SESSION['timeout'] = time();
                                     $btn = $_POST['btn'];
                                     $next_visit = $_POST['next_visit_date'];
                                     $adherence = array(
-                                            $a_study_id,$visit, haart_change_date, $haart_regimen , $art_effect,
+                                            $a_study_id,$visit, $haart_change, $haart_change_date, $haart_regimen , $art_effect,
                                             $self_art_adherence, $self_ctx_adherence,$cd4_taken, $cd4_count, $cd4_date, $vl_taken,
                                             $viral_load, $viral_date, $who_stage, $next_visit
                                             );
@@ -271,11 +281,11 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Date of changing HAART</label>
-                                            <input required="TRUE" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["haart_change_date"];} ?>"  name="haart_change_date" >
+                                            <input required="TRUE" <?php if($select_record["haart_change"]=="N") { echo 'disabled="true"';} ?> max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["haart_start_date"];} ?>"  name="haart_change_date" id="haart_change_date">
                                         </div>
                                          <div class="form-group">
                                             <label>HAART regimen</label>
-                                            <select required="TRUE" class="form-control" name="haart_regimen">
+                                            <select required="TRUE" <?php if($select_record["haart_change"]=="N") { echo 'disabled="true"';} ?> class="form-control" name="haart_regimen" id="haart_regimen">
                                                 <option value="" selected="selected">Select the regimen/code  of triple ARV therapy </option>
                                                 <option value="AF1A" <?php if($select_record["haart_regimen"]=="AF1A") { echo 'selected="selected"';} ?> >AZT + 3TC + NVP = AF1A</option>
                                                 <option value="AF1B" <?php if($select_record["haart_regimen"]=="AF1B") { echo 'selected="selected"';} ?> >AZT + 3TC + EFV = AF1B</option>
@@ -392,14 +402,17 @@ $_SESSION['timeout'] = time();
                                             <label class="radio-inline">
                                                 <input required="TRUE" onclick="toggleCd4()" type="radio" name="cd4_taken" id="optionsRadiosInline6" value="NA" <?php if($select_record["cd4_taken"]=="NA") { echo 'checked="true"';} ?> >NA
                                             </label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" onclick="toggleCd4()" type="radio" name="cd4_taken" id="optionsRadiosInline9" value="NV" <?php if($select_record["cd4_taken"]=="NA") { echo 'checked="true"';} ?> >Not Available
+                                            </label>
                                         </div>
                                         <div class="form-group">
                                             <label>CD4 count</label>
-                                            <input required="TRUE" <?php if($select_record["cd4_taken"]=="NA" || $select_record["cd4_taken"]=="N") { echo 'disabled="true"';} ?> id="cd4_count_id" type="number" step="any" min="0" class="form-control" placeholder="Enter the number of CD4 T lymphocytes (CD4 cells) in a sample of blood" value="<?php if($action == "edit"){echo $select_record["cd4_count"];} ?>" name="cd4_count" >
+                                            <input required="TRUE" <?php if($select_record["cd4_taken"]=="NA" || $select_record["cd4_taken"]=="N" || $select_record["cd4_taken"]=="NV") { echo 'disabled="true"';} ?> id="cd4_count_id" type="number" step="any" min="0" class="form-control" placeholder="Enter the number of CD4 T lymphocytes (CD4 cells) in a sample of blood" value="<?php if($action == "edit"){echo $select_record["cd4_count"];} ?>" name="cd4_count" >
                                         </div>
                                         <div class="form-group">
                                             <label>CD4 Date</label>
-                                            <input required="TRUE" <?php if($select_record["cd4_taken"]=="NA" || $select_record["cd4_taken"]=="N") { echo 'disabled="true"';} ?> id="cd4_date_id" max="<?php echo date("Y-m-d");?>" type="date"class="form-control"  value="<?php if($action == "edit"){echo $select_record["cd4_date"];} ?>"  name="cd4_date">
+                                            <input required="TRUE" <?php if($select_record["cd4_taken"]=="NA" || $select_record["cd4_taken"]=="N" || $select_record["cd4_taken"]=="NV") { echo 'disabled="true"';} ?> id="cd4_date_id" max="<?php echo date("Y-m-d");?>" type="date"class="form-control"  value="<?php if($action == "edit"){echo $select_record["cd4_date"];} ?>"  name="cd4_date">
                                         </div>
                                         <div class="form-group">
                                             <label>Viral Load taken</label>
@@ -413,14 +426,17 @@ $_SESSION['timeout'] = time();
                                             <label class="radio-inline">
                                                 <input required="TRUE" onclick="toggleVl()" type="radio" name="vl_taken" id="optionsRadiosInline5" value="NA" <?php if($select_record["vl_taken"]=="NA") { echo 'checked="true"';} ?> >NA
                                             </label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" onclick="toggleVl()" type="radio" name="vl_taken" id="optionsRadiosInline10" value="NA" <?php if($select_record["vl_taken"]=="NV") { echo 'checked="true"';} ?> >Not Available
+                                            </label>
                                         </div>
                                         <div class="form-group">
                                             <label>Viral load </label>
-                                            <input required="TRUE" <?php if($select_record["vl_taken"]=="NA" || $select_record["vl_taken"]=="N") { echo 'disabled="true"';} ?> type="text" id="viral_load_id" class="form-control" placeholder="Enter amount of HIV in a sample of blood reported as the number of HIV RNA copies per milliliter of blood"  value="<?php if($action == "edit"){echo $select_record["viral_load"];} ?>" name="viral_load">
+                                            <input required="TRUE" <?php if($select_record["vl_taken"]=="NA" || $select_record["vl_taken"]=="N" || $select_record["vl_taken"]=="NV") { echo 'disabled="true"';} ?> type="text" id="viral_load_id" class="form-control" placeholder="Enter amount of HIV in a sample of blood reported as the number of HIV RNA copies per milliliter of blood"  value="<?php if($action == "edit"){echo $select_record["viral_load"];} ?>" name="viral_load">
                                         </div>
                                         <div class="form-group">
                                             <label>Viral load date</label>
-                                            <input required="TRUE" <?php if($select_record["vl_taken"]=="NA" || $select_record["vl_taken"]=="N") { echo 'disabled="true"';} ?> id="viral_date_id" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["viral_date"];} ?>" name="viral_date" >
+                                            <input required="TRUE" <?php if($select_record["vl_taken"]=="NA" || $select_record["vl_taken"]=="N" || $select_record["vl_taken"]=="NV") { echo 'disabled="true"';} ?> id="viral_date_id" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["viral_date"];} ?>" name="viral_date" >
                                         </div>
                                            <div class="form-group">
                                             <label>WHO Stage</label>

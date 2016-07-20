@@ -151,13 +151,14 @@ class db_transactions {
         try{
             $sql = "INSERT INTO demographics(study_id, abs_date, facility_id, anc_id, psc_id, visit_count, "
                 ."anc_visit_date, birth_date, residence, parity, gravida, gestational_period, lmp, edd, "
-                ."marital_status, hiv_status, initial_hiv_status, hiv_retest, woman_haart, haart_regimen, "
+                ."marital_status, hiv_status, initial_hiv_status, hiv_retest, woman_haart, haart_regimen, haart_start_date, "
                 ."counselling, hiv_status_partner, participant_outcome, outdate, return_date, user_initial) "
                 ."VALUES ('".$arr_val[0]."','".$arr_val[1]. "','" .$arr_val[2]."','" .$arr_val[3]."','" .$arr_val[4]."'"
                 . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."','" .$arr_val[8]."','" .$arr_val[9]."'"
                 . ",'" .$arr_val[10]."','" .$arr_val[11]."','" .$arr_val[12]."','" .$arr_val[13]."','" .$arr_val[14]."'"
                 . ",'" .$arr_val[15]."','" .$arr_val[16]."','" .$arr_val[17]."','" .$arr_val[18]."','" .$arr_val[19]."'"
-                . ",'" .$arr_val[20]."','" .$arr_val[21]."','" .$arr_val[22]."','" .$arr_val[23]."','" .$arr_val[24]."','". $_SESSION["username"]."')";
+                . ",'" .$arr_val[20]."','" .$arr_val[21]."','" .$arr_val[22]."','" .$arr_val[23]."','" .$arr_val[24]."'"
+                . ", '" .$arr_val[25]."','". $_SESSION["username"]."')";
         //echo $sql;    
         $stmt = $this->dbCon()->prepare($sql);
         $stmt->execute();
@@ -174,10 +175,11 @@ class db_transactions {
     {
         try{
             $sql = "INSERT INTO anc_followup(anc_study_id, abs_date, visit_count, "
-                ."anc_visit_date, gestational_period, haart_regimen, counselling, "
+                ."anc_visit_date, gestational_period, haart_change, haart_regimen, haart_change_date, counselling, "
                 . "hiv_status_partner, return_date, user_initial) "
                 ."VALUES ('".$arr_val[0]."','".$arr_val[1]. "','" .$arr_val[2]."','" .$arr_val[3]."','" .$arr_val[4]."'"
-                . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."','" .$arr_val[8]."','". $_SESSION["username"]."')";
+                . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."','" .$arr_val[8]."','" .$arr_val[9]."','" .$arr_val[10]."','". $_SESSION["username"]."')";
+        //echo $sql;
         $stmt = $this->dbCon()->prepare($sql);
         $stmt->execute();
         $dem = $stmt->rowCount();
@@ -209,12 +211,12 @@ class db_transactions {
         //print_r($arr_val);
         try
         {
-            $sql = "INSERT INTO adherence(a_study_id, visit_date, haart_start_date, haart_regimen, art_effect, "
+            $sql = "INSERT INTO adherence(a_study_id, visit_date,haart_change, haart_start_date, haart_regimen, art_effect, "
                     . "self_art_adherence, self_ctx_adherence, cd4_taken, cd4_count, cd4_date, vl_taken, viral_load, "
                     . "viral_date, who_stage, user_initial, next_visit_date) "
                     . "VALUES ('".$arr_val[0]."','".$arr_val[1]. "','" .$arr_val[2]."','" .$arr_val[3]."','" .$arr_val[4]."'"
-                    . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."'," .$arr_val[8].",'" .$arr_val[9]."'"
-                    . ",'" .$arr_val[10]."'," .$arr_val[11].",'" .$arr_val[12]."','" .$arr_val[13]."','". $_SESSION["username"]."','". $arr_val[14]."')";
+                    . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."','" .$arr_val[8]."','" .$arr_val[9]."'"
+                    . ",'" .$arr_val[10]."','" .$arr_val[11]."','" .$arr_val[12]."','" .$arr_val[13]."','" .$arr_val[14]."','". $_SESSION["username"]."','". $arr_val[15]."')";
             //echo $sql;
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
@@ -334,8 +336,10 @@ class db_transactions {
                     . "visit_count='".$arr_val[5]."',anc_visit_date='".$arr_val[6]."',birth_date='".$arr_val[7]."',residence='".$arr_val[8]."',parity='".$arr_val[9]."',"
                     . "gravida='".$arr_val[10]."',gestational_period='".$arr_val[11]."',lmp='".$arr_val[12]."',edd='".$arr_val[13]."',marital_status='".$arr_val[14]."',"
                     . "hiv_status='".$arr_val[15]."',initial_hiv_status='".$arr_val[16]."',hiv_retest='".$arr_val[17]."',woman_haart='".$arr_val[18]."',haart_regimen='".$arr_val[19]."',"
-                    . "counselling='".$arr_val[20]."',hiv_status_partner='".$arr_val[21]."',participant_outcome='".$arr_val[22]."',outdate='".$arr_val[23]."',return_date='".$arr_val[24]."', user_initial = '". $_SESSION["username"]."'"
-                    . "WHERE study_id = '".$record_id."'";
+                    . "haart_start_date='".$arr_val[20]."',counselling='".$arr_val[21]."',hiv_status_partner='".$arr_val[22]."',participant_outcome='".$arr_val[23]."',outdate='".$arr_val[24]."',return_date='".$arr_val[25]."'"
+                    . ", user_initial = '". $_SESSION["username"]."'"
+                    . " WHERE study_id = '".$record_id."'";
+            //echo $sql;
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
             $dem = $stmt->rowCount();
@@ -349,8 +353,10 @@ class db_transactions {
     {
         try{
             $sql = "UPDATE anc_followup SET anc_study_id='".$arr_val[0]."', abs_date='".$arr_val[1]."',visit_count='".$arr_val[2]."',anc_visit_date='".$arr_val[3]."',gestational_period='".$arr_val[4]."',"
-                    . "haart_regimen='".$arr_val[5]."',counselling='".$arr_val[6]."', hiv_status_partner = '".$arr_val[7]."', return_date='".$arr_val[8]."',user_initial='".$_SESSION["username"]."' "
+                    . "haart_change='".$arr_val[5]."', haart_regimen='".$arr_val[6]."', haart_change_date='".$arr_val[7]."',counselling='".$arr_val[8]."', hiv_status_partner = '".$arr_val[9]."', "
+                    . "return_date='".$arr_val[10]."',user_initial='".$_SESSION["username"]."' "
                     . "WHERE anc_id = '".$record_id."'";
+            //echo $sql;
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
             $dem = $stmt->rowCount();
@@ -379,11 +385,12 @@ class db_transactions {
     {
         try{
             $sql = "UPDATE adherence "
-                . "SET a_study_id='".$arr_val[0]."', visit_date='".$arr_val[1]."' ,haart_start_date='".$arr_val[2]."',haart_regimen='".$arr_val[3]."',art_effect='".$arr_val[4]."',"
-                . "self_art_adherence='".$arr_val[5]."',self_ctx_adherence='".$arr_val[6]."',cd4_taken='".$arr_val[7]."',"
-                . "cd4_count=".$arr_val[8].",cd4_date='".$arr_val[9]."',vl_taken='".$arr_val[10]."',viral_load= ".$arr_val[11].","
-                . "viral_date='".$arr_val[12]."',who_stage='".$arr_val[13]."', user_initial = '". $_SESSION["username"]."', next_visit_date = '". $arr_val[14]."'"
+                . "SET a_study_id='".$arr_val[0]."', visit_date='".$arr_val[1]."' ,haart_change='".$arr_val[2]."' ,haart_start_date='".$arr_val[3]."', haart_regimen='".$arr_val[4]."',art_effect='".$arr_val[5]."',"
+                . "self_art_adherence='".$arr_val[6]."',self_ctx_adherence='".$arr_val[7]."',cd4_taken='".$arr_val[8]."',"
+                . "cd4_count=".$arr_val[9].",cd4_date='".$arr_val[10]."',vl_taken='".$arr_val[11]."',viral_load= ".$arr_val[12].","
+                . "viral_date='".$arr_val[13]."',who_stage='".$arr_val[14]."', user_initial = '". $_SESSION["username"]."', next_visit_date = '". $arr_val[15]."'"
                 . "WHERE adherence_id = '".$record_id."'";
+            //echo $sql;
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
             $adh = $stmt->rowCount();

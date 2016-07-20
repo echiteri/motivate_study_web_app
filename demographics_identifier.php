@@ -60,9 +60,11 @@ $_SESSION['timeout'] = time();
              if (document.getElementById("optionsRadiosInline1").checked)
             {
                 document.getElementById("haart_regimen").disabled = false;
+                document.getElementById("haart_start_date").disabled = false;
             }else if (document.getElementById("optionsRadiosInline2").checked)
             {
                 document.getElementById("haart_regimen").disabled = true;
+                document.getElementById("haart_start_date").disabled = true;
             }
             
         }
@@ -76,9 +78,10 @@ $_SESSION['timeout'] = time();
                 document.getElementById("hiv_status_partner").disabled = true;
             }
         }
+       
             
         function toggleHivStatus(){
-             if (document.getElementById("initial_hiv_status").value === "P")
+             if (document.getElementById("hiv_status").value === "P" || document.getElementById("initial_hiv_status").value === "P")
             {
                 document.getElementById("hiv_retest").disabled = true;
             }else
@@ -223,6 +226,7 @@ $_SESSION['timeout'] = time();
                                     $hiv_retest = $_POST['hiv_retest'];
                                     $woman_haart = $_POST['woman_haart'];
                                     $haart_regimen = $_POST['haart_regimen'];
+                                    $haart_start_date = $_POST['haart_start_date'];
                                     $counselling = $_POST['counselling'];
                                     $hiv_status_partner = $_POST['hiv_status_partner'];
                                     $participant_outcome = $_POST['participant_outcome'];
@@ -233,7 +237,7 @@ $_SESSION['timeout'] = time();
                                         $demographics = array($study_id, $abs_date, $facility_id, 
                                                             $anc_id, $psc_id, $visit_count, $anc_visit_date, $birth_date, 
                                                             $residence, $parity, $gravida, $gestational_period, $lmp,  $edd, $marital_status, $hiv_status, 
-                                                            $initial_hiv_status, $hiv_retest, $woman_haart, $haart_regimen, $counselling, 
+                                                            $initial_hiv_status, $hiv_retest, $woman_haart, $haart_regimen,$haart_start_date, $counselling, 
                                                             $hiv_status_partner,$participant_outcome,$outdate, $return_date);
                                         if ($btn == "submit")
                                         {
@@ -340,7 +344,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>HIV status</label>
-                                            <select required="TRUE" class="form-control" name="hiv_status">
+                                            <select required="TRUE" onchange="toggleHivStatus()" class="form-control" id="hiv_status" name="hiv_status">
                                                 <option  value="" selected="">Select HIV status of the participant</option>
                                                 <option value="P" <?php if($select_record["hiv_status"]=="P") { echo 'selected="selected"';} ?> >Positive</option>
                                                 <option value="N" <?php if($select_record["hiv_status"]=="N") { echo 'selected="selected"';} ?> >Negative</option>
@@ -372,15 +376,15 @@ $_SESSION['timeout'] = time();
                                             <label>Woman on HAART</label>
                                             <p class="help-block">Select whether participant is on triple ARV therapy</p>
                                             <label class="radio-inline">
-                                                <input required="TRUE" onclick="toggleReg()" type="radio" name="woman_haart" id="optionsRadiosInline1" value="Y" <?php if($select_record["woman_haart"]=="Y") { echo 'checked="TRUE"';} ?> >Yes
+                                                <input required="TRUE" onchange="toggleReg()" type="radio" name="woman_haart" id="optionsRadiosInline1" value="Y" <?php if($select_record["woman_haart"]=="Y") { echo 'checked="TRUE"';} ?> >Yes
                                             </label>
                                             <label class="radio-inline">
-                                                <input required="TRUE" onclick="toggleReg()" type="radio" name="woman_haart" id="optionsRadiosInline2" value="N" <?php if($select_record["woman_haart"]=="N") { echo 'checked="TRUE"';} ?> >No
+                                                <input required="TRUE" onchange="toggleReg()" type="radio" name="woman_haart" id="optionsRadiosInline2" value="N" <?php if($select_record["woman_haart"]=="N") { echo 'checked="TRUE"';} ?> >No
                                             </label>                    
                                         </div>
                                         <div class="form-group">
                                             <label>HAART regimen</label>
-                                            <select required="TRUE" id="haart_regimen" class="form-control" name="haart_regimen">
+                                            <select required="TRUE" <?php if($select_record["woman_haart"]=="N") { echo 'disabled="true"';} ?> id="haart_regimen" class="form-control" name="haart_regimen">
                                                 <option value=""  selected="">Select the type of triple ARV therapy</option>
                                                <option value="" selected="selected">Select the regimen/code  of triple ARV therapy </option>
                                                 <option value="AF1A" <?php if($select_record["haart_regimen"]=="AF1A") { echo 'selected="selected"';} ?> >AZT + 3TC + NVP = AF1A</option>
@@ -401,7 +405,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>HAART regimen start date</label>
-                                            <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["haart_start_date"];} ?>" name="haart_start_date"  >
+                                            <input max="<?php echo date("Y-m-d");?>" type="date" <?php if($select_record["woman_haart"]=="N") { echo 'disabled="true"';} ?> class="form-control" value="<?php if($action == "edit"){echo $select_record["haart_start_date"];} ?>" name="haart_start_date" id="haart_start_date" >
                                         </div>
                                          <div class="form-group">
                                             <label>Couple counselling</label>
@@ -415,7 +419,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Partner HIV result</label>
-                                            <select required="TRUE" id="hiv_status_partner" class="form-control" name="hiv_status_partner">
+                                            <select required="TRUE" <?php if($select_record["counselling"]=="N") { echo 'disabled="true"';} ?> id="hiv_status_partner" class="form-control" name="hiv_status_partner">
                                                 <option value=""  selected="">Select  HIV test results of the participant's partner</option>
                                                 <option value="P" <?php if($select_record["hiv_status_partner"]=="P") { echo 'selected="selected"';} ?> >Positive</option>
                                                 <option value="N" <?php if($select_record["hiv_status_partner"]=="N") { echo 'selected="selected"';} ?> >Negative</option>
@@ -432,6 +436,8 @@ $_SESSION['timeout'] = time();
                                                 <option value="LF" <?php if($select_record["participant_outcome"]=="LF") { echo 'selected="selected"';} ?> >Lost to follow</option>
                                                 <option value="D" <?php if($select_record["participant_outcome"]=="D"){ { echo 'selected="selected"';}} ?> >Discontinuation</option>
                                                 <option value="W" <?php if($select_record["participant_outcome"]=="W"){ { echo 'selected="selected"';}} ?> >Withdrawal</option>
+                                                <option value="ID" <?php if($select_record["participant_outcome"]=="ID") { echo 'selected="selected"';} ?> >Infant death</option>
+                                                <option value="SB" <?php if($select_record["participant_outcome"]=="SB") { echo 'selected="selected"';} ?> >Still Birth</option>
                                             </select>
                                         </div>
                                         <div class="form-group">

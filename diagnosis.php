@@ -501,13 +501,25 @@ $_SESSION['timeout'] = time();
                                             $dob = date();
                                             $today = date("Y-m-d");
                                             $infant_registration_record = $db->selectDefinedRecords("birth_date", "infant_registration", "hei_id", $select_record["i_hei_id"]);
+                                            $dia_visit_date = $db->selectDefinedRecords("visit_date", "infant_diagnosis", "diagnosis_id", $Diag_id);                                            
                                             foreach ($infant_registration_record as $rec)
                                             {
-                                                $dob = $rec["birth_date"];                                               
+                                                if($dia_visit_date[0]["visit_date"] != NULL)
+                                                { 
+                                                    $diff = abs(strtotime($dia_visit_date[0]["visit_date"]) - strtotime($rec["birth_date"]));
+                                                } else
+                                                {
+                                                    $diff = abs(strtotime($today) - strtotime($dob));
+                                                }
+                                                                                               
                                             }
-                                            $diff = abs(strtotime($today) - strtotime($dob));
+                                            //$diff = abs(strtotime($today) - strtotime($dob));
+                                            //echo $diff." Visit Date: ".$dia_visit_date[0]["visit_date"];
                                             $weeks = $diff/(60*60*24*7);
                                             $months = $diff/(60*60*24*30);
+                                            //echo "Diagnosis ID: ". $Diag_id;
+                                            //echo "Weeks: ".$weeks;
+                                            //echo "< br/>Months: ".$months;
                                                                                         
                                          if (($diff >= 1 && $weeks < 10) || $action == "add")   { ?>  
                                         <label>Infant feeding method at 6 weeks</label>
@@ -542,7 +554,7 @@ $_SESSION['timeout'] = time();
                                             <select required="TRUE" class="form-control" name="feeding_9mths">
                                                 <option value="" selected="selected">Select infant feeding method at 9 months</option>
                                                 <option value="BF" <?php if($select_record["feeding_9mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
-                                                <option value="No BF" <?php if($select_record["feeding_9mths"]=="No BF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
+                                                <option value="NBF" <?php if($select_record["feeding_9mths"]=="NBF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
                                             </select>                                    
                                         <?php } 
                                         if ($months >= 9 && $months < 12)   { ?> 
@@ -550,7 +562,7 @@ $_SESSION['timeout'] = time();
                                             <select required="TRUE" class="form-control" name="feeding_12mths">
                                                 <option value="" selected="selected">Select infant feeding method at 12 months</option>
                                                 <option value="BF" <?php if($select_record["feeding_12mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
-                                                <option value="No BF" <?php if($select_record["feeding_12mths"]=="No BF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
+                                                <option value="NBF" <?php if($select_record["feeding_12mths"]=="NBF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
                                             </select>                                     
                                         <?php } 
                                         if ($months >= 12 && $months < 15)   { ?> 
@@ -558,7 +570,7 @@ $_SESSION['timeout'] = time();
                                             <select required="TRUE" class="form-control" name="feeding_15mths">
                                                 <option value="" selected="selected">Select infant feeding method at 15 months</option>
                                                 <option value="BF" <?php if($select_record["feeding_15mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
-                                                <option value="No BF" <?php if($select_record["feeding_15mths"]=="No BF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
+                                                <option value="NBF" <?php if($select_record["feeding_15mths"]=="NBF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
                                             </select>
                                         <?php } 
                                         if ($months >= 15 && $months < 18)   { ?> 
@@ -566,7 +578,7 @@ $_SESSION['timeout'] = time();
                                             <select required="TRUE" class="form-control" name="feeding_18mths">
                                                 <option value="" selected="selected">Select infant feeding method at 18 months</option>
                                                 <option value="BF" <?php if($select_record["feeding_18mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
-                                                <option value="No BF" <?php if($select_record["feeding_18mths"]=="No BF") echo 'selected="selected"'; ?>>Not Breastfed</option>
+                                                <option value="NBF" <?php if($select_record["feeding_18mths"]=="NBF") echo 'selected="selected"'; ?>>Not Breastfed</option>
                                             </select> 
                                         <?php } ?>
                                     </div>

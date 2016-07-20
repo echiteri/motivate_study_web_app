@@ -218,14 +218,16 @@ $_SESSION['timeout'] = time();
                                     $visit_count = $_POST['visit_count'];
                                     $anc_visit_date = $_POST['anc_visit_date'];
                                     $gestational_period = $_POST['gestational_period'];
+                                    $haart_change = $_POST['haart_change'];
                                     $haart_regimen = $_POST['haart_regimen'];
+                                    $haart_change_date = $_POST['haart_change_date'];
                                     $counselling = $_POST['counselling'];
                                     $hiv_status_partner = $_POST['hiv_status_partner'];
                                     $return_date = $_POST['return_date'];
                                     $btn = $_POST['btn'];
                                     
                                        $anc_followup = array($anc_study_id, $abs_date, $visit_count, $anc_visit_date, 
-                                                            $gestational_period, $haart_regimen, $counselling, 
+                                                            $gestational_period,$haart_change, $haart_regimen, $haart_change_date, $counselling, 
                                                             $hiv_status_partner, $return_date);
                                        
                                         if ($btn == "submit")
@@ -280,19 +282,19 @@ $_SESSION['timeout'] = time();
                                         <div class="form-group">
                                             <label>Has HAART regimen changed?</label>
                                             <label class="radio-inline">
-                                                <input required="TRUE" onclick="toggleHaartChange()" type="radio" name="haart_change" id="optionsRadiosInline5" value="Y" <?php if($select_record["haart_change"]=="Y") { echo 'checked="true"';} ?> >Yes
+                                                <input required="TRUE" onchange="toggleHaartChange()" type="radio" name="haart_change" id="optionsRadiosInline5" value="Y" <?php if($select_record["haart_change"]=="Y") { echo 'checked="true"';} ?> >Yes
                                             </label>
                                             <label class="radio-inline">
-                                                <input required="TRUE" onclick="toggleHaartChange()" type="radio" name="haart_change" id="optionsRadiosInline6" value="N" <?php if($select_record["haart_change"]=="N") { echo 'checked="true"';} ?> >No
+                                                <input required="TRUE" onchange="toggleHaartChange()" type="radio" name="haart_change" id="optionsRadiosInline6" value="N" <?php if($select_record["haart_change"]=="N") { echo 'checked="true"';} ?> >No
                                             </label>
                                         </div>
                                         <div class="form-group">
                                             <label>Date of changing HAART</label>
-                                            <input required="TRUE" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["haart_change_date"];} ?>"  name="haart_change_date" >
+                                            <input required="TRUE" <?php if($select_record["haart_change"]=="N") { echo 'disabled="true"';} ?> max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["haart_change_date"];} ?>" id="haart_change_date"  name="haart_change_date" >
                                         </div>
                                         <div class="form-group">
                                             <label>HAART regimen</label>
-                                            <select required="TRUE" id="haart_regimen" class="form-control" name="haart_regimen">
+                                            <select required="TRUE" <?php if($select_record["haart_change"]=="N") { echo 'disabled="true"';} ?> id="haart_regimen" class="form-control" name="haart_regimen">
                                                 <option value=""  selected="">Select the type of triple ARV therapy</option>
                                                <option value="" selected="selected">Select the regimen/code  of triple ARV therapy </option>
                                                 <option value="AF1A" <?php if($select_record["haart_regimen"]=="AF1A") { echo 'selected="selected"';} ?> >AZT + 3TC + NVP = AF1A</option>
@@ -323,7 +325,7 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Partner HIV result</label>
-                                            <select required="TRUE" id="hiv_status_partner" class="form-control" name="hiv_status_partner">
+                                            <select required="TRUE" <?php if($select_record["counselling"]=="N") { echo 'disabled="true"';} ?> id="hiv_status_partner" class="form-control" name="hiv_status_partner">
                                                 <option value=""  selected="">Select  HIV test results of the participant's partner</option>
                                                 <option value="P" <?php if($select_record["hiv_status_partner"]=="P") { echo 'selected="selected"';} ?> >Positive</option>
                                                 <option value="N" <?php if($select_record["hiv_status_partner"]=="N") { echo 'selected="selected"';} ?> >Negative</option>
