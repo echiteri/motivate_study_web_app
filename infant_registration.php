@@ -53,7 +53,7 @@ $_SESSION['timeout'] = time();
                            { mData: 'Age_Enrolled_In_Weeks'},
                            {
                            "aTargets": [10],    
-                           "mData": "HEI_ID",  
+                           "mData": "Reg_ID",  
                            "mRender": function (data, type, full) {
                              return '<a href=infant_summary.php?&id=' + data +'>More</a> | <a href=registration.php?action=edit&id=' + data +'>Edit</a> | <a href=registration.php?action=delete&id=' + data +'>Delete</a>';
                                }

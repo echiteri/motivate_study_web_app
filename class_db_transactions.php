@@ -182,8 +182,8 @@ class db_transactions {
                 . "forth_results=[value-31],fifth_sample_collection=[value-32],fifth_results_collected=[value-33],"
                 . "fifth_results=[value-34],sixth_sample_collection=[value-35],sixth_results_collected=[value-36],"
                 . "sixth_results=[value-37],hei_outcome=[value-38],exit_date=[value-39],feeding_6wks=[value-40],"
-                . "feeding_10wks=[value-41],feeding_14wks=[value-42],feeding_9mths=[value-43],feeding_12mths=[value-44],"
-                . "feeding_15mths=[value-45],feeding_18mths=[value-46] WHERE diagnosis_id = :dg_id";
+                . "feeding_10wks=[value-41],feeding_14wks=[value-42],feeding_6mths=[value-43],feeding_9mths=[value-44],"
+                . "feeding_12mths=[value-45], feeding_15mths=[value-46],feeding_18mths=[value-47] WHERE diagnosis_id = :dg_id";
         $stmt = $DB->prepare($sql);
         $stmt->bindValue(":gd_id", $_SESSION["rolecode"]);//
         $stmt->execute();

@@ -66,7 +66,7 @@ $_SESSION['timeout'] = time();
                            "aTargets": [16],    
                            "mData": "DiagID",  
                            "mRender": function (data, type, full) {
-                             return '<a href=diagnosis.php?action=edit&id=' + data +'>Edit</a> | <a href=diagnosis.php?action=delete&id=' + data +'>Delete</a>';
+                             return '<a href=diagnosis.php?action=edit&id=' + full['DiagID'] +'&hei_id='+ full['HEI_ID'] + '>Edit</a> | <a href=diagnosis.php?action=delete&id=' + data +'>Delete</a>';
                                }
                            }
                        ]

@@ -148,10 +148,11 @@ $_SESSION['timeout'] = time();
                         <!-- /.panel-heading -->
                         <?php
                             $mode = $_REQUEST['mode'];
-                            $hei_id = $_REQUEST['id'];
+                            $reg_id = $_REQUEST['reg_id'];
+                            $id = $_REQUEST['id'];
                             $action = $_REQUEST['action'];
                             $table = "infant_registration";
-                            $tbl_id = "hei_id";
+                            $tbl_id = "id";
                             $db = new db_transactions();
                                 if($mode == "registration")
                                     {
@@ -181,7 +182,7 @@ $_SESSION['timeout'] = time();
                                                     echo '<label class="control-label" for="inputError">Early Infant Registration was not recorded.</label><br \>Return to <a href="dashboard.php" >Dashboard</a>';
                                                 }
                                         } else if ($btn == "update"){
-                                            if($db->editInfantRegistration($registration, $hei_id)>0)
+                                            if($db->editInfantRegistration($registration, $reg_id)>0)
                                                 {
                                                     echo '<label class="control-label" for="inputSuccess"> Early Infant Registration updated successfully</label> <br \> Return to <a href="dashboard.php" >Dashboard</a>';
                                                 } else {
@@ -192,10 +193,10 @@ $_SESSION['timeout'] = time();
                                     ?>
                             <?php   
                                 if ($action == "add" || $action == "edit") {
-                                        $select_record = $db->selectRecord($table, $tbl_id, $hei_id);
+                                        $select_record = $db->selectRecord($table, $tbl_id, $id);
                                     ?>
                         <div class="panel-heading">
-                            Enter forms details <button type="button" onclick="window.location.href='infant_registration.php?id=<?php echo $hei_id;?>'" class="btn btn-outline btn-primary btn-xs">Back</button><br><br>
+                            Enter forms details <button type="button" onclick="window.location.href='infant_registration.php?id=<?php echo $reg_id;?>'" class="btn btn-outline btn-primary btn-xs">Back</button><br><br>
                         </div>
                         <div class="panel-body">
                             <!-- Nav tabs -->
@@ -210,9 +211,10 @@ $_SESSION['timeout'] = time();
                                  <h4>Infant Registration Form</h4>
                                     
                             <div class="row">
-                                <form role="form" action="registration.php?id=<?php echo $hei_id;?>" method="post">
+                                <form role="form" action="registration.php?id=<?php echo $reg_id;?>" method="post">
                                      <div class="col-lg-6">
                                         <input type="hidden" name="mode" value="registration" />
+                                        <input type="hidden" name="reg_id" value="<?php echo $_REQUEST['id'];?>" />
                                         <div class="form-group">
                                             <label>Mother Study ID</label>
                                             <input class="form-control" value="<?php if($action == "edit"){echo $select_record["d_study_id"];} else if($_REQUEST["action"] == "add"){ echo trim($_REQUEST["study_id"]);}?>"
@@ -311,7 +313,7 @@ $_SESSION['timeout'] = time();
                             </div>
                         </div>
                             <?php } else if($action == "delete") {
-                                         if($db->deleteInfantRegistration($hei_id)>0)
+                                         if($db->deleteInfantRegistration($reg_id)>0)
                                                 {
                                                     echo '<label class="control-label" for="inputSuccess">Infant Registration deleted!</label> <br \> Return to <a href="dashboard.php" >Dashboard</a>';
                                                 } else {

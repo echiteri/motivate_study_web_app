@@ -2,6 +2,7 @@
 require_once("c_transactions.php");
 $db = new db_transactions();
 $sql = "SELECT "
+        . "id AS Reg_ID, "
         . "d_study_id AS Mother_StudyID, "
         . "hei_id AS HEI_ID, "
         . "birth_date AS DOB, "

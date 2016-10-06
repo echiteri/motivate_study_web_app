@@ -19,9 +19,9 @@ else{
 
 $_SESSION['timeout'] = time();
 //infant registration variables
-$infant_registation_hei_id = $_REQUEST["id"];
+$infant_registation_id = $_REQUEST["id"];
 $infant_registration_table = "infant_registration";
-$infant_registration_table_id = "hei_id";
+$infant_registration_table_id = "id";
 //infant diagnosis variables
 $infant_diagnosis_table = "infant_diagnosis";
 $infant_diagnosis_table_id = "i_hei_id";
@@ -130,11 +130,11 @@ $db = new db_transactions();
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-
+        <?php $inf_reg_rec = $db->selectRecord($infant_registration_table, $infant_registration_table_id, $infant_registation_id);?>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">HEI ID: <?php echo $infant_registation_hei_id; ?></h1>
+                    <h1 class="page-header">HEI ID: <?php echo $inf_reg_rec["hei_id"]; ?></h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -144,15 +144,15 @@ $db = new db_transactions();
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="text-danger">Infant identifier summary </h3>
-                            <?php $select_record = $db->selectRecord($infant_registration_table, $infant_registration_table_id, $infant_registation_hei_id);?>
+                            
                         </div>
                         <div class="panel-body">
-                            <h3>Date of birth: <small><?php echo $select_record["birth_date"]; ?></small></h3>
-                            <h3>Mother Study ID: <small><?php echo $select_record["d_study_id"]; ?></small></h3>
-                            <h3>Birth Weight: <small><?php echo $select_record["birth_weight"]; ?> Kg</small></h3>
-                            <h3>Sex: <small><?php echo $select_record["sex"]; ?></small></h3>
-                            <h3>Delivery Place: <small><?php echo $select_record["delivery_place"]; ?></small></h3>
-                            <h3>Abstraction Date: <small><?php echo  date("Y-m-d", strtotime($select_record["created_date"])); ?></small></h3>
+                            <h3>Date of birth: <small><?php echo $inf_reg_rec["birth_date"]; ?></small></h3>
+                            <h3>Mother Study ID: <small><?php echo $inf_reg_rec["d_study_id"]; ?></small></h3>
+                            <h3>Birth Weight: <small><?php echo $inf_reg_rec["birth_weight"]; ?> Kg</small></h3>
+                            <h3>Sex: <small><?php echo $inf_reg_rec["sex"]; ?></small></h3>
+                            <h3>Delivery Place: <small><?php echo $inf_reg_rec["delivery_place"]; ?></small></h3>
+                            <h3>Abstraction Date: <small><?php echo  date("Y-m-d", strtotime($inf_reg_rec["created_date"])); ?></small></h3>
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -163,11 +163,11 @@ $db = new db_transactions();
                    <!-- infant diagnosis panel begins -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4 class="text-danger">Infant diagnosis <span class="pull-right"> <a href="diagnosis.php?action=add&hei_id=<?php echo $infant_registation_hei_id ; ?>" class="fa fa-pencil"> Add new</a></span></h4>
+                            <h4 class="text-danger">Infant diagnosis <span class="pull-right"> <a href="diagnosis.php?action=add&id=<?php echo $infant_registation_id ; ?>&hei_id=<?php echo $inf_reg_rec["hei_id"] ; ?>" class="fa fa-pencil"> Add new</a></span></h4>
                             <?php 
                             $number = 1;
                             $select_variables = "diagnosis_id, visit_date, weight, height, next_appointment, created_date";
-                            $select_record = $db->selectDefinedRecords($select_variables, $infant_diagnosis_table, $infant_diagnosis_table_id, $infant_registation_hei_id);
+                            $select_record = $db->selectDefinedRecords($select_variables, $infant_diagnosis_table, $infant_diagnosis_table_id, $inf_reg_rec["hei_id"]);
                             ?>
                         </div>
                         <div class="panel-body">
@@ -189,7 +189,7 @@ $db = new db_transactions();
                                             . "Next Appointment: <strong>".$rec["next_appointment"]."</strong> "
                                             . "Abstraction Date: <strong>".$rec["created_date"]."</strong> .";
                                     echo "<span class='pull-right'>";
-                                    echo "<a href='diagnosis.php?action=edit&id=".$rec["diagnosis_id"]."' class='fa fa-edit' alt='Edit current record'></a> |  "
+                                    echo "<a href='diagnosis.php?action=edit&id=".$rec["diagnosis_id"]."&hei_id=".$inf_reg_rec["hei_id"]."' class='fa fa-edit' alt='Edit current record'></a> |  "
                                                         . "<a href='diagnosis.php?action=delete&id=".$rec["diagnosis_id"]."' class='fa fa-times-circle' alt='Delete current record'></a>";
                                     echo "</span>";
                                     echo '</p>';

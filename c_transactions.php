@@ -50,7 +50,7 @@ class db_transactions {
         } else {
           // Connect from a development environment.
           try{
-             $DB = new pdo('mysql:host=localhost;dbname=ODK_Local', 'root', 'root');
+             $DB = new pdo('mysql:host=localhost;dbname=motivate', 'root', 'root');
           }catch(PDOException $ex){
               die(json_encode(
                   array('outcome' => false, 'message' => 'Unable to connect')
@@ -269,12 +269,12 @@ class db_transactions {
         try{
              $sql = "INSERT INTO infant_diagnosis(i_hei_id, visit_date, "
                 . "weight, height, tb_contact, tb_ass_outcome, inf_milestones, imm_history, "
-                . "feeding_6wks, feeding_10wks, feeding_14wks, feeding_9mths, feeding_12mths, "
+                . "feeding_6wks, feeding_10wks, feeding_14wks, feeding_6mths,feeding_9mths, feeding_12mths, "
                 . "feeding_15mths, feeding_18mths, next_appointment, user_initial) "
                 . "VALUES ('".$arr_val[0]."','".$arr_val[1]. "','" .$arr_val[2]."','" .$arr_val[3]."','" .$arr_val[4]."'"
                 . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."','" .$arr_val[8]."'"
                 . ",'" .$arr_val[9]."','" .$arr_val[10]."','" .$arr_val[11]."','" .$arr_val[12]."'"
-                . ",'" .$arr_val[13]."','" .$arr_val[14]."','" .$arr_val[15]."','". $_SESSION["username"]."')";
+                . ",'" .$arr_val[13]."','" .$arr_val[14]."','" .$arr_val[15]."' ,'" .$arr_val[16]."','". $_SESSION["username"]."')";
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
             $inf = $stmt->rowCount();
@@ -421,10 +421,12 @@ class db_transactions {
     public function editInfantRegistration($arr_val, $record_id)
     {
         try{
-            $sql = "UPDATE infant_registration SET d_study_id='".$arr_val[1]."', birth_date='".$arr_val[2]."',"
+            //echo " ID: ". $record_id;
+            $sql = "UPDATE infant_registration SET hei_id = '".$arr_val[0]."', d_study_id='".$arr_val[1]."', birth_date='".$arr_val[2]."',"
                 . "birth_weight='".$arr_val[3]."',sex='".$arr_val[4]."',delivery_place='".$arr_val[5]."',arv_prophylaxis='".$arr_val[6]."',arv_pro_other='".$arr_val[7]."',"
                 . "enrol_date='".$arr_val[8]."',enrol_age='".$arr_val[9]."',participant_outcome='".$arr_val[10]."',outdate='".$arr_val[11]."', user_initial = '". $_SESSION["username"]."'"
-                . "WHERE hei_id = '".$record_id."'";
+                . "WHERE id = '".$record_id."'";
+           // echo $sql;
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
             $inf = $stmt->rowCount();
@@ -437,12 +439,12 @@ class db_transactions {
     public function editInfantDiagnosis($arr_val, $record_id)
     {
         try{
-            $sql = "UPDATE infant_diagnosis SET i_hei_id='".$arr_val[0]."', visit_date='".$arr_val[1]."',weight='".$arr_val[2]."',height='".$arr_val[3]."',"
+            $sql = "UPDATE infant_diagnosis SET  visit_date='".$arr_val[1]."',weight='".$arr_val[2]."',height='".$arr_val[3]."',"// add i_hei_id='".$arr_val[0]."' to allow HEI_ID editin
                 . " tb_contact='".$arr_val[4]."',tb_ass_outcome='".$arr_val[5]."',inf_milestones='".$arr_val[6]."',imm_history='".$arr_val[7]."',"
                  ."feeding_6wks = '".$arr_val[8]."' , feeding_10wks = '".$arr_val[9]."' ,"."feeding_14wks = '".$arr_val[10]."', "
-                 ."feeding_9mths = '".$arr_val[11]."' ,"."feeding_12mths = '".$arr_val[12]."', "
-                 ."feeding_15mths = '".$arr_val[13]."' ,"."feeding_18mths = '".$arr_val[14]."',"
-                 ." next_appointment='".$arr_val[15]."', user_initial = '". $_SESSION["username"]."'"
+                 ."feeding_6mths = '".$arr_val[11]."' , feeding_9mths = '".$arr_val[12]."' ,"."feeding_12mths = '".$arr_val[13]."', "
+                 ."feeding_15mths = '".$arr_val[14]."' ,"."feeding_18mths = '".$arr_val[15]."',"
+                 ." next_appointment='".$arr_val[16]."', user_initial = '". $_SESSION["username"]."'"
                 . " WHERE diagnosis_id = '".$record_id."'";
         //echo $sql;
             $stmt = $this->dbCon()->prepare($sql);
@@ -619,6 +621,7 @@ class db_transactions {
     {
         try{
             $sql = "SELECT ".$variables." FROM ".$table." WHERE ".$id."='".$select_id."'";
+            //echo $sql;
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
             $rs = $stmt->fetchAll();

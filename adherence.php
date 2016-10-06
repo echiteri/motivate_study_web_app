@@ -403,7 +403,7 @@ $_SESSION['timeout'] = time();
                                                 <input required="TRUE" onclick="toggleCd4()" type="radio" name="cd4_taken" id="optionsRadiosInline6" value="NA" <?php if($select_record["cd4_taken"]=="NA") { echo 'checked="true"';} ?> >NA
                                             </label>
                                             <label class="radio-inline">
-                                                <input required="TRUE" onclick="toggleCd4()" type="radio" name="cd4_taken" id="optionsRadiosInline9" value="NV" <?php if($select_record["cd4_taken"]=="NA") { echo 'checked="true"';} ?> >Not Available
+                                                <input required="TRUE" onclick="toggleCd4()" type="radio" name="cd4_taken" id="optionsRadiosInline9" value="NV" <?php if($select_record["cd4_taken"]=="NV") { echo 'checked="true"';} ?> >Not Available
                                             </label>
                                         </div>
                                         <div class="form-group">
@@ -427,7 +427,7 @@ $_SESSION['timeout'] = time();
                                                 <input required="TRUE" onclick="toggleVl()" type="radio" name="vl_taken" id="optionsRadiosInline5" value="NA" <?php if($select_record["vl_taken"]=="NA") { echo 'checked="true"';} ?> >NA
                                             </label>
                                             <label class="radio-inline">
-                                                <input required="TRUE" onclick="toggleVl()" type="radio" name="vl_taken" id="optionsRadiosInline10" value="NA" <?php if($select_record["vl_taken"]=="NV") { echo 'checked="true"';} ?> >Not Available
+                                                <input required="TRUE" onclick="toggleVl()" type="radio" name="vl_taken" id="optionsRadiosInline10" value="NV" <?php if($select_record["vl_taken"]=="NV") { echo 'checked="true"';} ?> >Not Available
                                             </label>
                                         </div>
                                         <div class="form-group">
