@@ -56,8 +56,8 @@ $_SESSION['timeout'] = time();
                            { mData: 'Feeding_method_15_Months' },
                            { mData: 'Feeding_method_18_Months' },
                            { mData: '1st_DNA_PCR' },
-                           { mData: 'Confirmatory_PCR' },
                            { mData: '1st_Antibody_Test' },
+                           { mData: 'Confirmatory_PCR' },
                            { mData: 'Repeat_Confirmatory_PCR' },
                            { mData: 'Final_Antibody_Test' },
                            { mData: 'HEI_Outcome'},
@@ -203,8 +203,8 @@ $_SESSION['timeout'] = time();
                                                     <th>Feeding_method_15_Months</th>
                                                     <th>Feeding_method_18_Months</th>
                                                     <th>1st_DNA_PCR</th>
-                                                    <th>Confirmatory_PCR</th>
                                                     <th>1st_Antibody_Test</th>
+                                                    <th>Confirmatory_PCR</th>
                                                     <th>Repeat_Confirmatory_PCR</th>
                                                     <th>Final_Antibody_Test</th>
                                                     <th>HEI_Outcome</th>

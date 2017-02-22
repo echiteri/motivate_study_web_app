@@ -89,6 +89,23 @@ $_SESSION['timeout'] = time();
                 document.getElementById("hiv_retest").disabled = false;
             }
         }
+        
+        function toggleOutcome(){
+             if (document.getElementById("participant_outcome").value === "TI")
+            {
+                document.getElementById("old_mflcode").disabled = false;
+            }else
+            {
+                document.getElementById("old_mflcode").disabled = true;
+            }
+            if(document.getElementById("participant_outcome").value != "")
+            {
+                document.getElementById("outdate").disabled = false;
+            }else
+            {
+                document.getElementById("outdate").disabled = true;
+            }
+        }
       
     </script>
     <!-- Bootstrap Core CSS -->
@@ -231,6 +248,7 @@ $_SESSION['timeout'] = time();
                                     $hiv_status_partner = $_POST['hiv_status_partner'];
                                     $participant_outcome = $_POST['participant_outcome'];
                                     $outdate = $_POST['outdate'];
+                                    $old_mflcode = $_POST['old_mflcode'];
                                     $return_date = $_POST['return_date'];
                                     $btn = $_POST['btn'];
                                     
@@ -238,7 +256,7 @@ $_SESSION['timeout'] = time();
                                                             $anc_id, $psc_id, $visit_count, $anc_visit_date, $birth_date, 
                                                             $residence, $parity, $gravida, $gestational_period, $lmp,  $edd, $marital_status, $hiv_status, 
                                                             $initial_hiv_status, $hiv_retest, $woman_haart, $haart_regimen,$haart_start_date, $counselling, 
-                                                            $hiv_status_partner,$participant_outcome,$outdate, $return_date);
+                                                            $hiv_status_partner,$participant_outcome, $outdate, $old_mflcode, $return_date);
                                         if ($btn == "submit")
                                         {
                                              if($db->insertDemographics($demographics)>0)
@@ -318,20 +336,20 @@ $_SESSION['timeout'] = time();
                                             <label>Gestational age in weeks</label>
                                             <input  required="TRUE" type="number" min="0" max="42" class="form-control" value="<?php if($action == "edit"){echo $select_record["gestational_period"];} ?>" placeholder="Enter the duration of pregnancy in weeks" name="gestational_period"  >
                                         </div>
-                                </div>
-                                <!-- /.col-lg-6 (nested) -->
-                                <div class="col-lg-6">
-                                    
                                         <div class="form-group">
                                             <label>Last Mestrual Period(LMP)</label>
                                             <input required="TRUE" id="lmp_date" max="<?php echo date("Y-m-d");?>" type="text" class="form-control" value="<?php if($action == "edit"){echo $select_record["lmp"];} ?>" name="lmp"  >
                                             
                                         </div>
-                                        <div class="form-group">
+                                        
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                                <div class="col-lg-6">
+                                    <div class="form-group">
                                             <label>EDD</label>
                                             <input required="TRUE" type="text" class="form-control" id="edd_date" value="<?php if($action == "edit"){echo $select_record["edd"];} ?>" name="edd"  >
                                         </div>
-                                           <div class="form-group">
+                                        <div class="form-group">
                                             <label>Marital status</label>
                                             <select required="TRUE" class="form-control" name="marital_status">
                                                 <option value="" selected="">Select participant's relationship status</option>
@@ -429,8 +447,9 @@ $_SESSION['timeout'] = time();
                                         </div>
                                         <div class="form-group">
                                             <label>Participant Outcome</label>
-                                            <select id="participant_outcome" class="form-control" name="participant_outcome">
+                                            <select id="participant_outcome" onchange="toggleOutcome()" class="form-control" name="participant_outcome">
                                                 <option value=""  selected="">Select  the outcome of the study participant</option>
+                                                <option value="TI" <?php if($select_record["participant_outcome"]=="TI") { echo 'selected="selected"';} ?> >Transfer in</option>
                                                 <option value="TO" <?php if($select_record["participant_outcome"]=="TO") { echo 'selected="selected"';} ?> >Transfer out</option>
                                                 <option value="MD" <?php if($select_record["participant_outcome"]=="MD") { echo 'selected="selected"';} ?> >Maternal death</option>
                                                 <option value="LF" <?php if($select_record["participant_outcome"]=="LF") { echo 'selected="selected"';} ?> >Lost to follow</option>
@@ -441,8 +460,16 @@ $_SESSION['timeout'] = time();
                                             </select>
                                         </div>
                                         <div class="form-group">
+                                            <?php
+                                                echo $select_record["outdate"];
+                                                echo $select_record["old_mflcode"];
+                                            ?>
                                             <label>Outcome date</label>
-                                            <input max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["outdate"];} ?>" name="outdate"  >
+                                            <input id="outdate" max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["outdate"];} ?>" name="outdate"  >
+                                        </div>
+                                    <div class="form-group">
+                                            <label>MFL Code</label>
+                                            <input max="16" id="old_mflcode" required="TRUE" type="text"  class="form-control" value="<?php if($action == "edit"){echo $select_record["old_mflcode"];} ?>" placeholder="Enter previous facility MFL Code" name="old_mflcode" >
                                         </div>
                                          <div class="form-group">
                                             <label>Date of return visit</label>

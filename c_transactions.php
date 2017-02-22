@@ -152,13 +152,13 @@ class db_transactions {
             $sql = "INSERT INTO demographics(study_id, abs_date, facility_id, anc_id, psc_id, visit_count, "
                 ."anc_visit_date, birth_date, residence, parity, gravida, gestational_period, lmp, edd, "
                 ."marital_status, hiv_status, initial_hiv_status, hiv_retest, woman_haart, haart_regimen, haart_start_date, "
-                ."counselling, hiv_status_partner, participant_outcome, outdate, return_date, user_initial) "
+                ."counselling, hiv_status_partner, participant_outcome, outdate, old_mflcode, return_date, user_initial) "
                 ."VALUES ('".$arr_val[0]."','".$arr_val[1]. "','" .$arr_val[2]."','" .$arr_val[3]."','" .$arr_val[4]."'"
                 . ",'" .$arr_val[5]."','" .$arr_val[6]."','" .$arr_val[7]."','" .$arr_val[8]."','" .$arr_val[9]."'"
                 . ",'" .$arr_val[10]."','" .$arr_val[11]."','" .$arr_val[12]."','" .$arr_val[13]."','" .$arr_val[14]."'"
                 . ",'" .$arr_val[15]."','" .$arr_val[16]."','" .$arr_val[17]."','" .$arr_val[18]."','" .$arr_val[19]."'"
                 . ",'" .$arr_val[20]."','" .$arr_val[21]."','" .$arr_val[22]."','" .$arr_val[23]."','" .$arr_val[24]."'"
-                . ", '" .$arr_val[25]."','". $_SESSION["username"]."')";
+                . ", '" .$arr_val[25]."',  '" .$arr_val[26]."', '". $_SESSION["username"]."')";
         //echo $sql;    
         $stmt = $this->dbCon()->prepare($sql);
         $stmt->execute();
@@ -336,7 +336,8 @@ class db_transactions {
                     . "visit_count='".$arr_val[5]."',anc_visit_date='".$arr_val[6]."',birth_date='".$arr_val[7]."',residence='".$arr_val[8]."',parity='".$arr_val[9]."',"
                     . "gravida='".$arr_val[10]."',gestational_period='".$arr_val[11]."',lmp='".$arr_val[12]."',edd='".$arr_val[13]."',marital_status='".$arr_val[14]."',"
                     . "hiv_status='".$arr_val[15]."',initial_hiv_status='".$arr_val[16]."',hiv_retest='".$arr_val[17]."',woman_haart='".$arr_val[18]."',haart_regimen='".$arr_val[19]."',"
-                    . "haart_start_date='".$arr_val[20]."',counselling='".$arr_val[21]."',hiv_status_partner='".$arr_val[22]."',participant_outcome='".$arr_val[23]."',outdate='".$arr_val[24]."',return_date='".$arr_val[25]."'"
+                    . "haart_start_date='".$arr_val[20]."',counselling='".$arr_val[21]."',hiv_status_partner='".$arr_val[22]."',participant_outcome='".$arr_val[23]."', "
+                    . "outdate='".$arr_val[24]."',old_mflcode='".$arr_val[25]."',return_date='".$arr_val[26]."'"
                     . ", user_initial = '". $_SESSION["username"]."'"
                     . " WHERE study_id = '".$record_id."'";
             //echo $sql;
