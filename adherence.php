@@ -442,10 +442,10 @@ $_SESSION['timeout'] = time();
                                             <label>WHO Stage</label>
                                             <select required="TRUE" class="form-control" name="who_stage">
                                                 <option value="" selected="">Select The clinical staging and case definition of HIV</option>
-                                                <option value="WHO stage I" <?php if($select_record["who_stage"]=="WHO stage I") { echo 'selected="selected"';} ?> >WHO stage I</option>
-                                                <option value="WHO stage II" <?php if($select_record["who_stage"]=="WHO stage II") { echo 'selected="selected"';} ?>>WHO stage II</option>
-                                                <option value="WHO stage III"<?php if($select_record["who_stage"]=="WHO stage III") { echo 'selected="selected"';} ?>>WHO stage III</option>
-                                                <option value="WHO stage IV"<?php if($select_record["who_stage"]=="WHO stage IV") { echo 'selected="selected"';} ?>>WHO stage IV</option>
+                                                <option value="WHO stage I" <?php if($select_record["who_stage"]=="WHO stage 1") { echo 'selected="selected"';} ?> >WHO stage 1</option>
+                                                <option value="WHO stage II" <?php if($select_record["who_stage"]=="WHO stage 2") { echo 'selected="selected"';} ?>>WHO stage 2</option>
+                                                <option value="WHO stage III"<?php if($select_record["who_stage"]=="WHO stage 3") { echo 'selected="selected"';} ?>>WHO stage 3</option>
+                                                <option value="WHO stage IV"<?php if($select_record["who_stage"]=="WHO stage 4") { echo 'selected="selected"';} ?>>WHO stage 4</option>
                                             </select>
                                         </div>
                                         <div class="form-group">

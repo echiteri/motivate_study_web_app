@@ -225,6 +225,42 @@ $_SESSION['timeout'] = time();
                                             echo 'Return to <a href="dashboard.php" >Dashboard</a>';
                                         }
                                 }
+                                else if($mode == "2ND_PCR"){
+                                    $nd_pcr_sample = $_POST['2nd_pcr_sample_collection'];
+                                    $nd_pcr_collect = $_POST['2nd_pcr_results_collected'];
+                                    $nd_pcr_results = $_POST['2nd_pcr_results'];
+                                    $diagnosis = array($nd_pcr_sample, $nd_pcr_collect, $nd_pcr_results, $_SESSION["username"]);
+                                        if ($db->updateInfantHivTests($diagnosis, $Diag_id, "2nd_pcr", $mode))
+                                        {
+                                            echo '<label class="control-label" for="inputSuccess">Early Infant Diagnosis updated successfully!</label>';
+                                            echo '<br \>';
+                                            echo 'Return to <a href="dashboard.php" >Dashboard</a>';
+                                        }
+                                        else 
+                                        {
+                                            echo '<label class="control-label" for="inputError">Early Infant Diagnosis was not updated.</label>';
+                                            echo '<br \>';
+                                            echo 'Return to <a href="dashboard.php" >Dashboard</a>';
+                                        }
+                                }
+                                else if($mode == "3RD_PCR"){
+                                    $rd_pcr_sample = $_POST['3rd_pcr_sample_collected'];
+                                    $rd_pcr_collect = $_POST['3rd_pcr_results_collected'];
+                                    $rd_pcr_results = $_POST['3rd_pcr_results'];
+                                    $diagnosis = array($rd_pcr_sample, $rd_pcr_collect, $rd_pcr_results, $_SESSION["username"]);
+                                        if ($db->updateInfantHivTests($diagnosis, $Diag_id, "3rd_pcr", $mode))
+                                        {
+                                            echo '<label class="control-label" for="inputSuccess">Early Infant Diagnosis updated successfully!</label>';
+                                            echo '<br \>';
+                                            echo 'Return to <a href="dashboard.php" >Dashboard</a>';
+                                        }
+                                        else 
+                                        {
+                                            echo '<label class="control-label" for="inputError">Early Infant Diagnosis was not updated.</label>';
+                                            echo '<br \>';
+                                            echo 'Return to <a href="dashboard.php" >Dashboard</a>';
+                                        }
+                                }
                                 else if($mode == "ANT_BDY"){
                                     $third_sample_collection = $_POST['third_sample_collection'];
                                     $third_results_collected = $_POST['third_results_collected'];
@@ -330,6 +366,11 @@ $_SESSION['timeout'] = time();
                                 <li><a href="#dna_pcr" data-toggle="tab">1st DNA PCR</a>
                                 </li>
                                 <li><a href="#rpt_pcr" data-toggle="tab">Repeat PCR </a>
+                                </li>
+                                </li>
+                                <li><a href="#2nd_pcr" data-toggle="tab">2nd PCR at 6 months</a>
+                                </li>
+                                <li><a href="#3rd_pcr" data-toggle="tab">3rd PCR at 12 months</a>
                                 </li>
                                 <li><a href="#ant_bdy" data-toggle="tab">1st Antibody test</a>
                                 </li>
@@ -646,6 +687,9 @@ $_SESSION['timeout'] = time();
                                         <label class="radio-inline">
                                             <input required="TRUE"  type="radio" name="first_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["first_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
                                         </label>
+                                        <label class="radio-inline">
+                                            <input required="TRUE"  type="radio" name="first_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["first_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
+                                        </label>
                                             
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
@@ -673,6 +717,67 @@ $_SESSION['timeout'] = time();
                                         </label>
                                         <label class="radio-inline">
                                             <input required="TRUE"  type="radio" name="second_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["second_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
+                                        </label>
+                                    </div>
+                                        <button type="update" class="btn btn-success">Update</button>
+                                        <button type="reset" class="btn btn-warning">Clear</button>
+                                    </form>
+                                </div>
+                                 <!-- 2nd PCR at 6 months -->
+                                <div class="tab-pane fade" id="2nd_pcr">
+                                    <h4>2nd PCR at 6 months</h4>
+                                    <form role="form" action="diagnosis.php?id=<?php echo $Diag_id;?>" method="post" id="2ND_PCR">
+                                        <input type="hidden" name="mode" value="2ND_PCR" />
+                                    <div class="form-group">
+                                        <label>Date of sample collection</label>
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["2nd_pcr_sample_collected"];} ?>" name="2nd_pcr_sample_collected"  >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Date results collected</label>
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["2nd_pcr_results_collected"];} ?>" name="2nd_pcr_results_collected"  >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Results</label>
+                                        <p class="help-block">Select results of 2nd PCR at 6 months</p>
+                                        <label class="radio-inline">
+                                            <input required="TRUE"  type="radio" name="2nd_pcr_results" id="optionsRadiosInline1" value="POS" <?php if($select_record["2nd_pcr_results"]=="POS") {echo 'checked="true"';} ?>>Positive
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input required="TRUE"  type="radio" name="2nd_pcr_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["2nd_pcr_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input required="TRUE"  type="radio" name="2nd_pcr_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["2nd_pcr_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
+                                        </label>
+                                    </div>
+                                        <button type="update" class="btn btn-success">Update</button>
+                                        <button type="reset" class="btn btn-warning">Clear</button>
+                                    </form>
+                                </div>
+                                 
+                                 <!-- 3rd PCR at 12 months -->
+                                <div class="tab-pane fade" id="3rd_pcr">
+                                    <h4>3rd PCR at 12 months</h4>
+                                    <form role="form" action="diagnosis.php?id=<?php echo $Diag_id;?>" method="post" id="3RDT_PCR">
+                                        <input type="hidden" name="mode" value="3RD_PCR" />
+                                    <div class="form-group">
+                                        <label>Date of sample collection</label>
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["3rd_pcr_sample_collected"];} ?>" name="3rd_pcr_sample_collected"  >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Date results collected</label>
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["3rd_pcr_sample_collected"];} ?>" name="3rd_pcr_sample_collected"  >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Results</label>
+                                        <p class="help-block">Select results of 3rd PCR at 12 months</p>
+                                        <label class="radio-inline">
+                                            <input required="TRUE"  type="radio" name="3rd_pcr_results" id="optionsRadiosInline1" value="POS" <?php if($select_record["3rd_pcr_results"]=="POS") {echo 'checked="true"';} ?>>Positive
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input required="TRUE"  type="radio" name="3rd_pcr_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["3rd_pcr_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input required="TRUE"  type="radio" name="3rd_pcr_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["3rd_pcr_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
                                         </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
@@ -735,7 +840,7 @@ $_SESSION['timeout'] = time();
                                 </div>
                                     <!-- Repeat confirmatory PCR (For rejections) -->
                                 <div class="tab-pane fade" id="rpt_con_pcr">
-                                    <h4>Repeat confirmatory PCR (For rejections)</h4>
+                                    <h4>Repeat PCR (For rejections/ +ve)</h4>
                                     <form role="form" action="diagnosis.php?id=<?php echo $Diag_id;?>" method="post" id="RPT_CON_PCR">
                                         <input type="hidden" name="mode" value="RPT_CON_PCR" />
                                     <div class="form-group">

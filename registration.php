@@ -260,6 +260,8 @@ $_SESSION['timeout'] = time();
                                                 <option value="1" <?php if($select_record["arv_prophylaxis"]=="1") { echo 'selected="selected"';} ?> >sdNVP only</option>
                                                 <option value="2" <?php if($select_record["arv_prophylaxis"]=="2") { echo 'selected="selected"';} ?>>NVP for 7 days</option>
                                                 <option value="3" <?php if($select_record["arv_prophylaxis"]=="3") { echo 'selected="selected"';} ?>>NVP for 6 weeks</option>
+                                                <option value="6" <?php if($select_record["arv_prophylaxis"]=="6") { echo 'selected="selected"';} ?>>AZT for 6 weeks + NVP for 12 weeks</option>
+                                                <option value="7" <?php if($select_record["arv_prophylaxis"]=="7") { echo 'selected="selected"';} ?>>NVP for 12 weeks</option>
                                                 <option value="4" <?php if($select_record["arv_prophylaxis"]=="4") { echo 'selected="selected"';} ?>>None</option>
                                                 <option value="5" <?php if($select_record["arv_prophylaxis"]=="5") { echo 'selected="selected"';} ?>>Other(specify)</option>
                                             </select>

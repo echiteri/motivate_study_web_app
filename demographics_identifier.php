@@ -346,7 +346,7 @@ $_SESSION['timeout'] = time();
                                 <!-- /.col-lg-6 (nested) -->
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                            <label>EDD</label>
+                                            <label>EDC</label> <!-- Changed: Data object is edd_date -->
                                             <input required="TRUE" type="text" class="form-control" id="edd_date" value="<?php if($action == "edit"){echo $select_record["edd"];} ?>" name="edd"  >
                                         </div>
                                         <div class="form-group">
@@ -358,6 +358,7 @@ $_SESSION['timeout'] = time();
                                                 <option value="3" <?php if($select_record["marital_status"]=="3") { echo 'selected="selected"';} ?>>Single</option>
                                                 <option value="4" <?php if($select_record["marital_status"]=="4") { echo 'selected="selected"';} ?>>Divorce</option>
                                                 <option value="5" <?php if($select_record["marital_status"]=="5") { echo 'selected="selected"';} ?>>Separated</option>
+                                                <option value="6" <?php if($select_record["marital_status"]=="6") { echo 'selected="selected"';} ?>>Cohabiting</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -381,7 +382,7 @@ $_SESSION['timeout'] = time();
                                             </select>
                                         </div>
                                          <div class="form-group">
-                                            <label>Retest status</label>
+                                            <label>Revisit status</label> <!-- Changed: data object is hiv_retest -->
                                             <select required="TRUE" class="form-control" name="hiv_retest" id="hiv_retest">
                                                 <option value=""  selected="">Select women who  tested negative at first trimester and positive at third trimester</option>
                                                 <option value="P" <?php if($select_record["hiv_retest"]=="P") { echo 'selected="selected"';} ?> >Positive</option>

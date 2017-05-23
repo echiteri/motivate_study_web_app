@@ -307,12 +307,14 @@ $_SESSION['timeout'] = time();
                                         </div>
                                          <div class="form-group">
                                             <label>TB Status</label>
-                                            <select required="TRUE" class="form-control" name="tb_status">
+                                            <select required="TRUE" class="form-control" name="tb_status">Pre TB,INH
                                                 <option value="" selected="">Select participants status of a TB infection </option>
                                                 <option value="No Signs" <?php if($select_record["tb_status"]=="No Signs") { echo 'selected="selected"';} ?>>No signs or symptoms of TB</option>
                                                 <option value="Suspect" <?php if($select_record["tb_status"]=="Suspect") { echo 'selected="selected"';} ?>>TB referral or sputum sent</option>
                                                 <option value="ND" <?php if($select_record["tb_status"]=="ND") { echo 'selected="selected"';} ?>>Not assessed for TB</option>
                                                 <option value="TB Rx" <?php if($select_record["tb_status"]=="TB Rx") { echo 'selected="selected"';} ?>>currently on TB treatment</option>
+                                                <option value="Pre TB" <?php if($select_record["tb_status"]=="Pre TB") { echo 'selected="selected"';} ?>>Pre TB</option>
+                                                <option value="INH" <?php if($select_record["tb_status"]=="INH") { echo 'selected="selected"';} ?>>INH</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -324,7 +326,7 @@ $_SESSION['timeout'] = time();
                                             </select>
                                         </div>
                                          <div class="form-group">
-                                            <label>EDD</label>
+                                            <label>EDC</label> <!-- Changed: data object is edd_date  -->
                                             <input required="TRUE" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["edd"];} ?>" id="edd_date"  name="edd" >
                                         </div>
                                          <div class="form-group">
