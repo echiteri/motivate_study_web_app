@@ -217,12 +217,12 @@ $_SESSION['timeout'] = time();
                                     $self_ctx_adherence = $_POST['self_ctx_adherence'];
                                     $cd4_taken = $_POST['cd4_taken'];
                                     if ($cd4_taken == "NA" || $cd4_taken == "N" || $cd4_taken == "NV")
-                                    { $cd4_count = 'NULL'; }
+                                    { $cd4_count = 2; }
                                     else { $cd4_count = $_POST['cd4_count']; }
                                     $cd4_date = $_POST['cd4_date'];
                                     $vl_taken = $_POST['vl_taken'];
                                     if($vl_taken == "NA" || $vl_taken == "N" || $vl_taken == "NV")
-                                    { $viral_load = 'NULL';}
+                                    { $viral_load = 2;}
                                     else {$viral_load = $_POST['viral_load'];}
                                     $viral_date = $_POST['viral_date'];
                                     $who_stage = $_POST['who_stage'];

@@ -44,7 +44,7 @@ $_SESSION['timeout'] = time();
                            { mData: 'StudyID' },
                            { mData: 'TB_Status' },
                            { mData: 'Preg_Status' },
-                           { mData: 'EDD' } ,
+                           { mData: 'EDC' } ,
                            { mData: 'FP_status' },
                            { mData: 'HIV_Disclosure' },
                            { mData: 'Next_visit_date' } ,
@@ -189,7 +189,7 @@ $_SESSION['timeout'] = time();
                                                     <th>StudyID</th>
                                                     <th>TB_Status</th>
                                                     <th>Preg_Status</th>
-                                                    <th>EDD</th>
+                                                    <th>EDC</th>
                                                     <th>FP_status</th>
                                                     <th>HIV_Disclosure</th>
                                                     <th>Next_visit_date</th>

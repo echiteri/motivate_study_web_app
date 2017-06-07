@@ -81,7 +81,8 @@ $_SESSION['timeout'] = time();
        
             
         function toggleHivStatus(){
-             if (document.getElementById("hiv_status").value === "P" || document.getElementById("initial_hiv_status").value === "P")
+             if (document.getElementById("hiv_status").value === "P" || document.getElementById("hiv_status").value === "R" || 
+                     document.getElementById("initial_hiv_status").value === "P" || document.getElementById("initial_hiv_status").value === "R")
             {
                 document.getElementById("hiv_retest").disabled = true;
             }else
@@ -368,6 +369,7 @@ $_SESSION['timeout'] = time();
                                                 <option value="P" <?php if($select_record["hiv_status"]=="P") { echo 'selected="selected"';} ?> >Positive</option>
                                                 <option value="N" <?php if($select_record["hiv_status"]=="N") { echo 'selected="selected"';} ?> >Negative</option>
                                                 <option value="KP" <?php if($select_record["hiv_status"]=="KP") { echo 'selected="selected"';} ?> >Known positive</option>
+                                                <option value="R" <?php if($select_record["hiv_status"]=="R") { echo 'selected="selected"';} ?> >Revisit</option>
                                                 <option value="U" <?php if($select_record["hiv_status"]=="U") { echo 'selected="selected"';} ?> >Unknown</option>
                                             </select>
                                         </div>
@@ -378,11 +380,12 @@ $_SESSION['timeout'] = time();
                                                  <option value="P" <?php if($select_record["initial_hiv_status"]=="P") { echo 'selected="selected"';} ?> >Positive</option>
                                                 <option value="N" <?php if($select_record["initial_hiv_status"]=="N") { echo 'selected="selected"';} ?> >Negative</option>
                                                 <option value="KP" <?php if($select_record["initial_hiv_status"]=="KP") { echo 'selected="selected"';} ?> >Known positive</option>
+                                                <option value="R" <?php if($select_record["hiv_status"]=="R") { echo 'selected="selected"';} ?> >Revisit</option>
                                                 <option value="U" <?php if($select_record["initial_hiv_status"]=="U") { echo 'selected="selected"';} ?> >Unknown</option>
                                             </select>
                                         </div>
                                          <div class="form-group">
-                                            <label>Revisit status</label> <!-- Changed: data object is hiv_retest -->
+                                            <label>Retest status</label> <!-- Changed: data object is hiv_retest -->
                                             <select required="TRUE" class="form-control" name="hiv_retest" id="hiv_retest">
                                                 <option value=""  selected="">Select women who  tested negative at first trimester and positive at third trimester</option>
                                                 <option value="P" <?php if($select_record["hiv_retest"]=="P") { echo 'selected="selected"';} ?> >Positive</option>
