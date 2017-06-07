@@ -571,7 +571,7 @@ $_SESSION['timeout'] = time();
                                                                                         
                                          if (($diff >= 1 && $weeks < 10)/* || $action == "add"*/)   { ?>  
                                         <label>Infant feeding method at 6 weeks</label>
-                                            <select required="TRUE" class="form-control" name="feeding_6wks">
+                                            <select class="form-control" name="feeding_6wks">
                                                 <option value="" selected="selected" >Select infant feeding method at 6 weeks</option>
                                                 <option value="EBF" <?php if($select_record["feeding_6wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
                                                 <option value="ERF" <?php if($select_record["feeding_6wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
@@ -581,7 +581,7 @@ $_SESSION['timeout'] = time();
                                         
                                         if ($weeks >= 10 && $weeks < 14)   { ?> 
                                         <label>Infant feeding method at 10 weeks</label>
-                                            <select required="TRUE" class="form-control" name="feeding_10wks">
+                                            <select class="form-control" name="feeding_10wks">
                                                 <option value="" selected="selected">Select infant feeding method at 10 weeks</option>
                                                <option value="EBF" <?php if($select_record["feeding_10wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
                                                 <option value="ERF" <?php if($select_record["feeding_10wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
@@ -590,7 +590,7 @@ $_SESSION['timeout'] = time();
                                         <?php } 
                                         if ($weeks >= 14 && $weeks < 16)   { ?> 
                                         <label>Infant feeding method at 14 weeks</label>
-                                            <select required="TRUE" class="form-control" name="feeding_14wks">
+                                            <select  class="form-control" name="feeding_14wks">
                                                 <option value="" selected="selected">Select infant feeding method at 14 weeks</option>
                                                 <option value="EBF" <?php if($select_record["feeding_14wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
                                                 <option value="ERF" <?php if($select_record["feeding_14wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
@@ -599,7 +599,7 @@ $_SESSION['timeout'] = time();
                                         <?php } 
                                         if ($weeks >= 16 && $months < 6)   { ?> 
                                           <label>Infant feeding method at 6 months</label>
-                                            <select required="TRUE" class="form-control" name="feeding_6mths">
+                                            <select class="form-control" name="feeding_6mths">
                                                 <option value="" selected="selected">Select infant feeding method at 6 months</option>
                                                 <option value="EBF" <?php if($select_record["feeding_14wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
                                                 <option value="ERF" <?php if($select_record["feeding_14wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
@@ -608,7 +608,7 @@ $_SESSION['timeout'] = time();
                                           <?php } 
                                         if ($months > 6 && $months < 9)   { ?> 
                                           <label>Infant feeding method at 9 months</label>
-                                            <select required="TRUE" class="form-control" name="feeding_9mths">
+                                            <select class="form-control" name="feeding_9mths">
                                                 <option value="" selected="selected">Select infant feeding method at 9 months</option>
                                                 <option value="BF" <?php if($select_record["feeding_9mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
                                                 <option value="NBF" <?php if($select_record["feeding_9mths"]=="NBF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
@@ -616,7 +616,7 @@ $_SESSION['timeout'] = time();
                                         <?php } 
                                         if ($months >= 9 && $months < 12)   { ?> 
                                         <label>Infant feeding method at 12 months</label>
-                                            <select required="TRUE" class="form-control" name="feeding_12mths">
+                                            <select class="form-control" name="feeding_12mths">
                                                 <option value="" selected="selected">Select infant feeding method at 12 months</option>
                                                 <option value="BF" <?php if($select_record["feeding_12mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
                                                 <option value="NBF" <?php if($select_record["feeding_12mths"]=="NBF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
@@ -624,7 +624,7 @@ $_SESSION['timeout'] = time();
                                         <?php } 
                                         if ($months >= 12 && $months < 15)   { ?> 
                                         <label>Infant feeding method at 15 months</label>
-                                            <select required="TRUE" class="form-control" name="feeding_15mths">
+                                            <select class="form-control" name="feeding_15mths">
                                                 <option value="" selected="selected">Select infant feeding method at 15 months</option>
                                                 <option value="BF" <?php if($select_record["feeding_15mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
                                                 <option value="NBF" <?php if($select_record["feeding_15mths"]=="NBF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
@@ -632,7 +632,7 @@ $_SESSION['timeout'] = time();
                                         <?php } 
                                         if ($months >= 15 && $months < 18)   { ?> 
                                         <label>Infant feeding method at 18 months</label>
-                                            <select required="TRUE" class="form-control" name="feeding_18mths">
+                                            <select class="form-control" name="feeding_18mths">
                                                 <option value="" selected="selected">Select infant feeding method at 18 months</option>
                                                 <option value="BF" <?php if($select_record["feeding_18mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
                                                 <option value="NBF" <?php if($select_record["feeding_18mths"]=="NBF") echo 'selected="selected"'; ?>>Not Breastfed</option>
