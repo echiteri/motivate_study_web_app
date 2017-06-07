@@ -317,7 +317,8 @@ class db_transactions {
                   .$column_part."_results_collected = '".$arr_val[1]."' ,".$column_part."_results = '".$arr_val[2]."', user_initial = '". $_SESSION["username"]."'"
                   ."WHERE diagnosis_id = '".$record_id."'";
              }
-        
+             
+             echo $sql;
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
             $inf = $stmt->rowCount();

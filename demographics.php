@@ -54,7 +54,7 @@ $_SESSION['timeout'] = time();
                            { mData: 'Parity' },
                            { mData: 'Gravida' },
                            { mData: 'LMP' } ,
-                           { mData: 'EDD' },
+                           { mData: 'EDC' },
                            { mData: 'Marital_Status' },
                            { mData: 'HIV_status' },
                            { mData: 'HAART_Regimen' },
@@ -202,7 +202,7 @@ $_SESSION['timeout'] = time();
                                                     <th>Parity</th>
                                                     <th>Gravida</th>
                                                     <th>LMP</th>
-                                                    <th>EDD</th>
+                                                    <th>EDC</th>
                                                     <th>Marital_Status</th>
                                                     <th>HIV_status</th>
                                                     <th>HAART_Regimen</th>

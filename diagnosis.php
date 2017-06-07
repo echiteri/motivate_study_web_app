@@ -244,11 +244,11 @@ $_SESSION['timeout'] = time();
                                         }
                                 }
                                 else if($mode == "3RD_PCR"){
-                                    $rd_pcr_sample = $_POST['3rd_pcr_sample_collected'];
-                                    $rd_pcr_collect = $_POST['3rd_pcr_results_collected'];
-                                    $rd_pcr_results = $_POST['3rd_pcr_results'];
+                                    $rd_pcr_sample = $_POST['3nd_pcr_sample_collection'];
+                                    $rd_pcr_collect = $_POST['3nd_pcr_results_collected'];
+                                    $rd_pcr_results = $_POST['3nd_pcr_results'];
                                     $diagnosis = array($rd_pcr_sample, $rd_pcr_collect, $rd_pcr_results, $_SESSION["username"]);
-                                        if ($db->updateInfantHivTests($diagnosis, $Diag_id, "3rd_pcr", $mode))
+                                        if ($db->updateInfantHivTests($diagnosis, $Diag_id, "3nd_pcr", $mode))
                                         {
                                             echo '<label class="control-label" for="inputSuccess">Early Infant Diagnosis updated successfully!</label>';
                                             echo '<br \>';
@@ -370,7 +370,7 @@ $_SESSION['timeout'] = time();
                                 </li>
                                 <li><a href="#2nd_pcr" data-toggle="tab">2nd PCR at 6 months</a>
                                 </li>
-                                <li><a href="#3rd_pcr" data-toggle="tab">3rd PCR at 12 months</a>
+                                <li><a href="#3nd_pcr" data-toggle="tab">3rd PCR at 12 months</a>
                                 </li>
                                 <li><a href="#ant_bdy" data-toggle="tab">1st Antibody test</a>
                                 </li>
@@ -428,7 +428,9 @@ $_SESSION['timeout'] = time();
                                                 <option value=""  selected="selected">Select TB status</option>
                                                 <option value="No signs" <?php if($action == "edit"){if($select_record["tb_ass_outcome"]=="No signs") { echo 'selected="selected"';}} ?>>No signs or symptoms of TB</option>
                                                 <option value="Suspect" <?php if($action == "edit"){if($select_record["tb_ass_outcome"]=="Suspect") { echo 'selected="selected"';}} ?>>TB referral or sputum sent</option>
-                                <option value="Confirmed" <?php if($action == "edit"){if($select_record["tb_ass_outcome"]=="Confirmed") { echo 'selected="selected"';}} ?>>Confirmed sputum +</option>
+                                                <option value="TB Rx" <?php if($action == "edit"){if($select_record["tb_ass_outcome"]=="TB Rx") { echo 'selected="selected"';}} ?>>TB Rx</option>
+                                                <option value="Not Done" <?php if($action == "edit"){if($select_record["tb_ass_outcome"]=="Not Done") { echo 'selected="selected"';}} ?>>Not Done</option>
+                                                <option value="Confirmed" <?php if($action == "edit"){if($select_record["tb_ass_outcome"]=="Confirmed") { echo 'selected="selected"';}} ?>>Confirmed sputum +</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -569,7 +571,7 @@ $_SESSION['timeout'] = time();
                                             //echo "Weeks: ".$weeks;
                                             //echo "< br/>Months: ".$months;
                                                                                         
-                                         if (($diff >= 1 && $weeks < 10)/* || $action == "add"*/)   { ?>  
+                                         //if (($diff >= 1 && $weeks < 10)/* || $action == "add"*/)   { ?>  
                                         <label>Infant feeding method at 6 weeks</label>
                                             <select class="form-control" name="feeding_6wks">
                                                 <option value="" selected="selected" >Select infant feeding method at 6 weeks</option>
@@ -577,9 +579,10 @@ $_SESSION['timeout'] = time();
                                                 <option value="ERF" <?php if($select_record["feeding_6wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
                                                 <option value="MF" <?php if($select_record["feeding_6wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
                                             </select> 
-                                        <?php } 
+                                        <?php //} 
                                         
-                                        if ($weeks >= 10 && $weeks < 14)   { ?> 
+                                        //if ($weeks >= 10 && $weeks < 14)   { 
+                                        ?> 
                                         <label>Infant feeding method at 10 weeks</label>
                                             <select class="form-control" name="feeding_10wks">
                                                 <option value="" selected="selected">Select infant feeding method at 10 weeks</option>
@@ -587,8 +590,9 @@ $_SESSION['timeout'] = time();
                                                 <option value="ERF" <?php if($select_record["feeding_10wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
                                                 <option value="MF" <?php if($select_record["feeding_10wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
                                             </select> 
-                                        <?php } 
-                                        if ($weeks >= 14 && $weeks < 16)   { ?> 
+                                        <?php //} 
+                                        //if ($weeks >= 14 && $weeks < 16)   { 
+                                        ?> 
                                         <label>Infant feeding method at 14 weeks</label>
                                             <select  class="form-control" name="feeding_14wks">
                                                 <option value="" selected="selected">Select infant feeding method at 14 weeks</option>
@@ -596,8 +600,10 @@ $_SESSION['timeout'] = time();
                                                 <option value="ERF" <?php if($select_record["feeding_14wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
                                                 <option value="MF" <?php if($select_record["feeding_14wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
                                             </select> 
-                                        <?php } 
-                                        if ($weeks >= 16 && $months < 6)   { ?> 
+                                        <?php
+                                        //// } 
+                                       // if ($weeks >= 16 && $months < 6)   { 
+                                        ?> 
                                           <label>Infant feeding method at 6 months</label>
                                             <select class="form-control" name="feeding_6mths">
                                                 <option value="" selected="selected">Select infant feeding method at 6 months</option>
@@ -605,39 +611,49 @@ $_SESSION['timeout'] = time();
                                                 <option value="ERF" <?php if($select_record["feeding_14wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
                                                 <option value="MF" <?php if($select_record["feeding_14wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
                                             </select>        
-                                          <?php } 
-                                        if ($months > 6 && $months < 9)   { ?> 
+                                          <?php //} 
+                                        //if ($months > 6 && $months < 9)   { 
+                                          ?> 
                                           <label>Infant feeding method at 9 months</label>
                                             <select class="form-control" name="feeding_9mths">
                                                 <option value="" selected="selected">Select infant feeding method at 9 months</option>
                                                 <option value="BF" <?php if($select_record["feeding_9mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
                                                 <option value="NBF" <?php if($select_record["feeding_9mths"]=="NBF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
                                             </select> 
-                                        <?php } 
-                                        if ($months >= 9 && $months < 12)   { ?> 
+                                        <?php 
+                                        ////} 
+                                       // if ($months >= 9 && $months < 12)   { 
+                                        ?> 
                                         <label>Infant feeding method at 12 months</label>
                                             <select class="form-control" name="feeding_12mths">
                                                 <option value="" selected="selected">Select infant feeding method at 12 months</option>
                                                 <option value="BF" <?php if($select_record["feeding_12mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
                                                 <option value="NBF" <?php if($select_record["feeding_12mths"]=="NBF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
                                             </select>                                     
-                                        <?php } 
-                                        if ($months >= 12 && $months < 15)   { ?> 
+                                        <?php
+                                        //// } 
+                                        //if ($months >= 12 && $months < 15)   { 
+                                        ?> 
                                         <label>Infant feeding method at 15 months</label>
                                             <select class="form-control" name="feeding_15mths">
                                                 <option value="" selected="selected">Select infant feeding method at 15 months</option>
                                                 <option value="BF" <?php if($select_record["feeding_15mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
                                                 <option value="NBF" <?php if($select_record["feeding_15mths"]=="NBF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
                                             </select>
-                                        <?php } 
-                                        if ($months >= 15 && $months < 18)   { ?> 
+                                        <?php
+                                        //// } 
+                                        //if ($months >= 15 && $months < 18)   { 
+                                        ?> 
                                         <label>Infant feeding method at 18 months</label>
                                             <select class="form-control" name="feeding_18mths">
                                                 <option value="" selected="selected">Select infant feeding method at 18 months</option>
                                                 <option value="BF" <?php if($select_record["feeding_18mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
                                                 <option value="NBF" <?php if($select_record["feeding_18mths"]=="NBF") echo 'selected="selected"'; ?>>Not Breastfed</option>
                                             </select> 
-                                        <?php } ?>
+                                        <?php
+                                           // } 
+                                        ?>
+                                        
                                     </div>
                                         
                                         <!-- infant feeding methods ends -->
@@ -698,7 +714,7 @@ $_SESSION['timeout'] = time();
                                 </div>
                                  <!-- Repeat PCR (for rejections) -->
                                 <div class="tab-pane fade" id="rpt_pcr">
-                                    <h4>Repeat PCR (for rejections)</h4>
+                                    <h4>Repeat confirmatory PCR for rejection/ +ve</h4>
                                     <form role="form" action="diagnosis.php?id=<?php echo $Diag_id;?>" method="post" id="RPT_PCR">
                                         <input type="hidden" name="mode" value="RPT_PCR" />
                                     <div class="form-group">
@@ -707,7 +723,7 @@ $_SESSION['timeout'] = time();
                                     </div>
                                     <div class="form-group">
                                         <label>Date results collected</label>
-                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["second_sample_collection"];} ?>" name="second_results_collected"  >
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["second_results_collected"];} ?>" name="second_results_collected"  >
                                     </div>
                                     <div class="form-group">
                                         <label>Results</label>
@@ -717,6 +733,9 @@ $_SESSION['timeout'] = time();
                                         </label>
                                         <label class="radio-inline">
                                             <input required="TRUE"  type="radio" name="second_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["second_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input required="TRUE"  type="radio" name="second_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["second_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
                                         </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
@@ -730,7 +749,7 @@ $_SESSION['timeout'] = time();
                                         <input type="hidden" name="mode" value="2ND_PCR" />
                                     <div class="form-group">
                                         <label>Date of sample collection</label>
-                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["2nd_pcr_sample_collected"];} ?>" name="2nd_pcr_sample_collected"  >
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["2nd_pcr_sample_collection"];} ?>" name="2nd_pcr_sample_collection"  >
                                     </div>
                                     <div class="form-group">
                                         <label>Date results collected</label>
@@ -755,29 +774,29 @@ $_SESSION['timeout'] = time();
                                 </div>
                                  
                                  <!-- 3rd PCR at 12 months -->
-                                <div class="tab-pane fade" id="3rd_pcr">
+                                <div class="tab-pane fade" id="3nd_pcr">
                                     <h4>3rd PCR at 12 months</h4>
-                                    <form role="form" action="diagnosis.php?id=<?php echo $Diag_id;?>" method="post" id="3RDT_PCR">
+                                    <form role="form" action="diagnosis.php?id=<?php echo $Diag_id;?>" method="post" id="3RD_PCR">
                                         <input type="hidden" name="mode" value="3RD_PCR" />
                                     <div class="form-group">
                                         <label>Date of sample collection</label>
-                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["3rd_pcr_sample_collected"];} ?>" name="3rd_pcr_sample_collected"  >
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["3nd_pcr_sample_collection"];} ?>" name="3nd_pcr_sample_collection"  >
                                     </div>
                                     <div class="form-group">
                                         <label>Date results collected</label>
-                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["3rd_pcr_sample_collected"];} ?>" name="3rd_pcr_sample_collected"  >
+                                        <input required="TRUE"  max="<?php echo date("Y-m-d");?>" type="date" class="form-control" value="<?php if($action == "edit"){echo $select_record["3nd_pcr_results_collected"];} ?>" name="3nd_pcr_results_collected"  >
                                     </div>
                                     <div class="form-group">
                                         <label>Results</label>
-                                        <p class="help-block">Select results of 3rd PCR at 12 months</p>
+                                        <p class="help-block">Select results of 3nd PCR at 12 months</p>
                                         <label class="radio-inline">
-                                            <input required="TRUE"  type="radio" name="3rd_pcr_results" id="optionsRadiosInline1" value="POS" <?php if($select_record["3rd_pcr_results"]=="POS") {echo 'checked="true"';} ?>>Positive
+                                            <input required="TRUE"  type="radio" name="3nd_pcr_results" id="optionsRadiosInline1" value="POS" <?php if($select_record["3nd_pcr_results"]=="POS") {echo 'checked="true"';} ?>>Positive
                                         </label>
                                         <label class="radio-inline">
-                                            <input required="TRUE"  type="radio" name="3rd_pcr_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["3rd_pcr_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
+                                            <input required="TRUE"  type="radio" name="3nd_pcr_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["3nd_pcr_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
                                         </label>
                                         <label class="radio-inline">
-                                            <input required="TRUE"  type="radio" name="3rd_pcr_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["3rd_pcr_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
+                                            <input required="TRUE"  type="radio" name="3nd_pcr_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["3nd_pcr_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
                                         </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
@@ -806,6 +825,9 @@ $_SESSION['timeout'] = time();
                                         <label class="radio-inline">
                                             <input required="TRUE"  type="radio" name="third_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["third_results"]=="NEG") {echo 'checked="true"';} ?>> Negative
                                         </label>
+                                        <label class="radio-inline">
+                                            <input required="TRUE"  type="radio" name="third_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["first_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
+                                        </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
                                         <button type="reset" class="btn btn-warning">Clear</button> 
@@ -832,6 +854,9 @@ $_SESSION['timeout'] = time();
                                         </label>
                                         <label class="radio-inline">
                                             <input required="TRUE"  type="radio" name="forth_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["forth_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input required="TRUE"  type="radio" name="forth_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["first_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
                                         </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
@@ -860,6 +885,9 @@ $_SESSION['timeout'] = time();
                                         <label class="radio-inline">
                                             <input required="TRUE"  type="radio" name="fifth_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["fifth_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
                                         </label>
+                                        <label class="radio-inline">
+                                            <input required="TRUE"  type="radio" name="fifth_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["first_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
+                                        </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
                                         <button type="reset" class="btn btn-warning">Clear</button>
@@ -886,6 +914,9 @@ $_SESSION['timeout'] = time();
                                         </label>
                                         <label class="radio-inline">
                                             <input required="TRUE"  type="radio" name="sixth_results" id="optionsRadiosInline2" value="NEG" <?php if($select_record["sixth_results"]=="NEG") {echo 'checked="true"';} ?>>Negative
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input required="TRUE"  type="radio" name="sixth_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["first_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
                                         </label>
                                         
                                     </div>

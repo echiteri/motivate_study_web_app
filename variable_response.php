@@ -6,7 +6,7 @@ variables_id AS VariableID,
 v_study_id AS StudyID,
 tb_status AS TB_Status, 
 preg_status AS Preg_Status,
-edd AS EDD,
+edd AS EDC,
 fp_status AS FP_status, 
 disclosure AS HIV_Disclosure,
 next_visit_date AS Next_visit_date
