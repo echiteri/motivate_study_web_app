@@ -210,21 +210,39 @@ $_SESSION['timeout'] = time();
                                     $a_study_id = $_POST['a_study_id'];
                                     $visit = $_POST['visit_date'];
                                     $haart_change = $_POST['haart_change'];
-                                    $haart_change_date= $_POST['haart_change_date'];
+                                    if(isset($_POST['haart_change_date']))
+                                    {
+                                        $haart_change_date= $_POST['haart_change_date'];
+                                    }else
+                                    {
+                                        $haart_change_date= '0000-00-00';
+                                    }
                                     $haart_regimen = $_POST['haart_regimen'];
                                     //$art_effect = $_POST['art_effect'];
                                     $self_art_adherence = $_POST['self_art_adherence'];
                                     $self_ctx_adherence = $_POST['self_ctx_adherence'];
                                     $cd4_taken = $_POST['cd4_taken'];
                                     if ($cd4_taken == "NA" || $cd4_taken == "N" || $cd4_taken == "NV")
-                                    { $cd4_count = 2; }
-                                    else { $cd4_count = $_POST['cd4_count']; }
-                                    $cd4_date = $_POST['cd4_date'];
+                                    {
+                                        $cd4_count = 'NULL';
+                                        $cd4_date = '0000-00-00';
+                                    }
+                                    else {
+                                        $cd4_count = $_POST['cd4_count'];
+                                        $cd4_date = $_POST['cd4_date'];
+                                    }
+
                                     $vl_taken = $_POST['vl_taken'];
                                     if($vl_taken == "NA" || $vl_taken == "N" || $vl_taken == "NV")
-                                    { $viral_load = 2;}
-                                    else {$viral_load = $_POST['viral_load'];}
-                                    $viral_date = $_POST['viral_date'];
+                                    {
+                                        $viral_load = 'NULL';
+                                        $viral_date = '0000-00-00';
+                                    }
+                                    else {
+                                        $viral_load = $_POST['viral_load'];
+                                        $viral_date = $_POST['viral_date'];
+                                    }
+
                                     $who_stage = $_POST['who_stage'];
                                     $btn = $_POST['btn'];
                                     $next_visit = $_POST['next_visit_date'];
@@ -306,7 +324,7 @@ $_SESSION['timeout'] = time();
                                         <div class="form-group">
                                             <label>Side effects of ART</label>
                                             <?php
-                                            $arr = split(";", $select_record["art_effect"]);
+                                            $arr = explode(";", $select_record["art_effect"]);
                                             ?>
                                           <div class="checkbox">                                                                                           
                                             <label class="checkbox-inline">                                                
@@ -442,10 +460,10 @@ $_SESSION['timeout'] = time();
                                             <label>WHO Stage</label>
                                             <select required="TRUE" class="form-control" name="who_stage">
                                                 <option value="" selected="">Select The clinical staging and case definition of HIV</option>
-                                                <option value="WHO stage I" <?php if($select_record["who_stage"]=="WHO stage 1") { echo 'selected="selected"';} ?> >WHO stage 1</option>
-                                                <option value="WHO stage II" <?php if($select_record["who_stage"]=="WHO stage 2") { echo 'selected="selected"';} ?>>WHO stage 2</option>
-                                                <option value="WHO stage III"<?php if($select_record["who_stage"]=="WHO stage 3") { echo 'selected="selected"';} ?>>WHO stage 3</option>
-                                                <option value="WHO stage IV"<?php if($select_record["who_stage"]=="WHO stage 4") { echo 'selected="selected"';} ?>>WHO stage 4</option>
+                                                <option value="WHO stage I" <?php if($select_record["who_stage"]=="WHO stage I") { echo 'selected="selected"';} ?> >WHO stage 1</option>
+                                                <option value="WHO stage II" <?php if($select_record["who_stage"]=="WHO stage II") { echo 'selected="selected"';} ?>>WHO stage 2</option>
+                                                <option value="WHO stage III"<?php if($select_record["who_stage"]=="WHO stage III") { echo 'selected="selected"';} ?>>WHO stage 3</option>
+                                                <option value="WHO stage IV"<?php if($select_record["who_stage"]=="WHO stage IV") { echo 'selected="selected"';} ?>>WHO stage 4</option>
                                             </select>
                                         </div>
                                         <div class="form-group">

@@ -454,12 +454,12 @@ $_SESSION['timeout'] = time();
                                                 //print_r($immunization_administered);
                                                 foreach ($immunization_administered as $imm_admin)
                                                 {
-                                                    $arr_tmp = split(";", $imm_admin['imm_history']);
+                                                    $arr_tmp = explode(";", $imm_admin['imm_history']);
                                                     $arr = array_merge($arr, $arr_tmp);
                                                 }
                                             } else
                                             {
-                                                $arr = split(";", $select_record["imm_history"]);
+                                                $arr = explode(";", $select_record["imm_history"]);
                                             }
                                             
                                             ?>
@@ -548,7 +548,7 @@ $_SESSION['timeout'] = time();
                                         <!-- infant feeding methods based of an infant age -->
                                         <div class="form-group">
                                         <?php
-                                            $dob = date();
+                                            /*$dob = date();
                                             $today = date("Y-m-d");
                                             $infant_registration_record = $db->selectDefinedRecords("birth_date", "infant_registration", "hei_id", $_REQUEST['hei_id']);
                                             $dia_visit_date = $db->selectDefinedRecords("visit_date", "infant_diagnosis", "diagnosis_id", $Diag_id);                                            
@@ -562,17 +562,21 @@ $_SESSION['timeout'] = time();
                                                     $diff = abs(strtotime($today) - strtotime($rec["birth_date"]));
                                                 }
                                                                                                
-                                            }
+                                            }*/
                                             //$diff = abs(strtotime($today) - strtotime($dob));
                                             //echo $diff;//." Visit Date: ".$dia_visit_date[0]["visit_date"];
-                                            $weeks = $diff/(60*60*24*7);
-                                            $months = $diff/(60*60*24*30);
+                                            //$weeks = $diff/(60*60*24*7);
+                                            //$months = $diff/(60*60*24*30);
                                             //echo "Diagnosis ID: ". $Diag_id;
                                             //echo "Weeks: ".$weeks;
                                             //echo "< br/>Months: ".$months;
                                                                                         
                                          //if (($diff >= 1 && $weeks < 10)/* || $action == "add"*/)   { ?>  
                                         <label>Infant feeding method at 6 weeks</label>
+                                            <?php
+                                            $feed_arr = ['EBF','ERF','MF', 'NBF', 'BF'];
+
+                                            ?>
                                             <select class="form-control" name="feeding_6wks">
                                                 <option value="" selected="selected" >Select infant feeding method at 6 weeks</option>
                                                 <option value="EBF" <?php if($select_record["feeding_6wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
