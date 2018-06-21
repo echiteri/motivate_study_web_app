@@ -50,7 +50,7 @@ class db_transactions {
         } else {
           // Connect from a development environment.
           try{
-             $DB = new pdo('mysql:host=localhost;dbname=motivate', 'root', 'root');
+             $DB = new pdo('mysql:host=localhost;dbname=motivate', 'root', '');
           }catch(PDOException $ex){
               die(json_encode(
                   array('outcome' => false, 'message' => 'Unable to connect')
@@ -623,6 +623,23 @@ class db_transactions {
     {
         try{
             $sql = "SELECT ".$variables." FROM ".$table." WHERE ".$id."='".$select_id."'";
+            if($id = "i_hei_id")
+            {
+                //$sql = $sql." GROUP BY i_hei_id";
+            }
+            //echo $sql;
+            $stmt = $this->dbCon()->prepare($sql);
+            $stmt->execute();
+            $rs = $stmt->fetchAll();
+            return $rs;
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }  
+    }
+    public function selectGroupById($variables, $table,$id,$select_id)
+    {
+        try{
+            $sql = "SELECT ".$variables." FROM ".$table." WHERE ".$id."='".$select_id."' GROUP BY ".$id;
             //echo $sql;
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();

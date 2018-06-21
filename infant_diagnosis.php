@@ -56,6 +56,9 @@ $_SESSION['timeout'] = time();
                            { mData: 'Feeding_method_15_Months' },
                            { mData: 'Feeding_method_18_Months' },
                            { mData: '1st_DNA_PCR' },
+                           { mData: 'Repeat_PCR' },
+                           { mData: '2nd_PCR_at_6_mon' },
+                           { mData: '3rd_PCR_at_12_mon' },
                            { mData: '1st_Antibody_Test' },
                            { mData: 'Confirmatory_PCR' },
                            { mData: 'Repeat_Confirmatory_PCR' },
@@ -63,7 +66,7 @@ $_SESSION['timeout'] = time();
                            { mData: 'HEI_Outcome'},
                            { mData: 'Next_Visit_Date' } ,
                            {
-                           "aTargets": [16],    
+                           "aTargets": [19],
                            "mData": "DiagID",  
                            "mRender": function (data, type, full) {
                              return '<a href=diagnosis.php?action=edit&id=' + full['DiagID'] +'&hei_id='+ full['HEI_ID'] + '>Edit</a> | <a href=diagnosis.php?action=delete&id=' + data +'>Delete</a>';
@@ -203,6 +206,9 @@ $_SESSION['timeout'] = time();
                                                     <th>Feeding_method_15_Months</th>
                                                     <th>Feeding_method_18_Months</th>
                                                     <th>1st_DNA_PCR</th>
+                                                    <th>Repeat_PCR</th>
+                                                    <th>2nd_PCR_at_6_mon</th>
+                                                    <th>3rd_PCR_at_12_mon</th>
                                                     <th>1st_Antibody_Test</th>
                                                     <th>Confirmatory_PCR</th>
                                                     <th>Repeat_Confirmatory_PCR</th>

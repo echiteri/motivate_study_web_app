@@ -575,84 +575,109 @@ $_SESSION['timeout'] = time();
                                         <label>Infant feeding method at 6 weeks</label>
                                             <?php
                                             $feed_arr = ['EBF','ERF','MF', 'NBF', 'BF'];
+                                            $bf = array();
+                                            if ($action == "add")//get previous given BF question
+                                            {
+                                                $breasfeeding = $db->selectGroupById("feeding_6wks,feeding_10wks,feeding_14wks,feeding_6mths,feeding_9mths
+                                                    feeding_12mths,feeding_15mths,feeding_18mths", $table, "i_hei_id", $_REQUEST['hei_id']);
+                                                foreach ($breasfeeding as $b)
+                                                {
+                                                    $bf["feeding_6wks"] = $b["feeding_6wks"];
+                                                    $bf["feeding_10wks"] =  $b["feeding_10wks"];
+                                                    $bf["feeding_14wks"] = $b["feeding_14wks"];
+                                                    $bf["feeding_6mths"] = $b["feeding_6mths"];
+                                                    $bf["feeding_9mths"] = $b["feeding_9mths"];
+                                                    $bf["feeding_12mths"] = $b["feeding_12mths"];
+                                                    $bf["feeding_15mths"] = $b["feeding_15mths"];
+                                                    $bf["feeding_18mths"] = $b["feeding_18mths"];
+                                                }
+                                            } 
+                                           /* echo "<br/> six weeks = ".$bf["feeding_6wks"]. "<br/>";
+                                            echo "ten weeks = ".$bf["feeding_10wks"]. "<br/>";
+                                            echo "forteen weeks = ".$bf["feeding_14wks"]. "<br/>";
+                                            echo "six months = ".$bf["feeding_6mths"]. "<br/>";
+                                            echo "nine months = ".$bf["feeding_9mths"]. "<br/>";
+                                            echo "twelve months = ".$bf["feeding_12mths"]. "<br/>";
+                                            echo "fifteen months = ".$bf["feeding_15mths"]. "<br/>";
+                                            echo "eighteen months = ".$bf["feeding_18mths"]. "<br/>";*/
 
                                             ?>
-                                            <select class="form-control" name="feeding_6wks">
+                                            <select class="form-control" name="feeding_6wks" <?php if(in_array($bf["feeding_6wks"], $feed_arr) && $action =="add") {echo 'disabled="true"';}?> >
                                                 <option value="" selected="selected" >Select infant feeding method at 6 weeks</option>
-                                                <option value="EBF" <?php if($select_record["feeding_6wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
-                                                <option value="ERF" <?php if($select_record["feeding_6wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
-                                                <option value="MF" <?php if($select_record["feeding_6wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
+                                                <option value="EBF" <?php if($action =="add"){if($bf["feeding_6wks"]=="EBF") { echo 'selected="selected"';}} elseif($select_record["feeding_6wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed </option>
+                                                <option value="ERF" <?php if($action =="add"){if($bf["feeding_6wks"]=="ERF") { echo 'selected="selected"';}} elseif($select_record["feeding_6wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
+                                                <option value="MF" <?php if($action =="add"){if($bf["feeding_6wks"]=="MF") { echo 'selected="selected"';}} elseif($select_record["feeding_6wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
                                             </select> 
                                         <?php //} 
                                         
                                         //if ($weeks >= 10 && $weeks < 14)   { 
                                         ?> 
                                         <label>Infant feeding method at 10 weeks</label>
-                                            <select class="form-control" name="feeding_10wks">
+                                            <select class="form-control" name="feeding_10wks" <?php if(in_array($bf["feeding_10wks"], $feed_arr) && $action =="add") {echo 'disabled="true"';}?>>
                                                 <option value="" selected="selected">Select infant feeding method at 10 weeks</option>
-                                               <option value="EBF" <?php if($select_record["feeding_10wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
-                                                <option value="ERF" <?php if($select_record["feeding_10wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
-                                                <option value="MF" <?php if($select_record["feeding_10wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
+                                               <option value="EBF" <?php if($action =="add"){if($bf["feeding_10wks"]=="EBF") { echo 'selected="selected"';}} elseif($select_record["feeding_10wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
+                                                <option value="ERF" <?php if($action =="add"){if($bf["feeding_10wks"]=="ERF") { echo 'selected="selected"';}} elseif($select_record["feeding_10wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
+                                                <option value="MF" <?php if($action =="add"){if($bf["feeding_10wks"]=="MF") { echo 'selected="selected"';}} elseif($select_record["feeding_10wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
                                             </select> 
                                         <?php //} 
                                         //if ($weeks >= 14 && $weeks < 16)   { 
                                         ?> 
                                         <label>Infant feeding method at 14 weeks</label>
-                                            <select  class="form-control" name="feeding_14wks">
+                                            <select  class="form-control" name="feeding_14wks" <?php if(in_array($bf["feeding_14wks"], $feed_arr) && $action =="add") {echo 'disabled="true"';}?>>
                                                 <option value="" selected="selected">Select infant feeding method at 14 weeks</option>
-                                                <option value="EBF" <?php if($select_record["feeding_14wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
-                                                <option value="ERF" <?php if($select_record["feeding_14wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
-                                                <option value="MF" <?php if($select_record["feeding_14wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
+                                                <option value="EBF" <?php if($action =="add"){if($bf["feeding_14wks"]=="EBF") { echo 'selected="selected"';}} elseif($select_record["feeding_14wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
+                                                <option value="ERF" <?php if($action =="add"){if($bf["feeding_14wks"]=="ERF") { echo 'selected="selected"';}} elseif($select_record["feeding_14wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
+                                                <option value="MF" <?php if($action =="add"){if($bf["feeding_14wks"]=="MF") { echo 'selected="selected"';}} elseif($select_record["feeding_14wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
                                             </select> 
                                         <?php
                                         //// } 
                                        // if ($weeks >= 16 && $months < 6)   { 
                                         ?> 
                                           <label>Infant feeding method at 6 months</label>
-                                            <select class="form-control" name="feeding_6mths">
+                                            <select class="form-control" name="feeding_6mths" <?php if(in_array($bf["feeding_6mths"], $feed_arr) && $action =="add") {echo 'disabled="true"';}?>>
                                                 <option value="" selected="selected">Select infant feeding method at 6 months</option>
-                                                <option value="EBF" <?php if($select_record["feeding_14wks"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
-                                                <option value="ERF" <?php if($select_record["feeding_14wks"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
-                                                <option value="MF" <?php if($select_record["feeding_14wks"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
+                                                <option value="EBF" <?php if($action =="add"){if($bf["feeding_6mths"]=="EBF") { echo 'selected="selected"';}} elseif($select_record["feeding_6mths"]=="EBF") { echo 'selected="selected"';} ?>>Exclusive Breastfed</option>
+                                                <option value="ERF" <?php if($action =="add"){if($bf["feeding_6mths"]=="ERF") { echo 'selected="selected"';}} elseif($select_record["feeding_6mths"]=="ERF") { echo 'selected="selected"';} ?>>Exclusive Replacement Fed</option>
+                                                <option value="MF" <?php if($action =="add"){if($bf["feeding_6mths"]=="MF") { echo 'selected="selected"';}} elseif($select_record["feeding_6mths"]=="MF") { echo 'selected="selected"';} ?>>Mixed Fed</option>
                                             </select>        
                                           <?php //} 
                                         //if ($months > 6 && $months < 9)   { 
                                           ?> 
                                           <label>Infant feeding method at 9 months</label>
-                                            <select class="form-control" name="feeding_9mths">
+                                            <select class="form-control" name="feeding_9mths" <?php if(in_array($bf["feeding_9mths"], $feed_arr) && $action =="add") {echo 'disabled="true"';}?>>
                                                 <option value="" selected="selected">Select infant feeding method at 9 months</option>
-                                                <option value="BF" <?php if($select_record["feeding_9mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
-                                                <option value="NBF" <?php if($select_record["feeding_9mths"]=="NBF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
+                                                <option value="BF" <?php if($action =="add"){if($bf["feeding_9mths"]=="BF") { echo 'selected="selected"';}} elseif($select_record["feeding_9mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
+                                                <option value="NBF" <?php if($action =="add"){if($bf["feeding_9mths"]=="NBF") { echo 'selected="selected"';}} elseif($select_record["feeding_9mths"]=="NBF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
                                             </select> 
                                         <?php 
                                         ////} 
                                        // if ($months >= 9 && $months < 12)   { 
                                         ?> 
                                         <label>Infant feeding method at 12 months</label>
-                                            <select class="form-control" name="feeding_12mths">
+                                            <select class="form-control" name="feeding_12mths" <?php if(in_array($bf["feeding_12mths"], $feed_arr) && $action =="add") {echo 'disabled="true"';}?>>
                                                 <option value="" selected="selected">Select infant feeding method at 12 months</option>
-                                                <option value="BF" <?php if($select_record["feeding_12mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
-                                                <option value="NBF" <?php if($select_record["feeding_12mths"]=="NBF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
+                                                <option value="BF" <?php if($action =="add"){if($bf["feeding_12mths"]=="BF") { echo 'selected="selected"';}} elseif($select_record["feeding_12mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
+                                                <option value="NBF" <?php if($action =="add"){if($bf["feeding_12mths"]=="NBF") { echo 'selected="selected"';}} elseif($select_record["feeding_12mths"]=="NBF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
                                             </select>                                     
                                         <?php
                                         //// } 
                                         //if ($months >= 12 && $months < 15)   { 
                                         ?> 
                                         <label>Infant feeding method at 15 months</label>
-                                            <select class="form-control" name="feeding_15mths">
+                                            <select class="form-control" name="feeding_15mths" <?php if(in_array($bf["feeding_15mths"], $feed_arr) && $action =="add") {echo 'disabled="true"';}?>>
                                                 <option value="" selected="selected">Select infant feeding method at 15 months</option>
-                                                <option value="BF" <?php if($select_record["feeding_15mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
-                                                <option value="NBF" <?php if($select_record["feeding_15mths"]=="NBF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
+                                                <option value="BF" <?php if($action =="add"){if($bf["feeding_15mths"]=="BF") { echo 'selected="selected"';}} elseif($select_record["feeding_15mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
+                                                <option value="NBF" <?php if($action =="add"){if($bf["feeding_15mths"]=="NBF") { echo 'selected="selected"';}} elseif($select_record["feeding_15mths"]=="NBF") { echo 'selected="selected"';} ?>>Not Breastfed</option>
                                             </select>
                                         <?php
                                         //// } 
                                         //if ($months >= 15 && $months < 18)   { 
                                         ?> 
                                         <label>Infant feeding method at 18 months</label>
-                                            <select class="form-control" name="feeding_18mths">
+                                            <select class="form-control" name="feeding_18mths" <?php if(in_array($bf["feeding_18mths"], $feed_arr) && $action =="add") {echo 'disabled="true"';}?>>
                                                 <option value="" selected="selected">Select infant feeding method at 18 months</option>
-                                                <option value="BF" <?php if($select_record["feeding_18mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
-                                                <option value="NBF" <?php if($select_record["feeding_18mths"]=="NBF") echo 'selected="selected"'; ?>>Not Breastfed</option>
+                                                <option value="BF" <?php if($action =="add"){if($bf["feeding_18mths"]=="BF") { echo 'selected="selected"';}} elseif($select_record["feeding_18mths"]=="BF") { echo 'selected="selected"';} ?> >Breastfed</option>
+                                                <option value="NBF" <?php if($action =="add"){if($bf["feeding_18mths"]=="NBF") { echo 'selected="selected"';}} elseif($select_record["feeding_18mths"]=="NBF") echo 'selected="selected"'; ?>>Not Breastfed</option>
                                             </select> 
                                         <?php
                                            // } 
