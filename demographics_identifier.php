@@ -461,6 +461,10 @@ $_SESSION['timeout'] = time();
                                                 <option value="W" <?php if($select_record["participant_outcome"]=="W"){ { echo 'selected="selected"';}} ?> >Withdrawal</option>
                                                 <option value="ID" <?php if($select_record["participant_outcome"]=="ID") { echo 'selected="selected"';} ?> >Infant death</option>
                                                 <option value="SB" <?php if($select_record["participant_outcome"]=="SB") { echo 'selected="selected"';} ?> >Still Birth</option>
+                                                <option value="MC" <?php if($select_record["participant_outcome"]=="MC") { echo 'selected="selected"';} ?> >Miscarriage</option>
+                                                <option value="ND" <?php if($select_record["participant_outcome"]=="ND") { echo 'selected="selected"';} ?> >Neonatal death.</option>
+                                                <option value="PD" <?php if($select_record["participant_outcome"]=="PD") { echo 'selected="selected"';} ?> >Participants death.</option>
+                                                <option value="CD" <?php if($select_record["participant_outcome"]=="CD") { echo 'selected="selected"';} ?> >Child death.</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
