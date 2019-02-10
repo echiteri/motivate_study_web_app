@@ -311,6 +311,7 @@ $_SESSION['timeout'] = time();
                                                 <option value="AS1B" <?php if($select_record["haart_regimen"]=="AS1B") { echo 'selected="selected"';} ?> >AZT + 3TC + ATV/r = AS1B</option>
                                                 <option value="AS2C" <?php if($select_record["haart_regimen"]=="AS2C") { echo 'selected="selected"';} ?> >TDF + 3TC + ATV/r = AS2C</option>
                                                 <option value="AS5B" <?php if($select_record["haart_regimen"]=="AS5B") { echo 'selected="selected"';} ?> >ABC + 3TC + ATV/r = AS5B</option>
+                                                <option value="AF5X" <?php if($select_record["haart_regimen"]=="AF5X") { echo 'selected="selected"';} ?> >DTG+3TC+TDF = AF5X</option>
                                             </select>
                                         </div>
                                          <div class="form-group">
