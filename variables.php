@@ -296,6 +296,9 @@ $_SESSION['timeout'] = time();
                                             <label class="radio-inline">
                                                 <input required="TRUE" onclick="toggleHb()" type="radio" name="hb_taken" id="optionsRadiosInline5" value="NA" <?php if($select_record["hb_taken"]=="NA") { echo 'checked="true"';} ?> >NA
                                             </label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="hb_taken" id="optionsRadiosInline6" value="None">None
+                                            </label>
                                         </div>
                                         <div class="form-group">
                                             <label>Hemoglobin</label>
@@ -341,7 +344,7 @@ $_SESSION['timeout'] = time();
                                         <div class="form-group">
                                             <label>Family Planning Methods</label>
                                             <?php
-                                            $arr = split(";", $select_record["fp_method"]);
+                                            $arr = explode(";", $select_record["fp_method"]);
                                             ?>
                                           <div class="checkbox">                        
                                             <label class="checkbox-inline">                                                
@@ -419,6 +422,9 @@ $_SESSION['timeout'] = time();
                                             <label class="radio-inline">
                                                 <input required="TRUE" type="radio" name="disclosure" id="optionsRadiosInline4" value="N" <?php if($select_record["disclosure"]=="N") {echo 'checked="true"';} ?>>No
                                             </label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="disclosure" id="optionsRadiosInline6" value="None">None
+                                            </label>
                                         </div>
                                         <div class="form-group">
                                             <label>Partner tested</label>
@@ -428,6 +434,9 @@ $_SESSION['timeout'] = time();
                                             </label>
                                             <label class="radio-inline">
                                                 <input required="TRUE" type="radio" name="patner_tested"  value="N" <?php if($select_record["patner_tested"]=="N") {echo 'checked="true"';} ?>>No
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="patner_tested" id="optionsRadiosInline6" value="None">None
                                             </label>
                                             
                                         </div>
@@ -447,7 +456,8 @@ $_SESSION['timeout'] = time();
                                 
                                 <!-- /.col-lg-6 (nested) -->
                                <?php } else if($action == "delete") {
-                                         if($db->deleteVariables($variables_id)>0)
+                                         if($db->deleteRecords($table, $tbl_id, $variables_id)>0)
+                                            //if($db->deleteVariables($variables_id)>0)
                                                 {
                                                     echo '<label class="control-label" for="inputSuccess">Women Variables deleted!</label> <br \> Return to <a href="dashboard.php" >Dashboard</a>';
                                                 } else {

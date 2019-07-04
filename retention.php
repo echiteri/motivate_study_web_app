@@ -206,7 +206,8 @@ $_SESSION['timeout'] = time();
                                         <button type="reset" class="btn btn-warning">Clear</button>
                                     </form>
                                     <?php } else if($action == "delete") {
-                                         if($db->deleteRentention($retention_id)>0)
+                                        if($db->deleteRecords($table, $tbl_id, $retention_id)>0)
+                                         //if($db->deleteRentention($retention_id)>0)
                                                 {
                                                     echo '<label class="control-label" for="inputSuccess">Women Retention deleted!</label> <br \> Return to <a href="dashboard.php" >Dashboard</a>';
                                                 } else {

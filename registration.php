@@ -243,6 +243,9 @@ $_SESSION['timeout'] = time();
                                             <label class="radio-inline">
                                                 <input required="TRUE" type="radio" name="sex" id="optionsRadiosInline2" value="F" <?php if($select_record["sex"]=="F") { echo 'checked="TRUE"';} ?>>Female
                                             </label>
+                                             <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="sex" id="optionsRadiosInline3" value="None">None
+                                            </label> 
                                         </div>
                                         <div class="form-group">
                                             <label>Place of delivery</label>
@@ -315,7 +318,8 @@ $_SESSION['timeout'] = time();
                             </div>
                         </div>
                             <?php } else if($action == "delete") {
-                                         if($db->deleteInfantRegistration($reg_id)>0)
+                                            if($db->deleteRecords($table, $tbl_id, $id)>0)
+                                        // if($db->deleteInfantRegistration($reg_id)>0)
                                                 {
                                                     echo '<label class="control-label" for="inputSuccess">Infant Registration deleted!</label> <br \> Return to <a href="dashboard.php" >Dashboard</a>';
                                                 } else {

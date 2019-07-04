@@ -27,7 +27,7 @@ session_start();
   } else {
     // Connect from a development environment.
     try{
-       $DB = new pdo('mysql:host=localhost; dbname=motivate', 'root', 'root');
+       $DB = new pdo('mysql:host=localhost; dbname=motivate', 'root', '');
     }catch(PDOException $ex){
         die(json_encode(
             array('outcome' => false, 'message' => 'Unable to connect')

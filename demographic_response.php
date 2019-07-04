@@ -18,7 +18,8 @@ haart_regimen AS HAART_Regimen,
 counselling AS Couple_counseling, 
 hiv_status_partner AS Partner_HIV_status,
 return_date AS Next_Visit_Date
-FROM demographics";
+FROM demographics
+WHERE voided = 0";
 $data = $db->getAssoArray($sql);
 $results = array(
             "sEcho" => 1,

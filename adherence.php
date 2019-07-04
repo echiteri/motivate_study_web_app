@@ -296,6 +296,9 @@ $_SESSION['timeout'] = time();
                                             <label class="radio-inline">
                                                 <input required="TRUE" onclick="toggleHaartChange()" type="radio" name="haart_change" id="optionsRadiosInline8" value="N" <?php if($select_record["haart_change"]=="N") { echo 'checked="true"';} ?> >No
                                             </label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="haart_change" id="optionsRadiosInline11" value="None">None
+                                            </label>
                                         </div>
                                         <div class="form-group">
                                             <label>Date of changing HAART</label>
@@ -424,6 +427,9 @@ $_SESSION['timeout'] = time();
                                             <label class="radio-inline">
                                                 <input required="TRUE" onclick="toggleCd4()" type="radio" name="cd4_taken" id="optionsRadiosInline9" value="NV" <?php if($select_record["cd4_taken"]=="NV") { echo 'checked="true"';} ?> >Not Available
                                             </label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="cd4_taken" id="optionsRadiosInline11" value="None">None
+                                            </label>
                                         </div>
                                         <div class="form-group">
                                             <label>CD4 count</label>
@@ -447,6 +453,9 @@ $_SESSION['timeout'] = time();
                                             </label>
                                             <label class="radio-inline">
                                                 <input required="TRUE" onclick="toggleVl()" type="radio" name="vl_taken" id="optionsRadiosInline10" value="NV" <?php if($select_record["vl_taken"]=="NV") { echo 'checked="true"';} ?> >Not Available
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="vl_taken" id="optionsRadiosInline11" value="None">None
                                             </label>
                                         </div>
                                         <div class="form-group">
@@ -477,7 +486,7 @@ $_SESSION['timeout'] = time();
                                         <?php } else if($action == "edit") { ?>
                                         <button type="update" name="btn" value="update" class="btn btn-success">Update</button>
                                         <?php } ?>
-                                        <button type="reset" class="btn btn-warning">Clear</button>
+                                        <button type="reset" onclick="reset()"class="btn btn-warning">Clear</button>
                                     </div>
                                      
                                 <!-- /.col-lg-6 (nested) -->
@@ -485,7 +494,8 @@ $_SESSION['timeout'] = time();
                                 
                                 <!-- /.col-lg-6 (nested) -->
                                <?php } else if($action == "delete") {
-                                         if($db->deleteAdherence($adherence_id)>0)
+                                            if($db->deleteRecords($table, $tbl_id, $adherence_id)>0)
+                                         //if($db->deleteAdherence($adherence_id)>0)
                                                 {
                                                     echo '<label class="control-label" for="inputSuccess">Women Adherence deleted!</label> <br \> Return to <a href="dashboard.php" >Dashboard</a>';
                                                 } else {

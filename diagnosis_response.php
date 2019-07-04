@@ -24,7 +24,8 @@ i.hei_outcome AS HEI_Outcome,
 i.next_appointment AS Next_Visit_Date
 FROM infant_registration AS r 
 JOIN infant_diagnosis AS i 
-ON i.i_hei_id = r.hei_id";
+ON i.i_hei_id = r.hei_id
+WHERE i.voided = 0";
 $data = $db->getAssoArray($sql);
 $results = array(
             "sEcho" => 1,

@@ -11,8 +11,9 @@ viral_load AS Viral_Load,
 viral_date AS Viral_Load_Date,
 self_art_adherence AS ART_Adherence,
 self_ctx_adherence AS CTX_Adherence,
-next_visit_date AS Next_Visit_Date                                                    
-FROM adherence";
+next_visit_date AS Next_Visit_Date
+FROM adherence
+WHERE voided = 0";
 $data = $db->getAssoArray($sql);
 $results = array(
             "sEcho" => 1,

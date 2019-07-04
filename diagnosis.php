@@ -421,6 +421,9 @@ $_SESSION['timeout'] = time();
                                             <label class="radio-inline">
                                                 <input required="TRUE" type="radio" name="tb_contact" id="optionsRadiosInline2" value="N" <?php if($action == "edit"){if($select_record["tb_contact"]=="N") {echo 'checked="true"';}} ?>>No
                                             </label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="tb_contact" id="optionsRadiosInline4" value="None">None
+                                            </label>
                                         </div>
                                         <div class="form-group">
                                             <label>TB assessment outcome</label>
@@ -735,6 +738,9 @@ $_SESSION['timeout'] = time();
                                         <label class="radio-inline">
                                             <input required="TRUE"  type="radio" name="first_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["first_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
                                         </label>
+                                        <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="first_results" id="optionsRadiosInline4" value="None">None
+                                            </label>
                                             
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
@@ -766,6 +772,9 @@ $_SESSION['timeout'] = time();
                                         <label class="radio-inline">
                                             <input required="TRUE"  type="radio" name="second_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["second_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
                                         </label>
+                                        <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="second_results" id="optionsRadiosInline4" value="None">None
+                                            </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
                                         <button type="reset" class="btn btn-warning">Clear</button>
@@ -796,6 +805,9 @@ $_SESSION['timeout'] = time();
                                         <label class="radio-inline">
                                             <input required="TRUE"  type="radio" name="2nd_pcr_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["2nd_pcr_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
                                         </label>
+                                        <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="2nd_pcr_results" id="optionsRadiosInline4" value="None">None
+                                            </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
                                         <button type="reset" class="btn btn-warning">Clear</button>
@@ -827,6 +839,9 @@ $_SESSION['timeout'] = time();
                                         <label class="radio-inline">
                                             <input required="TRUE"  type="radio" name="3nd_pcr_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["3nd_pcr_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
                                         </label>
+                                        <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="3nd_pcr_results" id="optionsRadiosInline4" value="None">None
+                                            </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
                                         <button type="reset" class="btn btn-warning">Clear</button>
@@ -857,6 +872,9 @@ $_SESSION['timeout'] = time();
                                         <label class="radio-inline">
                                             <input required="TRUE"  type="radio" name="third_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["first_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
                                         </label>
+                                        <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="third_results" id="optionsRadiosInline4" value="None">None
+                                            </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
                                         <button type="reset" class="btn btn-warning">Clear</button> 
@@ -887,6 +905,9 @@ $_SESSION['timeout'] = time();
                                         <label class="radio-inline">
                                             <input required="TRUE"  type="radio" name="forth_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["first_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
                                         </label>
+                                        <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="forth_results" id="optionsRadiosInline4" value="None">None
+                                            </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
                                         <button type="reset" class="btn btn-warning">Clear</button>
@@ -917,6 +938,9 @@ $_SESSION['timeout'] = time();
                                         <label class="radio-inline">
                                             <input required="TRUE"  type="radio" name="fifth_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["first_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
                                         </label>
+                                        <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="fifth_results" id="optionsRadiosInline4" value="None">None
+                                            </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
                                         <button type="reset" class="btn btn-warning">Clear</button>
@@ -947,7 +971,9 @@ $_SESSION['timeout'] = time();
                                         <label class="radio-inline">
                                             <input required="TRUE"  type="radio" name="sixth_results" id="optionsRadiosInline3" value="REJ" <?php if($select_record["first_results"]=="REJ") {echo 'checked="true"';} ?>>Rejected
                                         </label>
-                                        
+                                        <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="sixth_results" id="optionsRadiosInline4" value="None">None
+                                            </label>
                                     </div>
                                         <button type="update" class="btn btn-success">Update</button>
                                         <button type="reset" class="btn btn-warning">Clear</button>
@@ -982,7 +1008,8 @@ $_SESSION['timeout'] = time();
                             </div>
                         </div>
                             <?php } else if($action == "delete") {
-                                         if($db->deleteInfantDiagnosis($Diag_id)>0)
+                                            if($db->deleteRecords($table, $tbl_id, $Diag_id)>0)
+                                         //if($db->deleteInfantDiagnosis($Diag_id)>0)
                                                 {
                                                     echo '<label class="control-label" for="inputSuccess">Infant Diagnosis deleted!</label> <br \> Return to <a href="dashboard.php" >Dashboard</a>';
                                                 } else {

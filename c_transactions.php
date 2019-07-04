@@ -318,7 +318,7 @@ class db_transactions {
                   ."WHERE diagnosis_id = '".$record_id."'";
              }
              
-             echo $sql;
+            // echo $sql;
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
             $inf = $stmt->rowCount();
@@ -488,6 +488,21 @@ class db_transactions {
         }
     }
    //delete records functions
+    public function deleteRecords($table_name, $key_field, $record_id)
+    {
+        try{
+            $sql = "UPDATE $table_name SET voided = 1, voided_by = :user_initial, voided_datetime = CURRENT_TIMESTAMP WHERE $key_field = :st_id";
+            $stmt = $this->dbCon()->prepare($sql);
+            $stmt->bindParam(':st_id', $record_id, PDO::PARAM_INT);
+            $stmt->bindParam(':user_initial', $_SESSION["username"], PDO::PARAM_STR, 20);
+            $stmt->execute();
+            $rec = $stmt->rowCount();
+            return $rec;
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
     public function deleteDemographics($record_id)
     {
         try{
@@ -610,7 +625,7 @@ class db_transactions {
     public function selectRecord($table,$id,$select_id)
     {
         try{
-            $sql = "SELECT * FROM ".$table." WHERE ".$id."='".$select_id."'";
+            $sql = "SELECT * FROM ".$table." WHERE ".$id."='".$select_id."' AND voided = 0";
             $stmt = $this->dbCon()->prepare($sql);
             $stmt->execute();
             $rs = $stmt->fetch();

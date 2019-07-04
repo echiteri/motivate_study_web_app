@@ -10,7 +10,8 @@ edd AS EDC,
 fp_status AS FP_status, 
 disclosure AS HIV_Disclosure,
 next_visit_date AS Next_visit_date
-FROM variables";
+FROM variables
+WHERE voided = 0";
 $data = $db->getAssoArray($sql);
 $results = array(
             "sEcho" => 1,

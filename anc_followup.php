@@ -287,6 +287,9 @@ $_SESSION['timeout'] = time();
                                             <label class="radio-inline">
                                                 <input required="TRUE" onchange="toggleHaartChange()" type="radio" name="haart_change" id="optionsRadiosInline6" value="N" <?php if($select_record["haart_change"]=="N") { echo 'checked="true"';} ?> >No
                                             </label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="haart_change" id="optionsRadiosInline11" value="None">None
+                                            </label>
                                         </div>
                                         <div class="form-group">
                                             <label>Date of changing HAART</label>
@@ -323,6 +326,9 @@ $_SESSION['timeout'] = time();
                                             <label class="radio-inline">
                                                 <input required="TRUE" onclick="toggleHiv()" type="radio" name="counselling" id="optionsRadiosInline4" value="N" <?php if($select_record["counselling"]=="N") {{ echo 'checked="TRUE"';}} ?> >No
                                             </label>
+                                            <label class="radio-inline">
+                                                <input required="TRUE" type="radio" name="counselling" id="optionsRadiosInline7" value="None">None
+                                            </label>
                                         </div>
                                         <div class="form-group">
                                             <label>Partner HIV result</label>
@@ -349,7 +355,8 @@ $_SESSION['timeout'] = time();
                                 
                                     </form>
                                <?php } else if($action == "delete") {
-                                         if($db->deleteAncFollowup($anc_id)>0)
+                                        if($db->deleteRecords($table, $tbl_id, $anc_id)>0)
+                                         //if($db->deleteAncFollowup($anc_id)>0)
                                                 {
                                                     echo '<label class="control-label" for="inputSuccess">Women ANC Followup deleted!</label> <br \> Return to <a href="dashboard.php" >Dashboard</a>';
                                                 } else {
